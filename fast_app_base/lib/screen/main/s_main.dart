@@ -44,10 +44,13 @@ class MainScreenState extends State<MainScreen>
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
-    delay(() {
-      // Native Splash 해제
-      FlutterNativeSplash.remove();
-    }, 1500.ms);
+    delay(
+      () {
+        // Native Splash 해제
+        FlutterNativeSplash.remove();
+      },
+      1500.ms,
+    );
   }
 
   @override
@@ -61,7 +64,8 @@ class MainScreenState extends State<MainScreen>
         body: Container(
           color: context.appColors.seedColor.getMaterialColorValues[200],
           padding: EdgeInsets.only(
-              bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
+            bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0,
+          ),
           child: SafeArea(
             bottom: !extendBody,
             child: pages,
@@ -77,16 +81,19 @@ class MainScreenState extends State<MainScreen>
       _currentTabNavigationKey.currentState?.canPop() == false;
 
   IndexedStack get pages => IndexedStack(
-      index: _currentIndex,
-      children: tabs
-          .mapIndexed((tab, index) => Offstage(
+        index: _currentIndex,
+        children: tabs
+            .mapIndexed(
+              (tab, index) => Offstage(
                 offstage: _currentTab != tab,
                 child: TabNavigator(
                   navigatorKey: navigatorKeys[index],
                   tabItem: tab,
                 ),
-              ))
-          .toList());
+              ),
+            )
+            .toList(),
+      );
 
   void _handleBackPressed(bool didPop) {
     if (!didPop) {
@@ -144,17 +151,22 @@ class MainScreenState extends State<MainScreen>
     });
   }
 
-  BottomNavigationBarItem bottomItem(bool activate, IconData iconData,
-      IconData inActivateIconData, String label) {
+  BottomNavigationBarItem bottomItem(
+    bool activate,
+    IconData iconData,
+    IconData inActivateIconData,
+    String label,
+  ) {
     return BottomNavigationBarItem(
-        icon: Icon(
-          key: ValueKey(label),
-          activate ? iconData : inActivateIconData,
-          color: activate
-              ? context.appColors.iconButton
-              : context.appColors.iconButtonInactivate,
-        ),
-        label: label);
+      icon: Icon(
+        key: ValueKey(label),
+        activate ? iconData : inActivateIconData,
+        color: activate
+            ? context.appColors.iconButton
+            : context.appColors.iconButtonInactivate,
+      ),
+      label: label,
+    );
   }
 
   void _handleOnTapNavigationBarItem(int index) {
