@@ -26,10 +26,15 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
     switch (state) {
-      case AppLifecycleState.detached:
       case AppLifecycleState.resumed:
+        _detector.startListening();
+        break;
       case AppLifecycleState.inactive:
+        _detector.stopListening();
+        break;
+      case AppLifecycleState.detached:
       case AppLifecycleState.hidden:
       case AppLifecycleState.paused:
     }
