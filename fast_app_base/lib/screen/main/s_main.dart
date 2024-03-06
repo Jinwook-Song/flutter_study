@@ -9,6 +9,8 @@ import '../../common/common.dart';
 import 'w_menu_drawer.dart';
 
 class MainScreen extends StatefulWidget {
+  /// 50
+  static const double bottomNavigatorHeight = 50;
   const MainScreen({super.key});
 
   @override
