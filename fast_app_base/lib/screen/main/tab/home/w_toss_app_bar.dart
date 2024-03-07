@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/notification/s_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -12,8 +13,6 @@ class TossAppbar extends StatefulWidget {
 }
 
 class _TossAppbarState extends State<TossAppbar> {
-  bool _showBadge = true;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,12 +26,10 @@ class _TossAppbarState extends State<TossAppbar> {
           Image.asset('assets/image/icon/map_point.png', height: 30),
           const Gap(10),
           Badge(
-            isLabelVisible: _showBadge,
+            isLabelVisible: true,
             child: Tap(
               onTap: () {
-                setState(() {
-                  _showBadge = !_showBadge;
-                });
+                Nav.push(const NotificationScreen());
               },
               child: Image.asset(
                 'assets/image/icon/notification.png',
