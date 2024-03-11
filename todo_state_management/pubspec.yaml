@@ -63,6 +63,7 @@ dependencies:
   after_layout: ^1.2.0
   flutter_svg: ^2.0.3
   cached_network_image: ^3.2.3
+  gap: ^3.0.1
 
   #ui - util
   keyboard_utils_fork: ^0.0.4
@@ -92,14 +93,11 @@ dev_dependencies:
   flutter_oss_licenses: ^2.0.1
   test: ^1.22.0
 
-
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

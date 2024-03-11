@@ -44,9 +44,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
               width: 240,
               padding: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                  color: context.colors.background),
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                ),
+                color: context.colors.background,
+              ),
               child: isSmallScreen(context)
                   ? SingleChildScrollView(
                       child: getMenus(context),
@@ -83,7 +86,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     left: 20,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           const Height(10),
@@ -106,7 +109,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             },
           ),
           const Line(),
-          isSmallScreen(context) ? const Height(10) : const EmptyExpanded(),
+          isSmallScreen(context) ? const Height(10) : spacer,
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: ModeSwitch(
@@ -129,18 +132,19 @@ class _MenuDrawerState extends State<MenuDrawer> {
               Expanded(
                 child: Tap(
                   child: Container(
-                      height: 30,
-                      width: 100,
-                      padding: const EdgeInsets.only(left: 15),
-                      child: '© 2023. Bansook Nam. all rights reserved.'
-                          .selectableText
-                          .size(10)
-                          .makeWithDefaultFont()),
+                    height: 30,
+                    width: 100,
+                    padding: const EdgeInsets.only(left: 15),
+                    child: '© 2023. Bansook Nam. all rights reserved.'
+                        .selectableText
+                        .size(10)
+                        .makeWithDefaultFont(),
+                  ),
                   onTap: () async {},
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -161,34 +165,39 @@ class _MenuDrawerState extends State<MenuDrawer> {
         children: [
           Tap(
             child: Container(
-                padding: const EdgeInsets.only(left: 5, right: 5),
-                margin: const EdgeInsets.only(left: 15, right: 20),
-                decoration: BoxDecoration(
-                    border: Border.all(color: context.appColors.veryBrightGrey),
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              margin: const EdgeInsets.only(left: 15, right: 20),
+              decoration: BoxDecoration(
+                border: Border.all(color: context.appColors.veryBrightGrey),
+                borderRadius: BorderRadius.circular(10),
+                color: context.appColors.drawerBg,
+                boxShadow: [context.appShadows.buttonShadowSmall],
+              ),
+              child: Row(
+                children: [
+                  const Width(10),
+                  DropdownButton<String>(
+                    items: [
+                      menu(currentLanguage),
+                      menu(Language.values
+                          .where((element) => element != currentLanguage)
+                          .first),
+                    ],
+                    onChanged: (value) async {
+                      if (value == null) {
+                        return;
+                      }
+                      await context
+                          .setLocale(Language.find(value.toLowerCase()).locale);
+                    },
+                    value: describeEnum(currentLanguage).capitalizeFirst,
+                    underline: const SizedBox.shrink(),
+                    elevation: 1,
                     borderRadius: BorderRadius.circular(10),
-                    color: context.appColors.drawerBg,
-                    boxShadow: [context.appShadows.buttonShadowSmall]),
-                child: Row(
-                  children: [
-                    const Width(10),
-                    DropdownButton<String>(
-                      items: [
-                        menu(currentLanguage),
-                        menu(Language.values.where((element) => element != currentLanguage).first),
-                      ],
-                      onChanged: (value) async {
-                        if (value == null) {
-                          return;
-                        }
-                        await context.setLocale(Language.find(value.toLowerCase()).locale);
-                      },
-                      value: describeEnum(currentLanguage).capitalizeFirst,
-                      underline: const SizedBox.shrink(),
-                      elevation: 1,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
             onTap: () async {},
           ),
         ],
@@ -234,7 +243,8 @@ class _MenuWidget extends StatelessWidget {
   final String text;
   final Function() onTap;
 
-  const _MenuWidget(this.text, {Key? key, required this.onTap}) : super(key: key);
+  const _MenuWidget(this.text, {Key? key, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -247,11 +257,12 @@ class _MenuWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  child: text.text
-                      .textStyle(defaultFontStyle())
-                      .color(context.appColors.drawerText)
-                      .size(15)
-                      .make()),
+                child: text.text
+                    .textStyle(defaultFontStyle())
+                    .color(context.appColors.drawerText)
+                    .size(15)
+                    .make(),
+              ),
             ],
           ),
         ),
