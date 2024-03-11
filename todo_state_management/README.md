@@ -1,4 +1,4 @@
-# todo_state_management
+# fast_app_base
 
 A new Flutter project.
 
