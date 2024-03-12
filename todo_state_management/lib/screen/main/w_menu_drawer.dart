@@ -179,9 +179,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   DropdownButton<String>(
                     items: [
                       menu(currentLanguage),
-                      menu(Language.values
-                          .where((element) => element != currentLanguage)
-                          .first,),
+                      menu(
+                        Language.values
+                            .where((element) => element != currentLanguage)
+                            .first,
+                      ),
                     ],
                     onChanged: (value) async {
                       if (value == null) {
@@ -190,6 +192,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       await context
                           .setLocale(Language.find(value.toLowerCase()).locale);
                     },
+                    // ignore: deprecated_member_use
                     value: describeEnum(currentLanguage).capitalizeFirst,
                     underline: const SizedBox.shrink(),
                     elevation: 1,
@@ -205,11 +208,13 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   DropdownMenuItem<String> menu(Language language) {
     return DropdownMenuItem(
+      // ignore: deprecated_member_use
       value: describeEnum(language).capitalizeFirst,
       child: Row(
         children: [
           flag(language.flagPath),
           const Width(8),
+          // ignore: deprecated_member_use
           describeEnum(language)
               .capitalizeFirst!
               .text
