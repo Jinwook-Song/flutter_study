@@ -66,7 +66,7 @@ class TextBadge extends StatelessWidget {
         decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(borderRadius),
-            border: boder),
+            border: boder,),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -77,8 +77,8 @@ class TextBadge extends StatelessWidget {
                 .medium
                 .color(textColor)
                 .makeWithDefaultFont(),
-            if (rightWidget != null) rightWidget!
+            if (rightWidget != null) rightWidget!,
           ],
-        ));
+        ),);
   }
 }

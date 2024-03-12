@@ -58,7 +58,7 @@ class RoundButton extends StatefulWidget {
       this.leftWidget,
       this.rightWidget,
       this.textAlign = TextAlign.start,
-      Key? key})
+      Key? key,})
       : shadowColor = shadowColor ?? theme?.shadowColor ?? Colors.transparent,
         textColor = textColor ?? theme?.textColor ?? Colors.white,
         bgColor = bgColor ?? theme?.bgColor ?? AppColors.blue,
@@ -136,7 +136,7 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
             margin: EdgeInsets.symmetric(horizontal: widget.sideMargin),
             padding: EdgeInsets.only(
                 left: widget.sidePadding + widget.leftPadding,
-                right: widget.sidePadding + widget.rightPadding),
+                right: widget.sidePadding + widget.rightPadding,),
             duration: const Duration(milliseconds: 300),
             width: finalWidth,
             height: widget.height,
@@ -147,7 +147,7 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
               shape: BoxShape.rectangle,
               boxShadow: [
                 BoxShadow(
-                    color: shadowColor, offset: const Offset(0, 3), blurRadius: 6, spreadRadius: 0)
+                    color: shadowColor, offset: const Offset(0, 3), blurRadius: 6, spreadRadius: 0,),
               ],
             ),
             child: Row(

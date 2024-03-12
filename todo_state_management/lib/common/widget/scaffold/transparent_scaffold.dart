@@ -449,7 +449,7 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
   /// ** See code in examples/api/lib/material/scaffold/scaffold_messenger_state.show_material_banner.0.dart **
   /// {@end-tool}
   ScaffoldFeatureController<MaterialBanner, MaterialBannerClosedReason> showMaterialBanner(
-      MaterialBanner materialBanner) {
+      MaterialBanner materialBanner,) {
     assert(
       _scaffolds.isNotEmpty,
       'ScaffoldMessenger.showMaterialBanner was called, but there are currently no '
@@ -507,7 +507,7 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
   /// The removed material banner does not run its normal exit animation. If there are
   /// any queued material banners, they begin their entrance animation immediately.
   void removeCurrentMaterialBanner(
-      {MaterialBannerClosedReason reason = MaterialBannerClosedReason.remove}) {
+      {MaterialBannerClosedReason reason = MaterialBannerClosedReason.remove,}) {
     if (_materialBanners.isEmpty) {
       return;
     }
@@ -524,7 +524,7 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
   ///
   /// The closed completer is called after the animation is complete.
   void hideCurrentMaterialBanner(
-      {MaterialBannerClosedReason reason = MaterialBannerClosedReason.hide}) {
+      {MaterialBannerClosedReason reason = MaterialBannerClosedReason.hide,}) {
     if (_materialBanners.isEmpty ||
         _materialBannerController!.status == AnimationStatus.dismissed) {
       return;
@@ -819,7 +819,7 @@ class _BodyBuilder extends StatelessWidget {
 
         final double top = extendBodyBehindAppBar
             ? math.max(metrics.padding.top,
-                bodyConstraints.appBarHeight + bodyConstraints.materialBannerHeight)
+                bodyConstraints.appBarHeight + bodyConstraints.materialBannerHeight,)
             : metrics.padding.top;
 
         return MediaQuery(
@@ -910,7 +910,7 @@ class _ScaffoldLayout extends MultiChildLayoutDelegate {
           layoutChild(_ScaffoldSlot.persistentFooter, footerConstraints).height;
       bottomWidgetsHeight += persistentFooterHeight;
       positionChild(
-          _ScaffoldSlot.persistentFooter, Offset(0.0, math.max(0.0, bottom - bottomWidgetsHeight)));
+          _ScaffoldSlot.persistentFooter, Offset(0.0, math.max(0.0, bottom - bottomWidgetsHeight)),);
     }
 
     Size materialBannerSize = Size.zero;
@@ -988,7 +988,7 @@ class _ScaffoldLayout extends MultiChildLayoutDelegate {
       positionChild(
           _ScaffoldSlot.bottomSheet,
           Offset(
-              (size.width - bottomSheetSize.width) / 2.0, contentBottom - bottomSheetSize.height));
+              (size.width - bottomSheetSize.width) / 2.0, contentBottom - bottomSheetSize.height,),);
     }
 
     late Rect floatingActionButtonRect;
@@ -1050,7 +1050,7 @@ class _ScaffoldLayout extends MultiChildLayoutDelegate {
 
       final double xOffset = hasCustomWidth ? (size.width - snackBarWidth!) / 2 : 0.0;
       positionChild(
-          _ScaffoldSlot.snackBar, Offset(xOffset, snackBarYOffsetBase - snackBarSize.height));
+          _ScaffoldSlot.snackBar, Offset(xOffset, snackBarYOffsetBase - snackBarSize.height),);
 
       assert(() {
         // Whether a floating SnackBar has been offset too high.
@@ -2090,7 +2090,7 @@ class TransparentScaffoldState extends State<TransparentScaffold>
               showBodyScrim(false, 0.0);
               _floatingActionButtonVisibilityValue = 1.0;
               _persistentSheetHistoryEntry = null;
-            });
+            },);
             ModalRoute.of(context)!.addLocalHistoryEntry(_persistentSheetHistoryEntry!);
           }
         } else if (_persistentSheetHistoryEntry != null) {
@@ -2236,7 +2236,7 @@ class TransparentScaffoldState extends State<TransparentScaffold>
             if (!removedEntry && _currentBottomSheet?._widget == bottomSheet && !doingDispose) {
               removeCurrentBottomSheet();
             }
-          });
+          },);
 
     void removeEntryIfNeeded() {
       if (!isPersistent && !removedEntry) {
@@ -2423,7 +2423,7 @@ class TransparentScaffoldState extends State<TransparentScaffold>
           _previousFloatingActionButtonLocation!,
           _floatingActionButtonLocation!,
           _floatingActionButtonAnimator,
-          _floatingActionButtonMoveController.value);
+          _floatingActionButtonMoveController.value,);
       restartAnimationFrom = _floatingActionButtonAnimator
           .getAnimationRestart(_floatingActionButtonMoveController.value);
     }
@@ -2494,7 +2494,7 @@ class TransparentScaffoldState extends State<TransparentScaffold>
     }
     if (widget.floatingActionButtonLocation != oldWidget.floatingActionButtonLocation) {
       _moveFloatingActionButton(
-          widget.floatingActionButtonLocation ?? _kDefaultFloatingActionButtonLocation);
+          widget.floatingActionButtonLocation ?? _kDefaultFloatingActionButtonLocation,);
     }
     if (widget.bottomSheet != oldWidget.bottomSheet) {
       assert(() {
@@ -2925,7 +2925,7 @@ class TransparentScaffoldState extends State<TransparentScaffold>
                     children: children,
                   ),
                 );
-              }),
+              },),
         ),
       ),
     );
@@ -3122,7 +3122,7 @@ class _StandardBottomSheetState extends State<_StandardBottomSheet> {
           math.max(
             _kMinBottomSheetScrimOpacity,
             _kMaxBottomSheetScrimOpacity - scaffold._floatingActionButtonVisibilityValue,
-          ));
+          ),);
     } else {
       scaffold._floatingActionButtonVisibilityValue = 1.0;
       scaffold.showBodyScrim(false, 0.0);

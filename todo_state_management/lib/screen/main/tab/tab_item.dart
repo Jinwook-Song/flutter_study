@@ -13,11 +13,11 @@ enum TabItem {
   final Widget firstPage;
 
   const TabItem(this.activeIcon, this.tabName, this.firstPage,
-      {IconData? inActiveIcon})
+      {IconData? inActiveIcon,})
       : inActiveIcon = inActiveIcon ?? activeIcon;
 
   BottomNavigationBarItem toNavigationBarItem(BuildContext context,
-      {required bool isActivated}) {
+      {required bool isActivated,}) {
     return BottomNavigationBarItem(
         icon: Icon(
           key: ValueKey(tabName),
@@ -26,6 +26,6 @@ enum TabItem {
               ? context.appColors.iconButton
               : context.appColors.iconButtonInactivate,
         ),
-        label: tabName);
+        label: tabName,);
   }
 }

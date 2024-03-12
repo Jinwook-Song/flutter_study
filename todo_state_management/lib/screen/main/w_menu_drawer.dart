@@ -181,7 +181,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       menu(currentLanguage),
                       menu(Language.values
                           .where((element) => element != currentLanguage)
-                          .first),
+                          .first,),
                     ],
                     onChanged: (value) async {
                       if (value == null) {

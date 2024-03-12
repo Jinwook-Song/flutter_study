@@ -52,5 +52,5 @@ Future<void> pumpApp(WidgetTester tester) async {
       fallbackLocale: const Locale('ko'),
       path: 'assets/translations',
       useOnlyLangCode: true,
-      child: const App()));
+      child: const App(),),);
 }

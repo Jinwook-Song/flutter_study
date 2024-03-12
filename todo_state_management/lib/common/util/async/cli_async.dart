@@ -11,14 +11,14 @@ Future sleepAsync(Duration duration) {
 }
 
 Future sleepWhile(bool Function() predict,
-    [Duration duration = const Duration(milliseconds: 50)]) async {
+    [Duration duration = const Duration(milliseconds: 50),]) async {
   while (predict()) {
     await sleepAsync(duration);
   }
 }
 
 Future sleepUntil(bool Function() predict,
-    [Duration duration = const Duration(milliseconds: 50)]) async {
+    [Duration duration = const Duration(milliseconds: 50),]) async {
   while (!predict()) {
     await sleepAsync(duration);
   }
