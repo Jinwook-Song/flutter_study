@@ -4,7 +4,7 @@ import 'package:fast_app_base/screen/dialog/d_confirm.dart';
 import 'package:fast_app_base/screen/main/write/d_write_todo.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-
+/* 
 class TodoDataHolder extends GetxController {
   final RxList<Todo> todoList = <Todo>[].obs;
 
@@ -58,3 +58,4 @@ class TodoDataHolder extends GetxController {
 mixin class TodoDataProvider {
   late final TodoDataHolder todoData = Get.find();
 }
+ */

@@ -1,17 +1,17 @@
-enum TodoStatus { incomplete, ongoing, complete }
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Todo {
-  int id;
-  String title;
-  DateTime createdAt;
-  DateTime? updatedAt;
-  DateTime dueDate;
-  TodoStatus status;
+part 'vo_todo.freezed.dart';
 
-  Todo({
-    required this.id,
-    required this.title,
-    required this.dueDate,
-    this.status = TodoStatus.incomplete,
-  }) : createdAt = DateTime.now();
+@freezed
+class Todo with _$Todo {
+  const factory Todo({
+    required int id,
+    required String title,
+    required DateTime dueDate,
+    DateTime? updatedAt,
+    required DateTime createdAt,
+    @Default(TodoStatus.incomplete) TodoStatus status,
+  }) = _Todo;
 }
+
+enum TodoStatus { incomplete, ongoing, complete }

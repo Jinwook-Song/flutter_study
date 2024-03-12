@@ -7,16 +7,16 @@ import 'package:fast_app_base/screen/main/tab/todo/w_todo_status.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class TodoItem extends StatelessWidget with TodoDataProvider {
+class TodoItem extends StatelessWidget {
   final Todo todo;
-  TodoItem(this.todo, {super.key});
+  const TodoItem(this.todo, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(todo.id),
       onDismissed: (direction) {
-        todoData.deleteTodo(todo);
+        context.readTodoCubit.deleteTodo(todo);
       },
       background: RoundedContainer(
         const Row(
@@ -56,7 +56,7 @@ class TodoItem extends StatelessWidget with TodoDataProvider {
                 IconButton(
                   visualDensity: VisualDensity.compact,
                   onPressed: () {
-                    todoData.editTodo(todo);
+                    context.readTodoCubit.editTodo(todo);
                   },
                   icon: const Icon(EvaIcons.editOutline),
                 ),
