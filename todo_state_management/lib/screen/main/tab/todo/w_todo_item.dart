@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/dart/extension/datetime_extension.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
+import 'package:fast_app_base/data/memory/bloc/todo_event.dart';
 import 'package:fast_app_base/data/memory/vo_todo.dart';
 import 'package:fast_app_base/screen/main/tab/todo/w_todo_status.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class TodoItem extends StatelessWidget {
     return Dismissible(
       key: ValueKey(todo.id),
       onDismissed: (direction) {
-        context.readTodoCubit.deleteTodo(todo);
+        // context.readTodoCubit.deleteTodo(todo);
+        context.readTodoBloc.add(TodoRemovedEvent(todo));
       },
       background: RoundedContainer(
         const Row(
@@ -56,7 +58,8 @@ class TodoItem extends StatelessWidget {
                 IconButton(
                   visualDensity: VisualDensity.compact,
                   onPressed: () {
-                    context.readTodoCubit.editTodo(todo);
+                    // context.readTodoCubit.editTodo(todo);
+                    context.readTodoBloc.add(TodoContentUpdateEvent(todo));
                   },
                   icon: const Icon(EvaIcons.editOutline),
                 ),

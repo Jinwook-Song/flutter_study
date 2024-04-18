@@ -1,4 +1,5 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:fast_app_base/data/memory/bloc/todo_event.dart';
 import 'package:fast_app_base/data/memory/todo_cubit.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
@@ -55,7 +56,9 @@ class MainScreenState extends State<MainScreen>
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: context.readTodoCubit.addTodo,
+          onPressed: () {
+            context.readTodoBloc.add(TodoAddEvent());
+          },
           child: const Icon(EvaIcons.plus),
         ),
         bottomNavigationBar: _buildBottomNavigationBar(context),
