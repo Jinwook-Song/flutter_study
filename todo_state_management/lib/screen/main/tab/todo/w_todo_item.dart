@@ -3,22 +3,25 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/dart/extension/datetime_extension.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/data/memory/bloc/todo_event.dart';
+import 'package:fast_app_base/data/memory/todo_data_provider.dart';
 import 'package:fast_app_base/data/memory/vo_todo.dart';
 import 'package:fast_app_base/screen/main/tab/todo/w_todo_status.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-class TodoItem extends StatelessWidget {
+class TodoItem extends ConsumerWidget {
   final Todo todo;
   const TodoItem(this.todo, {super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Dismissible(
       key: ValueKey(todo.id),
       onDismissed: (direction) {
         // context.readTodoCubit.deleteTodo(todo);
-        context.readTodoBloc.add(TodoRemovedEvent(todo));
+        // context.readTodoBloc.add(TodoRemovedEvent(todo));
+        ref.readTodoHolder.removeTodo(todo);
       },
       background: RoundedContainer(
         const Row(
@@ -59,7 +62,8 @@ class TodoItem extends StatelessWidget {
                   visualDensity: VisualDensity.compact,
                   onPressed: () {
                     // context.readTodoCubit.editTodo(todo);
-                    context.readTodoBloc.add(TodoContentUpdateEvent(todo));
+                    // context.readTodoBloc.add(TodoContentUpdateEvent(todo));
+                    ref.readTodoHolder.editTodo(todo);
                   },
                   icon: const Icon(EvaIcons.editOutline),
                 ),
