@@ -92,14 +92,11 @@ dev_dependencies:
   flutter_oss_licenses: ^2.0.1
   test: ^1.22.0
 
-
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -110,6 +107,10 @@ flutter:
     - assets/image/icon/
     - assets/image/flag/
     - assets/image/darkmode/
+    - assets/image/fab/
+    - assets/image/detail/
+    - assets/image/home/
+    - assets/image/notification/
     - assets/translations/
     - assets/
 
