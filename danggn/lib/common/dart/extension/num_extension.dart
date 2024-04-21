@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 
-final decimalFormat = NumberFormat.decimalPattern("en");
+final decimalFormat = NumberFormat.decimalPattern('en');
 
 extension IntExt on int {
   static int? safeParse(String? source) {
@@ -12,13 +12,17 @@ extension IntExt on int {
     return decimalFormat.format(this);
   }
 
+  String toWon() {
+    return '${toComma()}원';
+  }
+
   String get withPlusMinus {
     if (this > 0) {
-      return "+$this";
+      return '+$this';
     } else if (this < 0) {
-      return "$this";
+      return '$this';
     } else {
-      return "0";
+      return '0';
     }
   }
 }

@@ -1,26 +1,27 @@
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/dart/extension/num_duration_extension.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_danggn_button.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
+import 'package:fast_app_base/screen/main/view_models/current_tab_view_model.dart';
+import 'package:fast_app_base/screen/main/w_menu_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/main/w_menu_drawer.dart';
-
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => MainScreenState();
+  ConsumerState<MainScreen> createState() => MainScreenState();
 }
 
-class MainScreenState extends State<MainScreen>
+class MainScreenState extends ConsumerState<MainScreen>
     with SingleTickerProviderStateMixin {
-  TabItem _currentTab = TabItem.home;
   final tabs = TabItem.values;
   late final List<GlobalKey<NavigatorState>> navigatorKeys =
       TabItem.values.map((e) => GlobalKey<NavigatorState>()).toList();
 
+  TabItem get _currentTab => ref.watch(currentTabProvider);
   int get _currentIndex => tabs.indexOf(_currentTab);
 
   GlobalKey<NavigatorState> get _currentTabNavigationKey =>
@@ -38,29 +39,30 @@ class MainScreenState extends State<MainScreen>
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: PopScope(
-        canPop: isRootPage,
-        onPopInvoked: _handleBackPressed,
-        child: Material(
-          child: Stack(
-            children: [
-              Scaffold(
-                extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
-                drawer: const MenuDrawer(),
-                body: Container(
-                  color:
-                      context.appColors.seedColor.getMaterialColorValues[200],
-                  child: SafeArea(
-                    bottom: !extendBody,
-                    child: pages,
-                  ),
-                ),
-                bottomNavigationBar: _buildBottomNavigationBar(context),
+    return PopScope(
+      canPop: isRootPage,
+      onPopInvoked: _handleBackPressed,
+      child: Material(
+        child: Stack(
+          children: [
+            Scaffold(
+              extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
+              drawer: const MenuDrawer(),
+              body: SafeArea(
+                bottom: !extendBody,
+                child: pages,
               ),
-              FloatingDanggnButton(),
-            ],
-          ),
+              bottomNavigationBar: _buildBottomNavigationBar(context),
+            ),
+            IgnorePointer(
+              ignoring: _currentTab == TabItem.chat,
+              child: AnimatedOpacity(
+                opacity: _currentTab == TabItem.chat ? 0 : 1,
+                duration: 300.ms,
+                child: FloatingDanggnButton(),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -137,9 +139,7 @@ class MainScreenState extends State<MainScreen>
   }
 
   void _changeTab(int index) {
-    setState(() {
-      _currentTab = tabs[index];
-    });
+    ref.read(currentTabProvider.notifier).setCurrentTab(index);
   }
 
   BottomNavigationBarItem bottomItem(

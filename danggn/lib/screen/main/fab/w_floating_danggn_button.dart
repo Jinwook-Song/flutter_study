@@ -10,6 +10,8 @@ import 'package:gap/gap.dart';
 class FloatingDanggnButton extends ConsumerWidget {
   FloatingDanggnButton({super.key});
 
+  static const double height = 180;
+
   final _duration = 300.ms;
 
   @override
@@ -62,7 +64,7 @@ class FloatingDanggnButton extends ConsumerWidget {
               ),
               GestureDetector(
                 onTap:
-                    ref.read(floatingButtonStateProvider.notifier).onTapButton,
+                    ref.read(floatingButtonStateProvider.notifier).toggleMenu,
                 child: AnimatedContainer(
                   duration: _duration,
                   height: 60,
@@ -89,12 +91,12 @@ class FloatingDanggnButton extends ConsumerWidget {
                     ],
                   ),
                 ),
+              ).pOnly(
+                bottom: MainScreenState.bottomNavigationBarHeight +
+                    context.viewPaddingBottom / 2,
+                right: 20,
               ),
             ],
-          ).pOnly(
-            bottom: MainScreenState.bottomNavigationBarHeight +
-                context.viewPaddingBottom / 2,
-            right: 20,
           ),
         ),
       ],

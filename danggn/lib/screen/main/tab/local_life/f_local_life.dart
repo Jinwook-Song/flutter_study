@@ -31,6 +31,10 @@ class LocalLifeFragmentState extends ConsumerState<LocalLifeFragment> {
     return ListView(
       controller: _scrollController,
       children: [
+        Image.network(
+          'https://picsum.photos/id/368/400/400',
+          fit: BoxFit.fill,
+        ),
         Container(
           height: 400,
           color: Colors.amber,

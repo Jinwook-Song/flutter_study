@@ -1,5 +1,10 @@
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/fab/view_models/floating_danggn_button_view_model.dart';
+import 'package:fast_app_base/screen/main/fab/w_floating_danggn_button.dart';
+import 'package:fast_app_base/screen/main/tab/home/w_product_post_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeFragment extends ConsumerStatefulWidget {
@@ -11,6 +16,7 @@ class HomeFragment extends ConsumerStatefulWidget {
 
 class _HomeFragmentState extends ConsumerState<HomeFragment> {
   final ScrollController _scrollController = ScrollController();
+  String title = '플러터동';
 
   @override
   void initState() {
@@ -28,24 +34,35 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      controller: _scrollController,
+    return Column(
       children: [
-        Container(
-          height: 400,
-          color: Colors.red,
+        AppBar(
+          centerTitle: false,
+          title: PopupMenuButton<String>(
+            onSelected: (value) {
+              setState(() {
+                title = value;
+              });
+            },
+            itemBuilder: (context) => ['플러터', '다트']
+                .map(
+                  (e) => PopupMenuItem(
+                    value: e,
+                    child: Text(e),
+                  ),
+                )
+                .toList(),
+            child: Text(title),
+          ),
         ),
-        Container(
-          height: 400,
-          color: Colors.black,
-        ),
-        Container(
-          height: 400,
-          color: Colors.red,
-        ),
-        Container(
-          height: 400,
-          color: Colors.blue,
+        Expanded(
+          child: ListView.separated(
+            padding: const EdgeInsets.only(bottom: FloatingDanggnButton.height),
+            controller: _scrollController,
+            itemCount: postList.length,
+            separatorBuilder: (context, index) => const Divider(),
+            itemBuilder: (context, index) => ProductPostItem(postList[index]),
+          ),
         ),
       ],
     );

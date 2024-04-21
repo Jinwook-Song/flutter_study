@@ -13,7 +13,7 @@ class FloatingButtonStateProvider extends Notifier<FloatingDanggnButtonState> {
 
   bool _needToRestore = false;
 
-  void onTapButton() {
+  void toggleMenu() {
     final prevState = state;
     state = state.copyWith(
       isExpanded: !state.isExpanded,
