@@ -16,14 +16,21 @@ class ApiError {
   });
 
   static createErrorResult(e) {
-    if (e is DioError) {
+    if (e is DioException) {
       if (!kReleaseMode) {
-        return SimpleResult.failure(ApiError(
+        return SimpleResult.failure(
+          ApiError(
             message: e.error?.toString() ?? e.message ?? 'message is empty',
-            isApplicationError: e.response == null,),);
+            isApplicationError: e.response == null,
+          ),
+        );
       } else {
         return SimpleResult.failure(
-            ApiError(message: 'api_error'.tr(), statusCode: e.response?.statusCode),);
+          ApiError(
+            message: 'api_error'.tr(),
+            statusCode: e.response?.statusCode,
+          ),
+        );
       }
     }
 
