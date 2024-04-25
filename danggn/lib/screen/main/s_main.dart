@@ -30,7 +30,7 @@ class MainScreenState extends ConsumerState<MainScreen>
   bool get extendBody => true;
 
   static double get bottomNavigationBarBorderRadius => 30.0;
-  static double get bottomNavigationBarHeight => 93;
+  static double get bottomNavigationBarHeight => 60;
 
   @override
   void initState() {
@@ -102,7 +102,7 @@ class MainScreenState extends ConsumerState<MainScreen>
 
   Widget _buildBottomNavigationBar(BuildContext context) {
     return Container(
-      height: bottomNavigationBarHeight,
+      height: bottomNavigationBarHeight + context.viewPaddingBottom,
       decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(color: Colors.black26, blurRadius: 10),

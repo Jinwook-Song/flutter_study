@@ -3,6 +3,8 @@ import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/fab/view_models/floating_danggn_button_view_model.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_danggn_button.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_product_post_item.dart';
+import 'package:fast_app_base/screen/notification/s_notification.dart';
+import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,6 +56,14 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
                 .toList(),
             child: Text(title),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Nav.push(const NotificationScreen());
+              },
+              icon: const Icon(Icons.notifications_none_rounded),
+            ),
+          ],
         ),
         Expanded(
           child: ListView.separated(
@@ -61,7 +71,12 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
             controller: _scrollController,
             itemCount: postList.length,
             separatorBuilder: (context, index) => const Divider(),
-            itemBuilder: (context, index) => ProductPostItem(postList[index]),
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () {
+                Nav.push(const PostDetailScreen());
+              },
+              child: ProductPostItem(postList[index]),
+            ),
           ),
         ),
       ],

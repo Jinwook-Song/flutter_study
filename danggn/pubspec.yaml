@@ -76,6 +76,10 @@ dependencies:
   flutter_riverpod: ^2.5.1
   gap: ^3.0.1
   timeago: ^3.6.1
+  flutter_hooks: ^0.20.5
+  hooks_riverpod: ^2.5.1
+  smooth_page_indicator: ^1.1.0
+  image_picker: ^1.1.0
 
 dev_dependencies:
   flutter_test:

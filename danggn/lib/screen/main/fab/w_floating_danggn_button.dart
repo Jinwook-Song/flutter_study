@@ -3,7 +3,9 @@ import 'package:fast_app_base/common/dart/extension/num_duration_extension.dart'
 import 'package:fast_app_base/common/widget/w_animated_height_collapse.dart';
 import 'package:fast_app_base/screen/main/fab/view_models/floating_danggn_button_view_model.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
+import 'package:fast_app_base/screen/write/s_write.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
@@ -41,24 +43,66 @@ class FloatingDanggnButton extends ConsumerWidget {
                 duration: _duration,
                 child: IgnorePointer(
                   ignoring: !isExpanded,
-                  child: Container(
-                    width: 160,
-                    padding: const EdgeInsets.all(15),
-                    margin: const EdgeInsets.only(bottom: 10),
-                    decoration: BoxDecoration(
-                      color: context.appColors.floatingActionLayer,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _floatItem('알바', '$basePath/fab/fab_01.png'),
-                        _floatItem('과외/클래스', '$basePath/fab/fab_02.png'),
-                        _floatItem('농수산물', '$basePath/fab/fab_03.png'),
-                        _floatItem('부동산', '$basePath/fab/fab_04.png'),
-                        _floatItem('중고차', '$basePath/fab/fab_05.png'),
-                      ],
-                    ),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 160,
+                        padding: const EdgeInsets.all(15),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          color: context.appColors.floatingActionLayer,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _floatItem(
+                              '알바',
+                              '$basePath/fab/fab_01.png',
+                            ),
+                            _floatItem(
+                              '과외/클래스',
+                              '$basePath/fab/fab_02.png',
+                            ),
+                            _floatItem(
+                              '농수산물',
+                              '$basePath/fab/fab_03.png',
+                            ),
+                            _floatItem(
+                              '부동산',
+                              '$basePath/fab/fab_04.png',
+                            ),
+                            _floatItem(
+                              '중고차',
+                              '$basePath/fab/fab_05.png',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Gap(5),
+                      GestureDetector(
+                        onTap: () {
+                          Nav.push(const WriteScreen());
+                        },
+                        child: Container(
+                          width: 160,
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: context.appColors.floatingActionLayer,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _floatItem(
+                                '내 물건 팔기',
+                                '$basePath/fab/fab_06.png',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
