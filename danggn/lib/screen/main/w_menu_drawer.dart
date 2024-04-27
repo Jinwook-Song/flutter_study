@@ -1,4 +1,5 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:fast_app_base/common/theme/custom_theme.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,18 +7,17 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
-import '../../../screen/dialog/d_message.dart';
-import '../../common/common.dart';
-import '../../common/language/language.dart';
-import '../../common/theme/theme_util.dart';
-import '../../common/widget/w_mode_switch.dart';
+import 'package:fast_app_base/screen/dialog/d_message.dart';
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/language/language.dart';
+import 'package:fast_app_base/common/theme/theme_util.dart';
+import 'package:fast_app_base/common/widget/w_mode_switch.dart';
 
 class MenuDrawer extends StatefulWidget {
-  static const minHeightForScrollView = 380;
-
   const MenuDrawer({
     Key? key,
   }) : super(key: key);
+  static const minHeightForScrollView = 380;
 
   @override
   State<MenuDrawer> createState() => _MenuDrawerState();
@@ -44,9 +44,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
               width: 240,
               padding: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                  color: context.colors.background),
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                ),
+                color: context.colors.background,
+              ),
               child: isSmallScreen(context)
                   ? SingleChildScrollView(
                       child: getMenus(context),
@@ -78,12 +81,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     closeDrawer(context);
                   },
                   padding: const EdgeInsets.only(
-                    top: 0,
                     right: 20,
                     left: 20,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           const Height(10),
@@ -109,17 +111,27 @@ class _MenuDrawerState extends State<MenuDrawer> {
           isSmallScreen(context) ? const Height(10) : const EmptyExpanded(),
           MouseRegion(
             cursor: SystemMouseCursors.click,
-            child: ModeSwitch(
-              value: context.isDarkMode,
-              onChanged: (value) {
-                ThemeUtil.toggleTheme(context);
+            child: PopupMenuButton<CustomTheme>(
+              onSelected: (value) {
+                context.changeTheme(value);
               },
-              height: 30,
-              activeThumbImage: Image.asset('$basePath/darkmode/moon.png'),
-              inactiveThumbImage: Image.asset('$basePath/darkmode/sun.png'),
-              activeThumbColor: Colors.transparent,
-              inactiveThumbColor: Colors.transparent,
-            ).pOnly(left: 20),
+              itemBuilder: (context) => CustomTheme.values
+                  .map(
+                    (theme) => PopupMenuItem(
+                      value: theme,
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: theme.color,
+                          ),
+                          Text(theme.name),
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+              child: Text(context.themeType.name),
+            ),
           ),
           const Height(10),
           getLanguageOption(context),
@@ -129,25 +141,22 @@ class _MenuDrawerState extends State<MenuDrawer> {
               Expanded(
                 child: Tap(
                   child: Container(
-                      height: 30,
-                      width: 100,
-                      padding: const EdgeInsets.only(left: 15),
-                      child: '© 2023. Bansook Nam. all rights reserved.'
-                          .selectableText
-                          .size(10)
-                          .makeWithDefaultFont()),
+                    height: 30,
+                    width: 100,
+                    padding: const EdgeInsets.only(left: 15),
+                    child: '© 2023. Bansook Nam. all rights reserved.'
+                        .selectableText
+                        .size(10)
+                        .makeWithDefaultFont(),
+                  ),
                   onTap: () async {},
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
-  }
-
-  void toggleTheme() {
-    ThemeUtil.toggleTheme(context);
   }
 
   void closeDrawer(BuildContext context) {
@@ -157,38 +166,44 @@ class _MenuDrawerState extends State<MenuDrawer> {
   }
 
   Widget getLanguageOption(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Tap(
             child: Container(
-                padding: const EdgeInsets.only(left: 5, right: 5),
-                margin: const EdgeInsets.only(left: 15, right: 20),
-                decoration: BoxDecoration(
-                    border: Border.all(color: context.appColors.veryBrightGrey),
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              margin: const EdgeInsets.only(left: 15, right: 20),
+              decoration: BoxDecoration(
+                border: Border.all(color: context.appColors.veryBrightGrey),
+                borderRadius: BorderRadius.circular(10),
+                color: context.appColors.drawerBg,
+                boxShadow: [context.appShadows.buttonShadowSmall],
+              ),
+              child: Row(
+                children: [
+                  const Width(10),
+                  DropdownButton<String>(
+                    items: [
+                      menu(currentLanguage),
+                      menu(
+                        Language.values
+                            .where((element) => element != currentLanguage)
+                            .first,
+                      ),
+                    ],
+                    onChanged: (value) async {
+                      if (value == null) {
+                        return;
+                      }
+                      await context
+                          .setLocale(Language.find(value.toLowerCase()).locale);
+                    },
+                    value: describeEnum(currentLanguage).capitalizeFirst,
+                    underline: const SizedBox.shrink(),
+                    elevation: 1,
                     borderRadius: BorderRadius.circular(10),
-                    color: context.appColors.drawerBg,
-                    boxShadow: [context.appShadows.buttonShadowSmall]),
-                child: Row(
-                  children: [
-                    const Width(10),
-                    DropdownButton<String>(
-                      items: [
-                        menu(currentLanguage),
-                        menu(Language.values.where((element) => element != currentLanguage).first),
-                      ],
-                      onChanged: (value) async {
-                        if (value == null) {
-                          return;
-                        }
-                        await context.setLocale(Language.find(value.toLowerCase()).locale);
-                      },
-                      value: describeEnum(currentLanguage).capitalizeFirst,
-                      underline: const SizedBox.shrink(),
-                      elevation: 1,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
             onTap: () async {},
           ),
         ],
@@ -214,13 +229,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   Widget flag(String path) {
     return SimpleShadow(
-      opacity: 0.5,
       // Default: 0.5
       color: Colors.grey,
-      // Default: Black
-      offset: const Offset(2, 2),
-      // Default: Offset(2, 2)
-      sigma: 2,
       // Default: 2
       child: Image.asset(
         path,
@@ -231,10 +241,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
 }
 
 class _MenuWidget extends StatelessWidget {
+  const _MenuWidget(this.text, {Key? key, required this.onTap})
+      : super(key: key);
   final String text;
   final Function() onTap;
-
-  const _MenuWidget(this.text, {Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -247,11 +257,12 @@ class _MenuWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  child: text.text
-                      .textStyle(defaultFontStyle())
-                      .color(context.appColors.drawerText)
-                      .size(15)
-                      .make()),
+                child: text.text
+                    .textStyle(defaultFontStyle())
+                    .color(context.appColors.drawerText)
+                    .size(15)
+                    .make(),
+              ),
             ],
           ),
         ),
