@@ -63,6 +63,8 @@ dependencies:
   after_layout: ^1.2.0
   flutter_svg: ^2.0.3
   cached_network_image: ^3.3.1
+  danggn_ui:
+    path: packages/danggn_ui
 
   #ui - util
   keyboard_utils_fork:

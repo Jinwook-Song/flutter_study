@@ -233,6 +233,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.17.2"
+  danggn_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/danggn_ui"
+      relative: true
+    source: path
+    version: "0.0.1"
   dart_pubspec_licenses:
     dependency: transitive
     description:
