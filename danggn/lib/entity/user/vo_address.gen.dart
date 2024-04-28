@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'vo_address.freezed.dart';
-part 'vo_address.g.dart';
+part 'vo_address.gen.freezed.dart';
+part 'vo_address.gen.g.dart';
 
 @freezed
 class Address with _$Address {

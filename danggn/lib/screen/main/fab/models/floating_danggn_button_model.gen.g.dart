@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'floating_danggn_button_model.dart';
+part of 'floating_danggn_button_model.gen.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

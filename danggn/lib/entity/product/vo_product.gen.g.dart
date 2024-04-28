@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'vo_product.dart';
+part of 'vo_product.gen.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

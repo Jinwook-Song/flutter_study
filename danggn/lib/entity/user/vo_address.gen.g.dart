@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'vo_address.dart';
+part of 'vo_address.gen.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

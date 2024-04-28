@@ -1,10 +1,10 @@
-import 'package:fast_app_base/entity/product/vo_product.dart';
-import 'package:fast_app_base/entity/user/vo_address.dart';
-import 'package:fast_app_base/entity/user/vo_user.dart';
+import 'package:fast_app_base/entity/product/vo_product.gen.dart';
+import 'package:fast_app_base/entity/user/vo_address.gen.dart';
+import 'package:fast_app_base/entity/user/vo_user.gen.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'vd_product_post.freezed.dart';
-part 'vd_product_post.g.dart';
+part 'vd_product_post.gen.freezed.dart';
+part 'vd_product_post.gen.g.dart';
 
 @freezed
 class ProductPost with _$ProductPost {

@@ -1,9 +1,9 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/util/local_json.dart';
-import 'package:fast_app_base/screen/opensource/vo_package.dart';
+import 'package:fast_app_base/screen/opensource/vo_package.gen.dart';
 import 'package:flutter/material.dart';
 
-import 'w_opensource_item.dart';
+import 'package:fast_app_base/screen/opensource/w_opensource_item.dart';
 
 /// 아래의 명령어를 통해서, 주기적으로 라이센스 json을 최신화 해주세요.
 /// flutter pub run flutter_oss_licenses:generate.dart -o assets/json/licenses.json --json
@@ -24,7 +24,7 @@ class _OpensourceScreenState extends State<OpensourceScreen> {
   }
 
   void initData() async {
-    final list = await LocalJson.getObjectList<Package>("json/licenses.json");
+    final list = await LocalJson.getObjectList<Package>('json/licenses.json');
     setState(() {
       packageList = list;
     });
@@ -40,7 +40,7 @@ class _OpensourceScreenState extends State<OpensourceScreen> {
         itemBuilder: (context, index) => OpensourceItem(packageList[index]),
         itemCount: packageList.length,
         separatorBuilder: (BuildContext context, int index) {
-          return const Line().pSymmetric(h:20);
+          return const Line().pSymmetric(h: 20);
         },
       ),
     );

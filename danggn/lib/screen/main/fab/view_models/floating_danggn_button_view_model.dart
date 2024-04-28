@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:fast_app_base/screen/main/fab/models/floating_danggn_button_model.dart';
+import 'package:fast_app_base/screen/main/fab/models/floating_danggn_button_model.gen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FloatingButtonStateProvider extends Notifier<FloatingDanggnButtonState> {
