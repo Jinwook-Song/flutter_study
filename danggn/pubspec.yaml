@@ -65,7 +65,12 @@ dependencies:
   cached_network_image: ^3.3.1
 
   #ui - util
-  keyboard_utils_fork: ^0.0.4
+  keyboard_utils_fork:
+    git:
+      url: https://github.com/Jinwook-Song/keyboard_utils.git
+      ref: master
+      # ref: ccc1047 # commit hash code
+    # path: ../../keyboard_utils # 로컬 경로
 
   #network
   dio: ^5.0.0
