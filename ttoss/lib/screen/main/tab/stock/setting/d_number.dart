@@ -32,9 +32,9 @@ class _NotificationDialogState extends DialogState<NumberDialog> {
                 int number = int.parse(text);
                 widget.hide(number);
 
-              })
+              },),
             ],
-          ))
+          ),),
         ],
       ),
     );

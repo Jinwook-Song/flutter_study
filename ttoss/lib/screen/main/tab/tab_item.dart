@@ -30,6 +30,6 @@ enum TabItem {
           color:
               isActivated ? context.appColors.iconButton : context.appColors.iconButtonInactivate,
         ),
-        label: tabName);
+        label: tabName,);
   }
 }

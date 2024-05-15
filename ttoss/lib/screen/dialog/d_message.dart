@@ -44,7 +44,7 @@ class _MessageDialogState extends DialogState<MessageDialog> {
             child: Container(
                 constraints: BoxConstraints(maxHeight: context.deviceHeight),
                 decoration: BoxDecoration(
-                    color: context.appColors.drawerBg, borderRadius: BorderRadius.circular(15)),
+                    color: context.appColors.drawerBg, borderRadius: BorderRadius.circular(15),),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -59,14 +59,14 @@ class _MessageDialogState extends DialogState<MessageDialog> {
                               style: TextStyle(
                                   fontSize: widget.fontSize,
                                   height: 1.8,
-                                  color: context.appColors.text),
+                                  color: context.appColors.text,),
                               textAlign: widget.textAlign,
                             ),
                           ),
                         ),
                         const SizedBox(
                           height: 4,
-                        )
+                        ),
                       ],
                     ),
                     Line(color: context.appColors.divider),
@@ -85,14 +85,14 @@ class _MessageDialogState extends DialogState<MessageDialog> {
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             ),
-                          )),
-                    )
+                          ),),
+                    ),
                   ],
-                )),
+                ),),
           ),
           Expanded(
             child: Container(),
-          )
+          ),
         ],
       ),
     );

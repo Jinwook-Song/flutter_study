@@ -27,7 +27,7 @@ class SearchBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   child: Arrow(
                     direction: AxisDirection.left,
                   ),
-                )),
+                ),),
             Expanded(
               child: TextFieldWithDelete(
                 textInputAction: TextInputAction.search,
@@ -43,7 +43,7 @@ class SearchBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 onTap: () {
                   //search
                 },
-                child: const Icon(Icons.search).pOnly(right: 15))
+                child: const Icon(Icons.search).pOnly(right: 15),),
           ],
         ),
       ),

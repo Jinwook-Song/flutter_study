@@ -40,14 +40,14 @@ class SimpleResult<SuccessType, FailureType> {
   }
 
   FutureOr<SimpleResult> runIfSuccessAsync(
-      FutureOr<void> Function(SuccessType data) function) async {
+      FutureOr<void> Function(SuccessType data) function,) async {
     await _runSuccess(function);
     return this;
   }
 
 
   FutureOr<SimpleResult> runIfFailureAsync(
-      FutureOr<void> Function(FailureType error) function) async {
+      FutureOr<void> Function(FailureType error) function,) async {
     await _runFailure(function);
     return this;
   }

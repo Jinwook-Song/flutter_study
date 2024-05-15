@@ -18,7 +18,7 @@ class LongButton extends StatelessWidget {
           emptyExpanded,
           Arrow(
             color: context.appColors.lessImportant,
-          )
+          ),
         ],
       ),
     );

@@ -53,7 +53,7 @@ class _ModeSwitchState extends State<ModeSwitch> {
                       color: widget.value
                           ? const Color.fromARGB(255, 0, 9, 27)
                           : const Color.fromARGB(255, 106, 158, 255),
-                      borderRadius: BorderRadius.circular(widget.height / 2)),
+                      borderRadius: BorderRadius.circular(widget.height / 2),),
                   duration: duration,
                 ),
                 AnimatedContainer(

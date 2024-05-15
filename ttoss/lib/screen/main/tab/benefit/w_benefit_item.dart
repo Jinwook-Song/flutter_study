@@ -24,7 +24,7 @@ class BenefitItem extends StatelessWidget {
             height5,
             benefit.title.text.color(context.appColors.blueText).size(13).make(),
           ],
-        )
+        ),
       ],
     ).pSymmetric(v: 20);
   }

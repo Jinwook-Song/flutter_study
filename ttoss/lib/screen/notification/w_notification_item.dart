@@ -54,7 +54,7 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
                 width10,
               ],
             ),
-            widget.notification.description.text.make().pOnly(left: leftPadding + iconWidth)
+            widget.notification.description.text.make().pOnly(left: leftPadding + iconWidth),
           ],
         ),
       ),

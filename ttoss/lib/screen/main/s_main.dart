@@ -28,7 +28,8 @@ class MainScreenState extends State<MainScreen>
 
   int get _currentIndex => tabs.indexOf(_currentTab);
 
-  GlobalKey<NavigatorState> get _currentTabNavigationKey => navigatorKeys[_currentIndex];
+  GlobalKey<NavigatorState> get _currentTabNavigationKey =>
+      navigatorKeys[_currentIndex];
 
   ///bottomNavigationBar 아래 영역 까지 그림
   bool get extendBody => true;
@@ -50,13 +51,16 @@ class MainScreenState extends State<MainScreen>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _handleBackPressed,
+    return PopScope(
+      onPopInvoked: (didPop) {
+        _handleBackPressed();
+      },
       child: Scaffold(
         extendBody: extendBody,
         drawer: const MenuDrawer(),
         body: Padding(
-          padding: EdgeInsets.only(bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
+          padding: EdgeInsets.only(
+              bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0,),
           child: SafeArea(
             bottom: !extendBody,
             child: pages,
@@ -76,8 +80,8 @@ class MainScreenState extends State<MainScreen>
                   navigatorKey: navigatorKeys[index],
                   tabItem: tab,
                 ),
-              ))
-          .toList());
+              ),)
+          .toList(),);
 
   Future<bool> _handleBackPressed() async {
     final isFirstRouteInCurrentTab =
@@ -135,15 +139,17 @@ class MainScreenState extends State<MainScreen>
     });
   }
 
-  BottomNavigationBarItem bottomItem(
-      bool activate, IconData iconData, IconData inActivateIconData, String label) {
+  BottomNavigationBarItem bottomItem(bool activate, IconData iconData,
+      IconData inActivateIconData, String label,) {
     return BottomNavigationBarItem(
         icon: Icon(
           key: ValueKey(label),
           activate ? iconData : inActivateIconData,
-          color: activate ? context.appColors.iconButton : context.appColors.iconButtonInactivate,
+          color: activate
+              ? context.appColors.iconButton
+              : context.appColors.iconButtonInactivate,
         ),
-        label: label);
+        label: label,);
   }
 
   void _handleOnTapNavigationBarItem(int index) {

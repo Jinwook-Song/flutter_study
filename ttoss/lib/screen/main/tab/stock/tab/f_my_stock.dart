@@ -34,7 +34,7 @@ class MyStockFragment extends StatelessWidget {
                   radius: 8,
                   backgroundColor: context.appColors.buttonBackground,
                   child: '채우기'.text.size(12).make(),
-                )
+                ),
               ],
             ),
             height30,
@@ -66,7 +66,7 @@ class MyStockFragment extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   '관심주식'.text.bold.make(),
-                  '편집하기'.text.color(context.appColors.lessImportant).make()
+                  '편집하기'.text.color(context.appColors.lessImportant).make(),
                 ],
               ),
               height20,

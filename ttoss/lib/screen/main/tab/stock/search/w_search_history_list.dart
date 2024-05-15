@@ -32,6 +32,6 @@ class _SearchHistoryListState extends State<SearchHistoryList> {
               text: historyList[index],
             );
           },
-        ));
+        ),);
   }
 }

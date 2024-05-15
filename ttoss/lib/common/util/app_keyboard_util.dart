@@ -39,7 +39,7 @@ mixin KeyboardDetector<T extends StatefulWidget> on State<T> {
   }
 
   initKeyboardDetector(
-      {final Function(double)? willShowKeyboard, final Function()? willHideKeyboard}) {
+      {final Function(double)? willShowKeyboard, final Function()? willHideKeyboard,}) {
     subscribingId = keyboardUtils.add(
         listener: k.KeyboardListener(willHideKeyboard: () {
       if (willHideKeyboard != null) {
@@ -55,7 +55,7 @@ mixin KeyboardDetector<T extends StatefulWidget> on State<T> {
       setState(() {
         isKeyboardOn = true;
       });
-    }));
+    },),);
   }
 
   disposeKeyboardDetector() {

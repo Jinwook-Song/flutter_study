@@ -19,6 +19,6 @@ class TabNavigator extends StatelessWidget {
           return MaterialPageRoute(
             builder: (context) => tabItem.firstPage,
           );
-        });
+        },);
   }
 }

@@ -35,8 +35,8 @@ class _PopularSearchListState extends State<PopularSearchList> {
                         .size(16)
                         .make(),
                   ],
-                ).pSymmetric(h: 20, v: 20))
-            .toList()
+                ).pSymmetric(h: 20, v: 20),)
+            .toList(),
       ],
     );
   }

@@ -18,7 +18,7 @@ class SwitchMenu extends StatelessWidget {
         OsSwitch(
           value: value,
           onChanged: onChanged,
-        )
+        ),
       ],
     ).pSymmetric(h: 20);
   }

@@ -35,10 +35,10 @@ class SearchHistoryItem extends StatelessWidget {
                       child: const Icon(
                         Icons.close,
                         size: 24,
-                      ).pOnly(left: 10, top: 10, bottom: 10)),
+                      ).pOnly(left: 10, top: 10, bottom: 10),),
                 ],
               ),
-            )),
+            ),),
       ],
     );
   }

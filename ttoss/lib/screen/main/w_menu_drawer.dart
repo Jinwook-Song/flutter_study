@@ -45,8 +45,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
               padding: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                  color: context.colors.background),
+                      topRight: Radius.circular(5), bottomRight: Radius.circular(5),),
+                  color: context.colors.background,),
               child: isSmallScreen(context)
                   ? SingleChildScrollView(
                       child: getMenus(context),
@@ -83,7 +83,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     left: 20,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           const Height(10),
@@ -135,12 +135,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       child: '© 2023. Bansook Nam. all rights reserved.'
                           .selectableText
                           .size(10)
-                          .makeWithDefaultFont()),
+                          .makeWithDefaultFont(),),
                   onTap: () async {},
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -167,7 +167,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     border: Border.all(color: context.appColors.veryBrightGrey),
                     borderRadius: BorderRadius.circular(10),
                     color: context.appColors.drawerBg,
-                    boxShadow: [context.appShadows.buttonShadowSmall]),
+                    boxShadow: [context.appShadows.buttonShadowSmall],),
                 child: Row(
                   children: [
                     const Width(10),
@@ -188,7 +188,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ],
-                )),
+                ),),
             onTap: () async {},
           ),
         ],
@@ -251,7 +251,7 @@ class _MenuWidget extends StatelessWidget {
                       .textStyle(defaultFontStyle())
                       .color(context.appColors.drawerText)
                       .size(15)
-                      .make()),
+                      .make(),),
             ],
           ),
         ),

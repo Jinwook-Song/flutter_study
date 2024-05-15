@@ -32,34 +32,34 @@ class RoundButton extends StatefulWidget {
   final Color textColor;
   final FontWeight fontWeight;
 
-  RoundButton(
-      {required this.text,
-      this.isEnabled = true,
-      required this.onTap,
-      this.onTapDisabled,
-      this.width,
-      this.height = 50.0,
-      this.borderRadius,
-      this.isFullWidth = false,
-      this.wrapContent = true,
-      this.theme,
-      Color? shadowColor,
-      Color? textColor,
-      Color? bgColor,
-      Color? borderColor,
-      this.fontWeight = FontWeight.w500,
-      this.fontSize = 16,
-      this.sidePadding = 15.0,
-      this.rightPadding = 0.0,
-      this.leftPadding = 0.0,
-      this.leftWidgetLeftPadding = 18.0,
-      this.leftWidgetOnStack = true,
-      this.sideMargin = 0.0,
-      this.leftWidget,
-      this.rightWidget,
-      this.textAlign = TextAlign.start,
-      Key? key})
-      : shadowColor = shadowColor ?? theme?.shadowColor ?? Colors.transparent,
+  RoundButton({
+    required this.text,
+    this.isEnabled = true,
+    required this.onTap,
+    this.onTapDisabled,
+    this.width,
+    this.height = 50.0,
+    this.borderRadius,
+    this.isFullWidth = false,
+    this.wrapContent = true,
+    this.theme,
+    Color? shadowColor,
+    Color? textColor,
+    Color? bgColor,
+    Color? borderColor,
+    this.fontWeight = FontWeight.w500,
+    this.fontSize = 16,
+    this.sidePadding = 15.0,
+    this.rightPadding = 0.0,
+    this.leftPadding = 0.0,
+    this.leftWidgetLeftPadding = 18.0,
+    this.leftWidgetOnStack = true,
+    this.sideMargin = 0.0,
+    this.leftWidget,
+    this.rightWidget,
+    this.textAlign = TextAlign.start,
+    Key? key,
+  })  : shadowColor = shadowColor ?? Colors.transparent,
         textColor = textColor ?? theme?.textColor ?? Colors.white,
         bgColor = bgColor ?? theme?.bgColor ?? AppColors.blue,
         borderColor = borderColor ?? theme?.borderColor ?? Colors.transparent,
@@ -86,7 +86,8 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
   @override
   Widget build(BuildContext context) {
     Color color = widget.isEnabled ? (widget.bgColor) : disabledBgColor;
-    Color currentTextColor = widget.isEnabled ? widget.textColor : disabledTextColor;
+    Color currentTextColor =
+        widget.isEnabled ? widget.textColor : disabledTextColor;
     Color borderColor = widget.borderColor;
     Color shadowColor = widget.shadowColor;
     var finalWidth = widget.wrapContent ? null : widget.width;
@@ -135,8 +136,9 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
           AnimatedContainer(
             margin: EdgeInsets.symmetric(horizontal: widget.sideMargin),
             padding: EdgeInsets.only(
-                left: widget.sidePadding + widget.leftPadding,
-                right: widget.sidePadding + widget.rightPadding),
+              left: widget.sidePadding + widget.leftPadding,
+              right: widget.sidePadding + widget.rightPadding,
+            ),
             duration: const Duration(milliseconds: 300),
             width: finalWidth,
             height: widget.height,
@@ -147,14 +149,19 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
               shape: BoxShape.rectangle,
               boxShadow: [
                 BoxShadow(
-                    color: shadowColor, offset: const Offset(0, 3), blurRadius: 6, spreadRadius: 0)
+                  color: shadowColor,
+                  offset: const Offset(0, 3),
+                  blurRadius: 6,
+                  spreadRadius: 0,
+                ),
               ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (widget.leftWidget != null && !widget.leftWidgetOnStack) widget.leftWidget!,
+                if (widget.leftWidget != null && !widget.leftWidgetOnStack)
+                  widget.leftWidget!,
                 Text(
                   widget.text,
                   textAlign: widget.textAlign,

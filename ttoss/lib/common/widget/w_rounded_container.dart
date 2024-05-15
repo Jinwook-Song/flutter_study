@@ -14,7 +14,7 @@ class RoundedContainer extends StatelessWidget {
       this.radius = 20,
       this.backgroundColor,
       this.margin,
-      this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15)});
+      this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class RoundedContainer extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
           color: backgroundColor ?? context.appColors.roundedLayoutBackground,
-          borderRadius: BorderRadius.circular(radius)),
+          borderRadius: BorderRadius.circular(radius),),
       child: child,
     );
   }

@@ -43,7 +43,7 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
           theme: context.themeType.themeData,
           home: const MainScreen(),
         );
-      }),
+      },),
     );
   }
 

@@ -8,7 +8,7 @@ class NotificationDialog extends DialogWidget {
   final List<TtossNotification> notifications;
 
   NotificationDialog(this.notifications,
-      {super.key, super.animation = NavAni.Bottom, super.barrierDismissible = false});
+      {super.key, super.animation = NavAni.Bottom, super.barrierDismissible = false,});
 
   @override
   DialogState<NotificationDialog> createState() => _NotificationDialogState();
@@ -27,8 +27,8 @@ class _NotificationDialogState extends DialogState<NotificationDialog> {
                   onTap: () {
                     widget.hide();
                   },
-                  notification: element))
-              .toList()
+                  notification: element,),)
+              .toList(),
         ],
       ),
     );

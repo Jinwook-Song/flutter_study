@@ -35,7 +35,7 @@ final bankAccounts = [
   bankAccountShinhan2,
   bankAccountShinhan3,
   bankAccountToss,
-  bankAccountKakao
+  bankAccountKakao,
 ];
 
 //Map
@@ -52,4 +52,4 @@ final bankSet = {bankAccountShinhan1,
   bankAccountShinhan2,
   bankAccountShinhan3,
   bankAccountToss,
-  bankAccountKakao};
+  bankAccountKakao,};

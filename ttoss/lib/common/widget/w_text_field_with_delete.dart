@@ -50,7 +50,7 @@ class TextFieldWithDelete extends StatefulWidget {
       this.leftImage,
       this.onTapDelete,
       this.showMaxCount,
-      this.autofocus})
+      this.autofocus,})
       : super(key: key);
 
   @override
@@ -137,7 +137,7 @@ class TextFieldWithDeleteState extends State<TextFieldWithDelete> {
                 hintStyle: TextStyle(
                     fontSize: widget.fontSize,
                     fontWeight: widget.fontWeight,
-                    color: context.appColors.hintText),
+                    color: context.appColors.hintText,),
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
@@ -163,14 +163,14 @@ class TextFieldWithDeleteState extends State<TextFieldWithDelete> {
                                 child: SvgPicture.asset(
                                   '$basePath/icon/delete_x.svg',
                                   colorFilter: ui.ColorFilter.mode(
-                                      context.appColors.iconButton, ui.BlendMode.srcIn),
+                                      context.appColors.iconButton, ui.BlendMode.srcIn,),
                                 ),
                               ),
                             ),
                           ],
                         )
-                      : Container()),
-            )
+                      : Container(),),
+            ),
           ],
         ),
       ],

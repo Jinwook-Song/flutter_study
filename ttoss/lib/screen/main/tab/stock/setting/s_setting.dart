@@ -28,13 +28,13 @@ class _SettingScreenState extends State<SettingScreen> {
           Obx(
             () => SwitchMenu('푸시 설정', Prefs.isPushOnRx.get(), onChanged: (isOn) {
               Prefs.isPushOnRx.set(isOn);
-            }),
+            },),
           ),
           Obx(() => Slider(
               value: Prefs.sliderPosition.get(),
               onChanged: (value) {
                 Prefs.sliderPosition.set(value);
-              })),
+              },),),
           Obx(
             () => BigButton(
               '날짜 ${Prefs.birthday.get() == null ? "" : Prefs.birthday.get()?.formattedDate}',
@@ -43,7 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime.now().subtract(90.days),
-                    lastDate: DateTime.now().add(90.days));
+                    lastDate: DateTime.now().add(90.days),);
                 if (date != null) {
                   Prefs.birthday.set(date);
                 }
@@ -66,7 +66,7 @@ class _SettingScreenState extends State<SettingScreen> {
             onTap: () async {
               Nav.push(const OpensourceScreen());
             },
-          )
+          ),
         ],
       ),
     );

@@ -30,7 +30,7 @@ class HomeFragment extends StatelessWidget {
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(
                   top: TtossAppBar.appBarHeight + 10,
-                  bottom: MainScreenState.bottomNavigatorHeight),
+                  bottom: MainScreenState.bottomNavigatorHeight,),
               child: Column(
                 children: [
                   BigButton(
@@ -46,14 +46,14 @@ class HomeFragment extends StatelessWidget {
                     children: [
                       "자산".text.bold.white.make(),
                       height5,
-                      ...bankAccounts.map((e) => BankAccountWidget(e)).toList()
+                      ...bankAccounts.map((e) => BankAccountWidget(e)).toList(),
                     ],
-                  )),
+                  ),),
                 ],
               ).pSymmetric(h: 20),
             ),
           ),
-          const TtossAppBar()
+          const TtossAppBar(),
         ],
       ),
     );
@@ -66,7 +66,7 @@ class HomeFragment extends StatelessWidget {
             context.showErrorSnackbar('error');
           },
           child: '에러 보여주기 버튼'.text.white.size(13).make().centered().pSymmetric(h: 10, v: 5),
-        ));
+        ),);
   }
 
   Future<void> showConfirmDialog(BuildContext context) async {
