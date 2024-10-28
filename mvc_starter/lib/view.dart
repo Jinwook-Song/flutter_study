@@ -1,34 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:mvc_starter/controller.dart';
+import 'package:mvc_starter/model.dart';
+
 // TODO: MVC 패턴을 적용하여 카운터 앱이 동작하도록 변경하세요.
 // - 단, View 내에 변수는 없어야 한다. (ex. counter)
 
-enum CounterMode {
-  plus,
-  minus;
-
-  CounterMode next() {
-    switch (this) {
-      case CounterMode.plus:
-        return CounterMode.minus;
-      case CounterMode.minus:
-        return CounterMode.plus;
-    }
-  }
-}
-
 class CounterView extends StatefulWidget {
-  const CounterView({super.key});
+  final CounterController counterController;
+  final CounterModeController counterModeController;
+  const CounterView({
+    super.key,
+    required this.counterController,
+    required this.counterModeController,
+  });
 
   @override
   State<CounterView> createState() => _CounterViewState();
 }
 
 class _CounterViewState extends State<CounterView> {
-  int counter = 0;
-  CounterMode counterMode = CounterMode.plus;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +42,7 @@ class _CounterViewState extends State<CounterView> {
               'You have pushed the button this many times:',
             ),
             Text(
-              counter.toString(),
+              widget.counterController.counter.toString(),
               style: Theme.of(context).textTheme.headlineMedium,
             )
           ],
@@ -58,24 +50,24 @@ class _CounterViewState extends State<CounterView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: execute,
-        child: Icon(counterMode.icon),
+        child: Icon(widget.counterModeController.counterMode.icon),
       ),
     );
   }
 
   void onChangedMode() {
     setState(() {
-      counterMode = counterMode.next();
+      widget.counterModeController.toggleMode();
     });
   }
 
   void execute() {
     setState(() {
-      switch (counterMode) {
+      switch (widget.counterModeController.counterMode) {
         case CounterMode.plus:
-          counter++;
+          widget.counterController.increment();
         case CounterMode.minus:
-          counter--;
+          widget.counterController.decrement();
       }
     });
   }
