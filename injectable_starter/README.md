@@ -1,16 +1,13 @@
 # injectable_starter
 
-A new Flutter project.
+Injectable
 
-## Getting Started
+@Annotation을 활용한 의존성 주입 라이브러리 → 가독성 향상
 
-This project is a starting point for a Flutter application.
+메타데이터를 표현하기 위한 특별한 형태의 주석으로 코드 자동 생성에 활용
 
-A few resources to get you started if this is your first Flutter project:
+get_it과 함께 사용
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+→ injectable: 클래스나 함수에 어노테이션을 추가하여 의존성을 자동으로 등록하고 해결하는 등 작업 수행
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+→ get_it: injectable이 등록한 의존성을 저장하고 관리하는데 사용

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable_starter/dependency.dart';
 
-import 'main.dart';
 import 'model.dart';
 
 // TODO: Injectable 을 사용하여 카운터 앱이 동작하도록 변경하세요.

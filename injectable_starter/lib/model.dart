@@ -1,3 +1,5 @@
+import 'package:injectable/injectable.dart';
+
 enum CounterMode {
   plus,
   minus;
@@ -12,6 +14,7 @@ enum CounterMode {
   }
 }
 
+@singleton
 class CounterModel {
   int _counter = 0;
 
@@ -26,6 +29,7 @@ class CounterModel {
   }
 }
 
+@singleton
 class CounterModeModel {
   CounterMode _counterMode = CounterMode.plus;
 
