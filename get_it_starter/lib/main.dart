@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
+import 'package:get_it_starter/model.dart';
 
 import 'screen.dart';
 
+final GetIt locator = GetIt.instance;
+
 void main() {
+  locator.registerSingleton<CounterModel>(CounterModel());
+  locator.registerSingleton<CounterModeModel>(CounterModeModel());
   runApp(const CounterApp());
 }
 
