@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'model.dart';
 
@@ -14,9 +15,6 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  CounterModel counterModel = CounterModel();
-  CounterModeModel counterModeModel = CounterModeModel();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +36,7 @@ class _CounterScreenState extends State<CounterScreen> {
               'You have pushed the button this many times:',
             ),
             Text(
-              counterModel.counter.toString(),
+              context.read<CounterModel>().counter.toString(),
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -46,24 +44,24 @@ class _CounterScreenState extends State<CounterScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: execute,
-        child: Icon(counterModeModel.counterMode.icon),
+        child: Icon(context.read<CounterModeModel>().counterMode.icon),
       ),
     );
   }
 
   void onChangedMode() {
     setState(() {
-      counterModeModel.toggleMode();
+      context.read<CounterModeModel>().toggleMode();
     });
   }
 
   void execute() {
     setState(() {
-      switch (counterModeModel.counterMode) {
+      switch (context.read<CounterModeModel>().counterMode) {
         case CounterMode.plus:
-          counterModel.increment();
+          context.read<CounterModel>().increment();
         case CounterMode.minus:
-          counterModel.decrement();
+          context.read<CounterModel>().decrement();
       }
     });
   }
