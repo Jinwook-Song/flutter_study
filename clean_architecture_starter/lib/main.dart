@@ -1,8 +1,8 @@
-import 'package:clean_architecture_starter/model.dart';
-import 'package:clean_architecture_starter/view_model.dart';
+import 'package:clean_architecture_starter/domain/domain.dart';
+import 'package:clean_architecture_starter/presentation/presentation.dart';
+import 'package:clean_architecture_starter/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'view.dart';
 
 void main() {
   runApp(const CounterApp());

@@ -12,20 +12,6 @@ enum CounterMode {
   }
 }
 
-class CounterModel {
-  int _counter = 0;
-
-  int get counter => _counter;
-
-  void increment() {
-    _counter++;
-  }
-
-  void decrement() {
-    _counter--;
-  }
-}
-
 class CouterModeModel {
   CounterMode _counterMode = CounterMode.plus;
   CounterMode get counterMode => _counterMode;

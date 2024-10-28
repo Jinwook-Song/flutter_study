@@ -1,9 +1,7 @@
-import 'package:clean_architecture_starter/model.dart';
-import 'package:clean_architecture_starter/view_model.dart';
+import 'package:clean_architecture_starter/domain/domain.dart';
+import 'package:clean_architecture_starter/presentation/presentation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// TODO: MVC 패턴을 MVVM 패턴으로 변경하여 카운터 앱이 동작하도록 변경하세요.
 
 class CounterView extends StatelessWidget {
   final CounterViewModel counterViewModel;
@@ -19,7 +17,7 @@ class CounterView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('MVVM'),
+        title: const Text('Clean Architecture'),
         actions: [
           IconButton(
             onPressed: onChangedMode,
@@ -46,7 +44,7 @@ class CounterView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: execute,
-        child: ValueListenableBuilder(
+        child: ValueListenableBuilder<CounterMode>(
             valueListenable: counterModeViewModel.counterMode,
             builder: (context, value, child) => Icon(value.icon)),
       ),
