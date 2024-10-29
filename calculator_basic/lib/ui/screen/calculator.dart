@@ -1,3 +1,4 @@
+import 'package:calculator_basic/data/data.dart';
 import 'package:calculator_basic/presentation/presentation.dart';
 import 'package:calculator_basic/ui/widget/calculator_board.dart';
 import 'package:calculator_basic/ui/widget/calculator_button.dart';
@@ -12,7 +13,10 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   final CalculatorViewModel _viewModel = CalculatorViewModel(
-      FetchCalculatorUsecase(), SaveCalculatorUsecase(), Calculator());
+    FetchCalculatorUsecase(),
+    SaveCalculatorUsecase(),
+    CalculatorEntity(),
+  );
 
   @override
   void initState() {
@@ -29,7 +33,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Calculator'),
       ),
-      body: ValueListenableBuilder<Calculator>(
+      body: ValueListenableBuilder<CalculatorEntity>(
         valueListenable: _viewModel,
         builder: (context, calculator, child) => Column(
           children: [
