@@ -1,7 +1,7 @@
 import 'package:calculator_basic/data/data.dart';
 
 class CalculatorDataSource {
-  final ICalculatorLocalDataSource _localDataSource;
+  final CalculatorLocalDataSource _localDataSource;
 
   CalculatorDataSource(this._localDataSource);
 

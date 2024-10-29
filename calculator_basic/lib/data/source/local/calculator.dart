@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class ICalculatorLocalDataSource {
+abstract class CalculatorLocalDataSource {
   String get key;
 
   Future<void> setString(String value);
@@ -8,7 +8,7 @@ abstract class ICalculatorLocalDataSource {
   Future<String?> getString();
 }
 
-class CalculatorLocalDataSource implements ICalculatorLocalDataSource {
+class CalculatorLocalDataSourceImpl implements CalculatorLocalDataSource {
   @override
   String get key => 'calculator';
 
