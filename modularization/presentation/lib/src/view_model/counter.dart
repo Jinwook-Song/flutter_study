@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:modularization/domain/domain.dart';
+import 'package:modularization_domain/domain.dart';
 
 class CounterViewModel {
   final CounterModel _counterModel;

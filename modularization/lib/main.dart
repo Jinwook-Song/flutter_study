@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:modularization/domain/domain.dart';
-import 'package:modularization/presentation/presentation.dart';
-import 'package:modularization/ui/ui.dart';
+import 'package:modularization_domain/domain.dart';
+import 'package:modularization_presentation/presentation.dart';
+import 'package:modularization_ui/ui.dart';
 
 void main() {
   runApp(const CounterApp());

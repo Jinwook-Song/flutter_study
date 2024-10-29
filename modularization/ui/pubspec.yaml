@@ -1,4 +1,4 @@
-name: modularization
+name: modularization_ui
 description: 'A new Flutter project.'
 
 publish_to: 'none'
@@ -14,11 +14,9 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   modularization_domain:
-    path: ./domain
+    path: ../domain
   modularization_presentation:
-    path: ./presentation
-  modularization_ui:
-    path: ./ui
+    path: ../presentation
 
 dev_dependencies:
   flutter_test:

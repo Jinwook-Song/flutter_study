@@ -1,7 +1,7 @@
-import 'package:modularization/domain/domain.dart';
-import 'package:modularization/presentation/presentation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modularization_domain/domain.dart';
+import 'package:modularization_presentation/presentation.dart';
 
 class CounterView extends StatelessWidget {
   final CounterViewModel counterViewModel;

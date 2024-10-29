@@ -1,5 +1,5 @@
-import 'package:modularization/domain/domain.dart';
 import 'package:flutter/foundation.dart';
+import 'package:modularization_domain/domain.dart';
 
 class CounterModeViewModel {
   final CounterModeModel _counterModeModel;
