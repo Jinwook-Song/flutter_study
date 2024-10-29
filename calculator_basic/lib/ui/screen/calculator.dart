@@ -13,6 +13,15 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   final CalculatorViewModel _viewModel = CalculatorViewModel(Calculator());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _viewModel.load();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +39,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 Expanded(
                     child: CalculatorButton.complex(
                   text: 'AC',
-                  onTap: _perform,
+                  onTap: (buttonText) => _perform(buttonText, save: true),
                 )),
                 Expanded(
                     child: CalculatorButton.complex(
@@ -142,7 +151,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     child: CalculatorButton.operator(
                   text: '=',
                   operator: calculator.operator,
-                  onTap: _perform,
+                  onTap: (buttonText) => _perform(buttonText, save: true),
                 )),
               ],
             ),
