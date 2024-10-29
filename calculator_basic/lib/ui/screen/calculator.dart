@@ -12,6 +12,7 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
+  final CalculatorViewModel _viewModel = CalculatorViewModel(Calculator());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,128 +20,145 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Calculator'),
       ),
-      body: Column(
-        children: [
-          const CalculatorBoard(),
-          Row(
-            children: [
-              Expanded(
-                  child: CalculatorButton.complex(
-                text: 'AC',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.complex(
-                text: '+/-',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.complex(
-                text: '<',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.operator(
-                text: '/',
-                onTap: (p0) {},
-              )),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '7',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '8',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '9',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.operator(
-                text: 'x',
-                onTap: (p0) {},
-              )),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '4',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '5',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '6',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.operator(
-                text: '-',
-                onTap: (p0) {},
-              )),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '1',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '2',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '3',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.operator(
-                text: '+',
-                onTap: (p0) {},
-              )),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                  flex: 2,
-                  child: CalculatorButton.simple(
-                    text: '0',
-                    onTap: (p0) {},
-                  )),
-              Expanded(
-                  child: CalculatorButton.simple(
-                text: '.',
-                onTap: (p0) {},
-              )),
-              Expanded(
-                  child: CalculatorButton.operator(
-                text: '=',
-                onTap: (p0) {},
-              )),
-            ],
-          ),
-        ],
+      body: ValueListenableBuilder<Calculator>(
+        valueListenable: _viewModel,
+        builder: (context, calculator, child) => Column(
+          children: [
+            CalculatorBoard(number: calculator.result),
+            Row(
+              children: [
+                Expanded(
+                    child: CalculatorButton.complex(
+                  text: 'AC',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.complex(
+                  text: '+/-',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.complex(
+                  text: '<',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.operator(
+                  text: '/',
+                  operator: calculator.operator,
+                  onTap: _perform,
+                )),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '7',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '8',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '9',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.operator(
+                  text: 'x',
+                  operator: calculator.operator,
+                  onTap: _perform,
+                )),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '4',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '5',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '6',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.operator(
+                  text: '-',
+                  operator: calculator.operator,
+                  onTap: _perform,
+                )),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '1',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '2',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '3',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.operator(
+                  text: '+',
+                  operator: calculator.operator,
+                  onTap: _perform,
+                )),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: CalculatorButton.simple(
+                      text: '0',
+                      onTap: _perform,
+                    )),
+                Expanded(
+                    child: CalculatorButton.simple(
+                  text: '.',
+                  onTap: _perform,
+                )),
+                Expanded(
+                    child: CalculatorButton.operator(
+                  text: '=',
+                  operator: calculator.operator,
+                  onTap: _perform,
+                )),
+              ],
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  Future<void> _perform(
+    String buttonText, {
+    bool save = false,
+  }) async {
+    _viewModel.calculate(buttonText);
+
+    if (save) await _viewModel.save();
   }
 }
 
