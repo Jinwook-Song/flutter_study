@@ -1,3 +1,5 @@
+import 'package:calculator_basic/ui/widget/calculator_board.dart';
+import 'package:calculator_basic/ui/widget/calculator_button.dart';
 import 'package:calculator_basic/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +18,127 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Calculator'),
+      ),
+      body: Column(
+        children: [
+          const CalculatorBoard(),
+          Row(
+            children: [
+              Expanded(
+                  child: CalculatorButton.complex(
+                text: 'AC',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.complex(
+                text: '+/-',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.complex(
+                text: '<',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.operator(
+                text: '/',
+                onTap: (p0) {},
+              )),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '7',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '8',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '9',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.operator(
+                text: 'x',
+                onTap: (p0) {},
+              )),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '4',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '5',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '6',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.operator(
+                text: '-',
+                onTap: (p0) {},
+              )),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '1',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '2',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '3',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.operator(
+                text: '+',
+                onTap: (p0) {},
+              )),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                  flex: 2,
+                  child: CalculatorButton.simple(
+                    text: '0',
+                    onTap: (p0) {},
+                  )),
+              Expanded(
+                  child: CalculatorButton.simple(
+                text: '.',
+                onTap: (p0) {},
+              )),
+              Expanded(
+                  child: CalculatorButton.operator(
+                text: '=',
+                onTap: (p0) {},
+              )),
+            ],
+          ),
+        ],
       ),
     );
   }
