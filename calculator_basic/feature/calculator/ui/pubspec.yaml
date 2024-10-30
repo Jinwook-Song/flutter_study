@@ -20,6 +20,8 @@ dependencies:
     path: ../domain
   calculator_basic_data:
     path: ../data
+  calculator_basic_di:
+    path: ../di
 
 dev_dependencies:
   flutter_test:

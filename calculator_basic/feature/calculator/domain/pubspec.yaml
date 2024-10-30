@@ -8,10 +8,6 @@ version: 1.0.0+1
 environment:
   sdk: ^3.5.3
 
-dependencies:
-  calculator_basic:
-    path: ../
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

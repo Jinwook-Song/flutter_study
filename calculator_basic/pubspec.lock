@@ -18,37 +18,37 @@ packages:
     source: hosted
     version: "2.1.1"
   calculator_basic_data:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: data
+      path: "feature/calculator/data"
       relative: true
     source: path
     version: "1.0.0+1"
   calculator_basic_di:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: di
+      path: "feature/calculator/di"
       relative: true
     source: path
     version: "1.0.0+1"
   calculator_basic_domain:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: domain
+      path: "feature/calculator/domain"
       relative: true
     source: path
     version: "1.0.0+1"
   calculator_basic_presentation:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: presentation
+      path: "feature/calculator/presentation"
       relative: true
     source: path
     version: "1.0.0+1"
   calculator_basic_ui:
     dependency: "direct main"
     description:
-      path: ui
+      path: "feature/calculator/ui"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -77,7 +77,7 @@ packages:
     source: hosted
     version: "1.18.0"
   cupertino_icons:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cupertino_icons
       sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
@@ -244,7 +244,7 @@ packages:
     source: hosted
     version: "2.1.8"
   provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: provider
       sha256: c8a055ee5ce3fd98d6fc872478b03823ffdb448699c6ebdbbc71d59b596fd48c
