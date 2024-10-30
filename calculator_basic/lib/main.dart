@@ -1,5 +1,5 @@
-import 'package:calculator_basic/di/di.dart';
-import 'package:calculator_basic/ui/screen/calculator.dart';
+import 'package:calculator_basic_di/di.dart';
+import 'package:calculator_basic_ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

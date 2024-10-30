@@ -1,4 +1,4 @@
-name: calculator_basic
+name: calculator_basic_data
 description: 'A new Flutter project.'
 
 publish_to: 'none'
@@ -11,19 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.8
-  provider: ^6.1.2
-  calculator_basic_data:
-    path: data
+  shared_preferences: ^2.3.2
   calculator_basic_domain:
-    path: domain
-  calculator_basic_presentation:
-    path: presentation
-  calculator_basic_ui:
-    path: ui
-  calculator_basic_di:
-    path: di
+    path: ../domain
 
 dev_dependencies:
   flutter_test:
