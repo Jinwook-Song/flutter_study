@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 abstract class ChatEvent {}
@@ -10,25 +11,15 @@ class AddChatEvent extends ChatEvent {
   AddChatEvent({required this.item});
 }
 
-class ChatBloc {
-  final List<ChatItem> _items = [];
-
-  final StreamController<ChatEvent> _eventController = StreamController();
-  Sink<ChatEvent> get eventSink => _eventController.sink;
-
-  final StreamController<List<ChatItem>> _stateController = StreamController();
-  Stream<List<ChatItem>> get stateStream => _stateController.stream;
-
+class ChatBloc extends Bloc<ChatEvent, List<ChatItem>> {
   final Stream<int> _stream =
       Stream.periodic(const Duration(seconds: 3), (count) => count).take(5);
 
-  ChatBloc() {
-    _eventController.stream.listen((event) {
-      if (event is AddChatEvent) {
-        _items.add(event.item);
-      }
-      _stateController.sink.add(_items);
-    });
+  ChatBloc() : super([]) {
+    // event 등록
+    on<AddChatEvent>(
+      (event, emit) => emit([...state, event.item]),
+    );
   }
 
   void startAutoMessage() {
@@ -49,14 +40,9 @@ class ChatBloc {
         isMe: false,
       );
 
-      _items.add(item);
-      _stateController.sink.add(_items);
+      final AddChatEvent event = AddChatEvent(item: item);
+      add(event);
     });
-  }
-
-  void dispose() {
-    _eventController.close();
-    _stateController.close();
   }
 }
 
@@ -80,7 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
-    _bloc.dispose();
+    _bloc.close();
     super.dispose();
   }
 
@@ -92,7 +78,8 @@ class _ChatScreenState extends State<ChatScreen> {
         title: const Text('Stream'),
       ),
       body: StreamBuilder<List<ChatItem>>(
-        stream: _bloc.stateStream,
+        initialData: _bloc.state,
+        stream: _bloc.stream,
         builder: (context, snapshot) {
           final items = snapshot.data ?? [];
           return ListView.separated(
@@ -124,7 +111,8 @@ class _ChatScreenState extends State<ChatScreen> {
             message: message,
           );
 
-          _bloc.eventSink.add(AddChatEvent(item: item));
+          final AddChatEvent event = AddChatEvent(item: item);
+          _bloc.add(event);
         },
       ),
     );
