@@ -10,9 +10,11 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final List<ChatItem> items = [];
+  final StreamController<List<ChatItem>> _streamController = StreamController();
+  final Stream<int> _stream =
+      Stream.periodic(const Duration(seconds: 3), (count) => count).take(5);
 
-  Timer? timer;
+  final List<ChatItem> items = [];
 
   @override
   void initState() {
@@ -24,43 +26,31 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
-    timer?.cancel();
-    timer = null;
+    _streamController.close();
     super.dispose();
   }
 
   void startAutoMessage() {
-    int count = 0;
+    _stream.listen((count) {
+      if (count == 5) return;
 
-    timer = Timer.periodic(
-      const Duration(seconds: 5),
-      (timer) {
-        if (count == 5) {
-          timer.cancel();
-          return;
-        }
+      final String message;
+      if (count == 0) {
+        message = '채팅을 시작합니다.';
+      } else if (count == 4) {
+        message = '채팅을 종료합니다.';
+      } else {
+        message = '안녕하세요.' * count;
+      }
 
-        final String message;
-        if (count == 0) {
-          message = '채팅을 시작합니다.';
-        } else if (count == 4) {
-          message = '채팅을 종료합니다.';
-        } else {
-          message = '안녕하세요.' * count;
-        }
+      final ChatItem item = ChatItem(
+        message: message,
+        isMe: false,
+      );
 
-        final ChatItem item = ChatItem(
-          message: message,
-          isMe: false,
-        );
-
-        setState(() {
-          items.add(item);
-        });
-
-        count++;
-      },
-    );
+      items.add(item);
+      _streamController.sink.add(items);
+    });
   }
 
   @override
@@ -70,26 +60,33 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Stream'),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(16.0),
-        reverse: true,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final ChatItem item = items.reversed.toList()[index];
-          if (item.isMe) {
-            return ChatTile.right(
-              message: item.message,
-            );
-          } else {
-            return ChatTile.left(
-              message: item.message,
-            );
-          }
+      body: StreamBuilder<List<ChatItem>>(
+        initialData: items,
+        stream: _streamController.stream,
+        builder: (context, snapshot) {
+          final items = snapshot.data ?? [];
+          return ListView.separated(
+            padding: const EdgeInsets.all(16.0),
+            reverse: true,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              final ChatItem item = items.reversed.toList()[index];
+              if (item.isMe) {
+                return ChatTile.right(
+                  message: item.message,
+                );
+              } else {
+                return ChatTile.left(
+                  message: item.message,
+                );
+              }
+            },
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 8,
+            ),
+            itemCount: items.length,
+          );
         },
-        separatorBuilder: (context, index) => const SizedBox(
-          height: 8,
-        ),
-        itemCount: items.length,
       ),
       bottomNavigationBar: ChatBottomNavigationBar(
         onSend: (message) {
@@ -97,9 +94,8 @@ class _ChatScreenState extends State<ChatScreen> {
             message: message,
           );
 
-          setState(() {
-            items.add(item);
-          });
+          items.add(item);
+          _streamController.sink.add(items);
         },
       ),
     );
