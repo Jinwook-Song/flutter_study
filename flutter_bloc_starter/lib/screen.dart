@@ -11,20 +11,12 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final ChatBloc bloc = ChatBloc();
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      bloc.startAutoMessage();
+      context.read<ChatBloc>().startAutoMessage();
     });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    bloc.close();
-    super.dispose();
   }
 
   @override
@@ -34,11 +26,9 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('flutter bloc'),
       ),
-      body: StreamBuilder<List<ChatItem>>(
-        initialData: bloc.state,
-        stream: bloc.stream,
-        builder: (context, snapshot) {
-          final List<ChatItem> items = snapshot.data ?? [];
+      body: BlocBuilder<ChatBloc, List<ChatItem>>(
+        builder: (context, state) {
+          final List<ChatItem> items = state;
           return ListView.separated(
             padding: const EdgeInsets.all(16.0),
             reverse: true,
@@ -72,7 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
             item: item,
           );
 
-          bloc.add(event);
+          context.read<ChatBloc>().add(event);
         },
       ),
     );
