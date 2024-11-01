@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "151033691576",
+    "project_id": "auth-with-bloc-67862",
+    "storage_bucket": "auth-with-bloc-67862.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151033691576:android:5240aaa8ef7bb4fc61e34d",
+        "android_client_info": {
+          "package_name": "com.example.login"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlPRYE3eNObiRhbj-lhnWSIp9aMUAMENU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
