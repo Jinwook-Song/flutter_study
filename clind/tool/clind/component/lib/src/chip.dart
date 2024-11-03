@@ -1,3 +1,4 @@
+import 'package:core_util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:tool_clind_theme/theme.dart';
 
@@ -50,6 +51,26 @@ class ClindChannelChip extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ClindLoadingChannelChip extends StatelessWidget {
+  const ClindLoadingChannelChip({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CoreShimmer(
+      baseColor: context.colorScheme.gray800,
+      highlightColor: context.colorScheme.gray900,
+      child: Container(
+        width: 88.0,
+        height: 33.0,
+        decoration: BoxDecoration(
+          color: context.colorScheme.gray800,
+          borderRadius: BorderRadius.circular(20.0),
         ),
       ),
     );

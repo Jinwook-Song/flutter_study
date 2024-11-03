@@ -41,8 +41,7 @@ class ClindPostCard extends StatelessWidget {
     required this.onCommentTapped,
     required this.onViewTapped,
     required this.onTap,
-  }) : thumbnailUrls =
-            thumbnailUrls?.where((url) => url.isWebUrl).toList() ?? [];
+  }) : thumbnailUrls = thumbnailUrls?.where((url) => url.isWebUrl).toList() ?? [];
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +87,7 @@ class ClindPostCard extends StatelessWidget {
                               children: [
                                 Text(
                                   title,
-                                  style: context.textTheme.default17Medium
-                                      .copyWith(
+                                  style: context.textTheme.default17Medium.copyWith(
                                     color: context.colorScheme.gray100,
                                   ),
                                   maxLines: 1,
@@ -101,8 +99,7 @@ class ClindPostCard extends StatelessWidget {
                                 Flexible(
                                   child: Text(
                                     content,
-                                    style: context.textTheme.default15Regular
-                                        .copyWith(
+                                    style: context.textTheme.default15Regular.copyWith(
                                       color: context.colorScheme.gray400,
                                       height: 18.75 / 15.0,
                                     ),

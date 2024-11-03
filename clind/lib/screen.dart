@@ -21,61 +21,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colorScheme.black,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Clind'),
+      appBar: ClindAppBar(
+        context: context,
+        title: ClindSearchTextField(onSearch: (String text) {}),
       ),
       body: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: ClindCardButton.like(
-                  context,
-                  count: 4,
-                  isSelected: true,
-                  onTap: () {},
-                ),
-              ),
-              Expanded(
-                child: ClindCardButton.comment(
-                  context,
-                  count: 1000,
-                  onTap: () {},
-                ),
-              ),
-              Expanded(
-                child: ClindCardButton.view(
-                  context,
-                  count: 999999999,
-                  onTap: () {},
-                ),
-              ),
-            ],
-          ),
-          const ClindLoadingPostCard(),
-          ClindChannelChip(
-            imageUrl: 'https://avatars.githubusercontent.com/u/78011042?v=4',
-            name: 'jw',
+          ClindSearchBar(text: '', onTap: () {}),
+          const ClindLoadingSearchBar(),
+          ClindSortFilter(
+            text: '최신순',
             onTap: () {},
-          ),
-          ClindDivider.horizontal(),
-          ClindIcon.mail(color: context.colorScheme.white),
-          const ClindProfileImage(imageUrl: ''),
-          ClindSettingTile.simple(context, title: 'title', onTap: () {}),
-          ClindSettingTile.icon(context,
-              icon: ClindIcon.cancel(), title: 'test', onTap: () {})
+          )
         ],
       ),
-      bottomNavigationBar: ClindBottomNavigationBar(
-        items: [
-          ClindBottomNavigationItem.home(),
-          ClindBottomNavigationItem.notification(),
-          ClindBottomNavigationItem.my(),
-        ],
-        currentIndex: 2,
-        onTap: (index) {},
-      ),
+      floatingActionButton: ClindWriteButton(onTap: () {
+        ClindDialog.showConfirm(context, title: 'test', onConfirm: () {});
+      }),
+      bottomNavigationBar:
+          ClindChatBottomNavigationBar(onSend: (String text) {}),
     );
   }
 }

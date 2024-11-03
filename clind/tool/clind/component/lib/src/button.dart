@@ -99,3 +99,52 @@ class ClindCardButton extends StatelessWidget {
     );
   }
 }
+
+class ClindWriteButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const ClindWriteButton({
+    super.key,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap.call(),
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        height: 44.0,
+        decoration: BoxDecoration(
+          color: ColorName.writingButton,
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(
+              width: 15.0,
+            ),
+            ClindIcon.edit(
+              color: ColorName.white,
+            ),
+            const SizedBox(
+              width: 3.0,
+            ),
+            Flexible(
+              child: Text(
+                '글쓰기',
+                style: context.textTheme.default14Medium.copyWith(
+                  color: ColorName.white,
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 15.0,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
