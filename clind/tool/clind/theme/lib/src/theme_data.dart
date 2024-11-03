@@ -1,30 +1,64 @@
 import 'package:core_theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
 
 class ClindThemeData extends ICoreThemeData {
   const ClindThemeData({
+    required super.appBarTheme,
     required super.textTheme,
     required super.colorScheme,
     required super.navigationBarThemeData,
+    required super.dialogTheme,
     required super.dividerTheme,
   });
 
   factory ClindThemeData.light() {
     return ClindThemeData(
+        appBarTheme: ClindAppBarTheme.light(),
         textTheme: const ClindTextTheme(),
         colorScheme: ClindColorScheme.light(),
         navigationBarThemeData: ClindNavigationBarThemeData.light(),
+        dialogTheme: ClindDialogTheme.light(),
         dividerTheme: ClindDividerTheme.light());
   }
 
   factory ClindThemeData.dark() {
     return ClindThemeData(
+        appBarTheme: ClindAppBarTheme.dark(),
         textTheme: const ClindTextTheme(),
         colorScheme: ClindColorScheme.dark(),
         navigationBarThemeData: ClindNavigationBarThemeData.dark(),
+        dialogTheme: ClindDialogTheme.dark(),
         dividerTheme: ClindDividerTheme.dark());
+  }
+}
+
+class ClindAppBarTheme extends ICoreAppBarTheme {
+  const ClindAppBarTheme({
+    required super.systemOverlayStyle,
+    required super.primaryColor,
+    required super.backgroundColor,
+    super.toolbarHeight = 44.0,
+    super.titleSpacing = 0.0,
+    super.centerTitle = true,
+  });
+
+  factory ClindAppBarTheme.light() {
+    return const ClindAppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      primaryColor: ColorName.gray800,
+      backgroundColor: ColorName.white,
+    );
+  }
+
+  factory ClindAppBarTheme.dark() {
+    return const ClindAppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle.light,
+      primaryColor: ColorName.gray200,
+      backgroundColor: ColorName.darkBlack,
+    );
   }
 }
 
@@ -180,6 +214,53 @@ class ClindNavigationBarThemeData extends ICoreNavigationBarThemeData {
   }
 }
 
+class ClindDialogTheme extends ICoreDialogTheme {
+  const ClindDialogTheme({
+    required super.titleTextStyle,
+    required super.backgroundColor,
+    required super.confirmTextStyle,
+    required super.confirmBackgroundColor,
+    required super.cancelTextStyle,
+    required super.cancelBackgroundColor,
+  });
+
+  factory ClindDialogTheme.light() {
+    const ClindTextTheme data = ClindTextTheme();
+    return ClindDialogTheme(
+      titleTextStyle: data.default15Medium.copyWith(
+        color: ColorName.gray800,
+      ),
+      backgroundColor: ColorName.gray200,
+      confirmTextStyle: data.default15SemiBold.copyWith(
+        color: ColorName.black,
+      ),
+      confirmBackgroundColor: ColorName.gray400,
+      cancelTextStyle: data.default15Medium.copyWith(
+        color: ColorName.gray800,
+      ),
+      cancelBackgroundColor: ColorName.gray200,
+    );
+  }
+
+  factory ClindDialogTheme.dark() {
+    const ClindTextTheme data = ClindTextTheme();
+    return ClindDialogTheme(
+      titleTextStyle: data.default15Medium.copyWith(
+        color: ColorName.gray200,
+      ),
+      backgroundColor: ColorName.gray800,
+      confirmTextStyle: data.default16SemiBold.copyWith(
+        color: ColorName.white,
+      ),
+      confirmBackgroundColor: ColorName.gray600,
+      cancelTextStyle: data.default15Medium.copyWith(
+        color: ColorName.gray200,
+      ),
+      cancelBackgroundColor: ColorName.gray800,
+    );
+  }
+}
+
 class ClindDividerTheme extends ICoreDividerTheme {
   const ClindDividerTheme({
     required super.color,
@@ -203,6 +284,10 @@ extension ClindThemeDataExtension on BuildContext {
     return ClindTheme.of(this);
   }
 
+  ClindAppBarTheme get appBarTheme {
+    return themeData.appBarTheme as ClindAppBarTheme;
+  }
+
   ClindTextTheme get textTheme {
     return themeData.textTheme as ClindTextTheme;
   }
@@ -213,6 +298,10 @@ extension ClindThemeDataExtension on BuildContext {
 
   ClindNavigationBarThemeData get navigationBarThemeData {
     return themeData.navigationBarThemeData as ClindNavigationBarThemeData;
+  }
+
+  ClindDialogTheme get dialogTheme {
+    return themeData.dialogTheme as ClindDialogTheme;
   }
 
   ClindDividerTheme get dividerTheme {
