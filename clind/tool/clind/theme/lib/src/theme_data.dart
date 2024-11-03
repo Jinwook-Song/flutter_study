@@ -7,20 +7,24 @@ class ClindThemeData extends ICoreThemeData {
   const ClindThemeData({
     required super.textTheme,
     required super.colorScheme,
+    required super.navigationBarThemeData,
+    required super.dividerTheme,
   });
 
   factory ClindThemeData.light() {
     return ClindThemeData(
-      textTheme: const ClindTextTheme(),
-      colorScheme: ClindColorScheme.light(),
-    );
+        textTheme: const ClindTextTheme(),
+        colorScheme: ClindColorScheme.light(),
+        navigationBarThemeData: ClindNavigationBarThemeData.light(),
+        dividerTheme: ClindDividerTheme.light());
   }
 
   factory ClindThemeData.dark() {
     return ClindThemeData(
-      textTheme: const ClindTextTheme(),
-      colorScheme: ClindColorScheme.dark(),
-    );
+        textTheme: const ClindTextTheme(),
+        colorScheme: ClindColorScheme.dark(),
+        navigationBarThemeData: ClindNavigationBarThemeData.dark(),
+        dividerTheme: ClindDividerTheme.dark());
   }
 }
 
@@ -157,6 +161,43 @@ class ClindColorScheme extends ICoreColorScheme {
   Color get gray900 => isDarkMode ? ColorName.gray900 : ColorName.gray100;
 }
 
+class ClindNavigationBarThemeData extends ICoreNavigationBarThemeData {
+  const ClindNavigationBarThemeData({
+    required super.backgroundColor,
+    super.height = 58.0,
+  });
+
+  factory ClindNavigationBarThemeData.light() {
+    return const ClindNavigationBarThemeData(
+      backgroundColor: ColorName.white,
+    );
+  }
+
+  factory ClindNavigationBarThemeData.dark() {
+    return const ClindNavigationBarThemeData(
+      backgroundColor: ColorName.darkBlack,
+    );
+  }
+}
+
+class ClindDividerTheme extends ICoreDividerTheme {
+  const ClindDividerTheme({
+    required super.color,
+  });
+
+  factory ClindDividerTheme.light() {
+    return const ClindDividerTheme(
+      color: ColorName.gray200,
+    );
+  }
+
+  factory ClindDividerTheme.dark() {
+    return const ClindDividerTheme(
+      color: ColorName.gray800,
+    );
+  }
+}
+
 extension ClindThemeDataExtension on BuildContext {
   ClindThemeData get themeData {
     return ClindTheme.of(this);
@@ -168,5 +209,13 @@ extension ClindThemeDataExtension on BuildContext {
 
   ClindColorScheme get colorScheme {
     return themeData.colorScheme as ClindColorScheme;
+  }
+
+  ClindNavigationBarThemeData get navigationBarThemeData {
+    return themeData.navigationBarThemeData as ClindNavigationBarThemeData;
+  }
+
+  ClindDividerTheme get dividerTheme {
+    return themeData.dividerTheme as ClindDividerTheme;
   }
 }

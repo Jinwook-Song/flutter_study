@@ -14,6 +14,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  core_util:
+    path: core/util
+
+  tool_clind_component:
+    path: tool/clind/component
   tool_clind_theme:
     path: tool/clind/theme
 
