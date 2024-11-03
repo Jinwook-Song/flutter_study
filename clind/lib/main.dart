@@ -13,7 +13,7 @@ class ClindApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClindTheme(
-      themeData: ClindThemeData.dark(),
+      themeData: ClindThemeData.light(),
       child: const MaterialApp(
         themeMode: ThemeMode.dark,
         localizationsDelegates: [

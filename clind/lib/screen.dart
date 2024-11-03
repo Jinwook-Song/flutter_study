@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,38 +24,26 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Clind'),
       ),
+      backgroundColor: context.colorScheme.bg,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'poppins30Bold',
-            style: context.textTheme.poppins30Bold,
+          Container(
+            height: 100,
+            color: context.colorScheme.gray100,
           ),
-          Text(
-            'poppins18Bold',
-            style: context.textTheme.poppins18Bold,
+          Container(
+            height: 100,
+            color: context.colorScheme.bg2,
           ),
-          Text(
-            'default22Regular',
-            style: context.textTheme.default22Regular,
+          Container(
+            height: 100,
+            color: context.colorScheme.black,
           ),
-          Text(
-            'default17SemiBold',
-            style: context.textTheme.default17SemiBold,
-          ),
-          Text(
-            'default17Medium',
-            style: context.textTheme.default17Medium,
-          ),
-          Text(
-            'default17Regular',
-            style: context.textTheme.default17Regular,
-          ),
-          Text(
-            'default17Regular',
-            style:
-                context.textTheme.default12Medium.copyWith(color: Colors.red),
+          Container(
+            height: 100,
+            color: ColorName.mainRed,
           ),
         ],
       ),

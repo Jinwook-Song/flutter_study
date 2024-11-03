@@ -1,0 +1,30 @@
+name: tool_clind_component
+description: tool clind component package.
+publish_to: none
+
+environment:
+  sdk: ^3.5.3
+  flutter: '>=1.17.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  core_util:
+    path: ../../../core/util
+
+  tool_clind_theme:
+    path: ../theme
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  build_runner: 2.4.13
+  flutter_gen_runner: 5.8.0
+
+flutter_gen:
+  output: lib/gen/
+  line_length: 120
+
+flutter:
+  assets:
+    - assets/images/svgs/
