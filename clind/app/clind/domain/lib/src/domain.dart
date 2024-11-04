@@ -1,3 +1,3 @@
 export 'entity/entity.dart';
 export 'repository/repository.dart';
-export 'usecase/usecase.dart';
+export 'use_case/use_case.dart';
