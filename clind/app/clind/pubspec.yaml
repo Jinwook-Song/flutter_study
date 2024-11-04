@@ -24,6 +24,9 @@ dependencies:
   tool_clind_theme:
     path: ../../tool/clind/theme
 
+  ui:
+    path: ui
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
