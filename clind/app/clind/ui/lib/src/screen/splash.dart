@@ -1,7 +1,10 @@
+import 'package:di/di.dart';
 import 'package:flutter/material.dart';
+import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
+import 'package:core_flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,7 +16,7 @@ class SplashScreen extends StatefulWidget {
     return showGeneralDialog<void>(
       context: context,
       pageBuilder: (context, animation, secondaryAnimation) =>
-          const SplashScreen(),
+          const SplashBlocProvider(child: SplashScreen()),
       barrierColor: Colors.transparent,
       transitionDuration: Duration.zero,
     );
@@ -27,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _hideAfterDelay(const Duration(seconds: 2));
+      context.readFlowBloc<AdCubit>().load();
     });
   }
 
@@ -65,23 +68,75 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Scaffold(
         backgroundColor: ColorName.splashBackground,
         body: SizedBox.expand(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              ClindIcon.logo(
-                size: 46.0,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClindIcon.logo(
+                    size: 46.0,
+                  ),
+                  const SizedBox(
+                    height: 14.0,
+                  ),
+                  Text(
+                    'Clind',
+                    style: context.textTheme.poppins18Bold.copyWith(
+                      fontSize: 24.0,
+                      height: 24.0 / 24.0,
+                      color: ColorName.white,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(
-                height: 14.0,
-              ),
-              Text(
-                'Clind',
-                style: context.textTheme.poppins18Bold.copyWith(
-                  fontSize: 24.0,
-                  height: 24.0 / 24.0,
-                  color: ColorName.white,
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    FlowBlocConsumer<AdCubit, String>.when(
+                      data: (context, state) => Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.viewPaddingOf(context).bottom,
+                        ),
+                        child: Image.network(
+                          state.data,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      orElse: (context, state) => Container(
+                        height: 100,
+                        color: ColorName.black,
+                      ),
+                      onData: (context, state) =>
+                          _hideAfterDelay(const Duration(seconds: 3)),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: MediaQuery.viewPaddingOf(context).bottom,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            stops: const [
+                              0,
+                              0.5,
+                            ],
+                            colors: [
+                              ColorName.splashBackground,
+                              ColorName.splashBackground.withOpacity(0.0),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-              ),
+              )
             ],
           ),
         ),

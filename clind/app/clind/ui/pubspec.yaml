@@ -24,3 +24,6 @@ dependencies:
     path: ../../../tool/clind/component
   tool_clind_theme:
     path: ../../../tool/clind/theme
+
+  core_flutter_bloc:
+    path: ../../../core/flutter_bloc
