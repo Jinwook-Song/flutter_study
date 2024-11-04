@@ -19,3 +19,8 @@ dependencies:
 
   di:
     path: ../di
+
+  tool_clind_component:
+    path: ../../../tool/clind/component
+  tool_clind_theme:
+    path: ../../../tool/clind/theme

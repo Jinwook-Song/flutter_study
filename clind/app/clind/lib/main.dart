@@ -1,4 +1,5 @@
 import 'package:core_util/util.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ui/ui.dart';
 
 import 'package:flutter/material.dart';
@@ -6,14 +7,29 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tool_clind_theme/theme.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await ICoreFirebase.initialize();
 
   runApp(const ClindApp());
 }
 
-class ClindApp extends StatelessWidget {
+class ClindApp extends StatefulWidget {
   const ClindApp({super.key});
+
+  @override
+  State<ClindApp> createState() => _ClindAppState();
+}
+
+class _ClindAppState extends State<ClindApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => FlutterNativeSplash.remove(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +45,6 @@ class ClindApp extends StatelessWidget {
         ],
         initialRoute: ClindRoute.root.path,
         onGenerateRoute: (settings) => IClindRoutes.find(settings),
-        home: const HomeScreen(),
       ),
     );
   }

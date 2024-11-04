@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ui/src/screen/splash.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,8 +12,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => SplashScreen.show(context),
+    );
   }
 
   @override
