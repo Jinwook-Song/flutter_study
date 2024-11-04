@@ -52,14 +52,14 @@ packages:
   core_theme:
     dependency: transitive
     description:
-      path: "core/theme"
+      path: "../../core/theme"
       relative: true
     source: path
     version: "0.0.0"
   core_util:
     dependency: "direct main"
     description:
-      path: "core/util"
+      path: "../../core/util"
       relative: true
     source: path
     version: "0.0.0"
@@ -278,14 +278,14 @@ packages:
   tool_clind_component:
     dependency: "direct main"
     description:
-      path: "tool/clind/component"
+      path: "../../tool/clind/component"
       relative: true
     source: path
     version: "0.0.0"
   tool_clind_theme:
     dependency: "direct main"
     description:
-      path: "tool/clind/theme"
+      path: "../../tool/clind/theme"
       relative: true
     source: path
     version: "0.0.0"

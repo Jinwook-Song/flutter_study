@@ -1,4 +1,4 @@
-import 'package:clind/screen.dart';
+import 'screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tool_clind_theme/theme.dart';

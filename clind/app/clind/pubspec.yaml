@@ -15,12 +15,12 @@ dependencies:
     sdk: flutter
 
   core_util:
-    path: core/util
+    path: ../../core/util
 
   tool_clind_component:
-    path: tool/clind/component
+    path: ../../tool/clind/component
   tool_clind_theme:
-    path: tool/clind/theme
+    path: ../../tool/clind/theme
 
 dev_dependencies:
   flutter_test:
