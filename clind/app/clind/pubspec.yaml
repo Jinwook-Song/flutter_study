@@ -27,9 +27,29 @@ dependencies:
   ui:
     path: ui
 
+  flutter_native_splash: ^2.4.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+
+flutter_native_splash:
+  color: '#4F0504'
+  image: assets/icons/splash.png
+  color_dark: '#4F0504'
+  image_dark: assets/icons/splash.png
+  android: true
+  ios: true
+  web: false
+  android_12:
+    color: '#4F0504'
+    image: assets/icons/android12Splash.png
+    icon_background_color: '#4F0504'
+    color_dark: '#4F0504'
+    image_dark: assets/icons/android12Splash.png
+    icon_background_color_dark: '#4F0504'
+  android_gravity: center
+  ios_content_mode: center

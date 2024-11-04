@@ -27,12 +27,13 @@ class Profile {
     this.likeCount = 0,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
+  factory Profile.fromJson(Map<String, dynamic> json) =>
+      _$ProfileFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 }
 
-final Profile my = const Profile(
+const Profile my = Profile(
   id: 'my_profile',
   imageUrl: 'https://source.unsplash.com/random/300×300',
   company: 'Fast campus',
