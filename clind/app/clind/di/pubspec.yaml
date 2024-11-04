@@ -16,3 +16,8 @@ dependencies:
     path: ../domain
   presentation:
     path: ../presentation
+
+  core_flutter_bloc:
+    path: ../../../core/flutter_bloc
+  core_util:
+    path: ../../../core/util
