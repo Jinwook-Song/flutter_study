@@ -1,6 +1,6 @@
 import 'package:core_util/util.dart';
+import 'package:ui/ui.dart';
 
-import 'screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tool_clind_theme/theme.dart';
@@ -19,15 +19,17 @@ class ClindApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClindTheme(
       themeData: ClindThemeData.dark(),
-      child: const MaterialApp(
+      child: MaterialApp(
         themeMode: ThemeMode.dark,
-        localizationsDelegates: [
+        localizationsDelegates: const [
           ...GlobalMaterialLocalizations.delegates,
         ],
-        supportedLocales: [
+        supportedLocales: const [
           Locale('ko'),
         ],
-        home: HomeScreen(),
+        initialRoute: ClindRoute.root.path,
+        onGenerateRoute: (settings) => IClindRoutes.find(settings),
+        home: const HomeScreen(),
       ),
     );
   }
