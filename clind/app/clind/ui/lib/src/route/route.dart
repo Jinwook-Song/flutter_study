@@ -1,3 +1,4 @@
+import 'package:di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/src/screen/home.dart';
 
@@ -38,7 +39,7 @@ abstract class IClindRoutes {
     final ClindRoute route = ClindRoute.decode(uri.path);
     switch (route) {
       case ClindRoute.root:
-        return const HomeScreen();
+        return const HomeBlocProvider(child: HomeScreen());
       case ClindRoute.unknown:
         return const SizedBox();
     }
