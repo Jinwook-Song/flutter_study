@@ -1,10 +1,11 @@
 import 'package:di/di.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/src/screen/home.dart';
+import 'package:ui/ui.dart';
 
 enum ClindRoute {
   root,
-  unknown;
+  unknown,
+  community;
 
   static String encode(ClindRoute route) => route.path;
 
@@ -40,6 +41,8 @@ abstract class IClindRoutes {
     switch (route) {
       case ClindRoute.root:
         return const HomeBlocProvider(child: HomeScreen());
+      case ClindRoute.community:
+        return const CommunityScreen();
       case ClindRoute.unknown:
         return const SizedBox();
     }
@@ -86,6 +89,13 @@ abstract class IClindRouteTo {
     return push<void>(
       context,
       route: ClindRoute.root,
+    );
+  }
+
+  static Future<void> community(BuildContext context) {
+    return push<void>(
+      context,
+      route: ClindRoute.community,
     );
   }
 }

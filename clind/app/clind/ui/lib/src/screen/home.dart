@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
+import 'package:ui/src/route/route.dart';
 import 'package:ui/src/screen/splash.dart';
 import 'package:tool_clind_theme/theme.dart';
 
@@ -28,15 +29,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colorScheme.darkBlack,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Clind'),
-      ),
       body: FlowBlocBuilder<HomeTabCubit, int>.when(
           data: (context, state) => CoreTabSwitchingView(
                 currentTabIndex: state.data,
                 tabCount: ClindNavigationType.values.length,
-                tabBuilder: (context, index) => const SizedBox.shrink(),
+                tabBuilder: (context, index) {
+                  final Uri url = switch (index) {
+                    0 => Uri(path: ClindRoute.community.path),
+                    _ => Uri(path: ClindRoute.community.path),
+                  };
+                  return IClindRoutes.findScreen(url);
+                },
               )),
       bottomNavigationBar: FlowBlocBuilder<HomeTabCubit, int>.when(
         data: (context, state) => ClindBottomNavigationBar(
