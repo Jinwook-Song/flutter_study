@@ -1,8 +1,9 @@
 import 'package:core_util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:tool_clind_component/component.dart';
-import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
+import 'package:ui/src/widget/community_all_channel_button.dart';
+import 'package:ui/src/widget/community_tab_bar.dart';
 
 enum CommunityTapType {
   normal(title: '홈'),
@@ -91,27 +92,14 @@ class _CommunityScreenState extends State<CommunityScreen>
                 )
               ],
               bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(45),
-                child: TabBar(
-                  controller: _tabController,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicatorColor: context.colorScheme.gray100,
-                  labelStyle: context.textTheme.default15Medium,
-                  labelColor: context.colorScheme.gray100,
-                  unselectedLabelStyle: context.textTheme.default15Medium,
-                  unselectedLabelColor: context.colorScheme.gray400,
-                  dividerColor: context.appBarTheme.backgroundColor,
-                  splashFactory: NoSplash.splashFactory,
-                  tabs: List.generate(
-                    CommunityTapTypeX.count,
-                    (index) => Tab(
-                      text: CommunityTapType.values[index].title,
-                    ),
-                  ),
-                  onTap: _onChangedTab,
-                ),
-              ),
+                  preferredSize: const Size.fromHeight(45),
+                  child: CommunityTabBar(
+                    controller: _tabController,
+                    tabs: CommunityTapType.values
+                        .map((tab) => tab.title)
+                        .toList(),
+                    onTap: _onChangedTab,
+                  )),
             )
           ];
         },
@@ -156,26 +144,14 @@ class _CommunityScreenState extends State<CommunityScreen>
                             ),
                           ),
                           Positioned(
-                              top: 0,
-                              right: 0,
-                              bottom: 0,
-                              child: GestureDetector(
-                                behavior: HitTestBehavior.translucent,
-                                onTap: () {},
-                                child: SizedBox(
-                                  width: 63,
-                                  child: ColoredBox(
-                                    color: context.colorScheme.darkBlack,
-                                    child: Center(
-                                      child: Text(
-                                        '전체',
-                                        style: context.textTheme.default14Medium
-                                            .copyWith(color: ColorName.blue),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ))
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            child: CommunityAllChannelButton(
+                              '전체',
+                              onTap: () {},
+                            ),
+                          )
                         ],
                       ),
                     ),
