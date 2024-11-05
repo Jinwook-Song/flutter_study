@@ -20,10 +20,12 @@ dependencies:
   di:
     path: ../di
 
+  core_flutter_bloc:
+    path: ../../../core/flutter_bloc
+  core_util:
+    path: ../../../core/util
+
   tool_clind_component:
     path: ../../../tool/clind/component
   tool_clind_theme:
     path: ../../../tool/clind/theme
-
-  core_flutter_bloc:
-    path: ../../../core/flutter_bloc

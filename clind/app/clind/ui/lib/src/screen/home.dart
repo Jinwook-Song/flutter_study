@@ -1,4 +1,5 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
+import 'package:core_util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:presentation/presentation.dart';
@@ -31,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Clind'),
       ),
+      body: FlowBlocBuilder<HomeTabCubit, int>.when(
+          data: (context, state) => CoreTabSwitchingView(
+                currentTabIndex: state.data,
+                tabCount: ClindNavigationType.values.length,
+                tabBuilder: (context, index) => const SizedBox.shrink(),
+              )),
       bottomNavigationBar: FlowBlocBuilder<HomeTabCubit, int>.when(
         data: (context, state) => ClindBottomNavigationBar(
           items: ClindNavigationType.values
@@ -40,6 +47,16 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: context.readFlowBloc<HomeTabCubit>().change,
         ),
       ),
+      floatingActionButton:
+          FlowBlocBuilder<HomeTabCubit, int>.when(data: (context, state) {
+        switch (state.data) {
+          case 0:
+          case 1:
+            return ClindWriteButton(onTap: () {});
+          default:
+            return const SizedBox.shrink();
+        }
+      }),
     );
   }
 }
