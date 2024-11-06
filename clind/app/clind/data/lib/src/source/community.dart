@@ -8,4 +8,8 @@ class CommunityDataSource {
   Future<dynamic> getChannels() async {
     return await _remoteDataSource.getChannels();
   }
+
+  Future<dynamic> getPopularChannels() async {
+    return await _remoteDataSource.getPopularChannels();
+  }
 }

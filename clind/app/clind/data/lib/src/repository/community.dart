@@ -14,6 +14,15 @@ class CommunityRepository implements ICommunityRepository {
         jsonList.map((json) => ChannelModel.fromJson(json)).toList();
     return models.map((m) => m.toEntity()).toList();
   }
+
+  @override
+  Future<List<ChannelEntitiy>> getPopularChannels() async {
+    final List<dynamic> jsonList =
+        await _communityDataSource.getPopularChannels();
+    final List<ChannelModel> models =
+        jsonList.map((json) => ChannelModel.fromJson(json)).toList();
+    return models.map((m) => m.toEntity()).toList();
+  }
 }
 
 extension on ChannelModel {
