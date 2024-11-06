@@ -31,9 +31,9 @@ class CommunityTabBar extends StatelessWidget {
       dividerColor: context.appBarTheme.backgroundColor,
       splashFactory: NoSplash.splashFactory,
       tabs: List.generate(
-        CommunityTapTypeX.count,
+        CommunityTabTypeX.count,
         (index) => Tab(
-          text: CommunityTapType.values[index].title,
+          text: CommunityTabType.values[index].title,
         ),
       ),
       onTap: onTap,

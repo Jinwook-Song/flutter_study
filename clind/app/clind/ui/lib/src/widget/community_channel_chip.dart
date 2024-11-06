@@ -21,3 +21,51 @@ class CommunityChannelChip extends ClindChannelChip {
     );
   }
 }
+
+class CommunityLoadingChannelListView extends StatelessWidget {
+  const CommunityLoadingChannelListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+      ),
+      itemCount: 10,
+      itemBuilder: (context, index) => const ClindLoadingChannelChip(),
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 6.0,
+      ),
+    );
+  }
+}
+
+class CommunityChannelListView extends StatelessWidget {
+  final List<Channel> items;
+  final Function(Channel) onTap;
+
+  const CommunityChannelListView({
+    super.key,
+    required this.items,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+      ),
+      itemCount: items.length,
+      itemBuilder: (context, index) => CommunityChannelChip.item(
+        items[index],
+        onTap: () => onTap.call(items[index]),
+      ),
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 6.0,
+      ),
+    );
+  }
+}
