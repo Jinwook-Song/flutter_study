@@ -7,58 +7,62 @@ class CommunityRepository implements ICommunityRepository {
   CommunityRepository(this._communityDataSource);
 
   @override
-  Future<List<ChannelEntitiy>> getChannels() async {
+  Future<List<Channel>> getChannels() async {
     // api response -> data model -> domain entity
     final List<dynamic> jsonList = await _communityDataSource.getChannels();
-    final List<ChannelModel> models =
-        jsonList.map((json) => ChannelModel.fromJson(json)).toList();
-    return models.map((m) => m.toEntity()).toList();
+    return jsonList.map((json) => Channel.fromJson(json)).toList();
+    // final List<ChannelModel> models =
+    //     jsonList.map((json) => ChannelModel.fromJson(json)).toList();
+    // return models.map((m) => m.toEntity()).toList();
   }
 
   @override
-  Future<List<ChannelEntitiy>> getPopularChannels() async {
+  Future<List<Channel>> getPopularChannels() async {
     final List<dynamic> jsonList =
         await _communityDataSource.getPopularChannels();
-    final List<ChannelModel> models =
-        jsonList.map((json) => ChannelModel.fromJson(json)).toList();
-    return models.map((m) => m.toEntity()).toList();
+    return jsonList.map((json) => Channel.fromJson(json)).toList();
+
+    // final List<ChannelModel> models =
+    //     jsonList.map((json) => ChannelModel.fromJson(json)).toList();
+    // return models.map((m) => m.toEntity()).toList();
   }
 
   @override
-  Future<List<PostEntity>> getPosts({int? take, int? page}) async {
+  Future<List<Post>> getPosts({int? take, int? page}) async {
     final List<dynamic> jsonList =
         await _communityDataSource.getPosts(take: take, page: page);
-    final List<PostModel> models =
-        jsonList.map((json) => PostModel.fromJson(json)).toList();
-    return models.map((m) => m.toEntity()).toList();
+    return jsonList.map((json) => Post.fromJson(json)).toList();
+    // final List<PostModel> models =
+    //     jsonList.map((json) => PostModel.fromJson(json)).toList();
+    // return models.map((m) => m.toEntity()).toList();
   }
 }
 
-extension on ChannelModel {
-  ChannelEntitiy toEntity() {
-    return ChannelEntitiy(
-      id: id,
-      name: name,
-      imageUrl: imageUrl,
-      followCount: followCount,
-    );
-  }
-}
+// extension on ChannelModel {
+//   ChannelEntitiy toEntity() {
+//     return ChannelEntitiy(
+//       id: id,
+//       name: name,
+//       imageUrl: imageUrl,
+//       followCount: followCount,
+//     );
+//   }
+// }
 
-extension on PostModel {
-  PostEntity toEntity() {
-    return PostEntity(
-        id: id,
-        imageUrl: imageUrl,
-        channel: channel,
-        company: company,
-        title: title,
-        content: content,
-        thumbnailUrls: thumbnailUrls,
-        isLike: isLike,
-        likeCount: likeCount,
-        commentCount: commentCount,
-        viewCount: viewCount,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt));
-  }
-}
+// extension on PostModel {
+//   PostEntity toEntity() {
+//     return PostEntity(
+//         id: id,
+//         imageUrl: imageUrl,
+//         channel: channel,
+//         company: company,
+//         title: title,
+//         content: content,
+//         thumbnailUrls: thumbnailUrls,
+//         isLike: isLike,
+//         likeCount: likeCount,
+//         commentCount: commentCount,
+//         viewCount: viewCount,
+//         createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt));
+//   }
+// }
