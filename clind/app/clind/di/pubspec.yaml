@@ -21,3 +21,6 @@ dependencies:
     path: ../../../core/flutter_bloc
   core_util:
     path: ../../../core/util
+
+  tool_clind_network:
+    path: ../../../tool/clind/network

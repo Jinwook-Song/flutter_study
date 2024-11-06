@@ -45,6 +45,23 @@ class CommunityPostListCubit extends IFlowCubit<List<Post>> {
 
     try {
       final List<Post> data = await _getPostsUseCase.execute();
+      emitData(data);
+    } catch (e, s) {
+      emitError(e, s);
+    }
+  }
+}
+
+class CommunityPoPularPostListCubit extends IFlowCubit<List<Post>> {
+  final GetPostsUseCase _getPostsUseCase;
+
+  CommunityPoPularPostListCubit(this._getPostsUseCase);
+
+  Future<void> load() async {
+    emitLoading();
+
+    try {
+      final List<Post> data = await _getPostsUseCase.execute();
       final List<Post> result = List.from(data)..shuffle();
       emitData(result);
     } catch (e, s) {
