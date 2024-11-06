@@ -1,9 +1,12 @@
+import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:core_util/util.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
-import 'package:ui/src/widget/community_all_channel_button.dart';
-import 'package:ui/src/widget/community_tab_bar.dart';
+
+import 'package:ui/ui.dart';
 
 enum CommunityTapType {
   normal(title: '홈'),
@@ -34,6 +37,12 @@ class _CommunityScreenState extends State<CommunityScreen>
   );
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _refresh());
+  }
+
+  @override
   void dispose() {
     _pageController.dispose();
     _tabController.dispose();
@@ -57,6 +66,25 @@ class _CommunityScreenState extends State<CommunityScreen>
   void _onChangedTab(int index) {
     _updateTab(index);
     _updatePage(index);
+    _refresh();
+  }
+
+  Future<void> _refresh() async {
+    final index = _tabController.index;
+    if (index >= CommunityTapTypeX.count) return;
+    final CommunityTapType type = CommunityTapType.values[index];
+    switch (type) {
+      case CommunityTapType.normal:
+        await Future.wait([
+          context.readFlowBloc<CommunityChannelListCubit>().load(),
+          context.readFlowBloc<CommunityPostListCubit>().load(),
+        ]);
+      case CommunityTapType.popular:
+        await Future.wait([
+          context.readFlowBloc<CommunityPopularChannelListCubit>().load(),
+          context.readFlowBloc<CommunityPoPularPostListCubit>().load(),
+        ]);
+    }
   }
 
   @override
@@ -108,8 +136,9 @@ class _CommunityScreenState extends State<CommunityScreen>
           itemCount: CommunityTapTypeX.count,
           onPageChanged: _onChangedTab,
           itemBuilder: (context, index) {
+            final CommunityTapType type = CommunityTapType.values[index];
             return CoreRefreshIndicator(
-              onRefresh: () async {},
+              onRefresh: _refresh,
               indicator: ClindIcon.restartAlt(
                 color: context.colorScheme.gray400,
               ),
@@ -126,31 +155,110 @@ class _CommunityScreenState extends State<CommunityScreen>
                                 top: 15, bottom: 9, right: 63),
                             child: SizedBox(
                               height: 33,
-                              child: ListView.separated(
-                                itemCount: 10,
-                                scrollDirection: Axis.horizontal,
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(
-                                  width: 6,
-                                ),
-                                itemBuilder: (context, index) =>
-                                    ClindChannelChip(
-                                  imageUrl:
-                                      'https://cdn.day1company.io/prod/uploads/migrations/215902_card_img.webp?w=828&q=75',
-                                  name: 'flutter',
-                                  onTap: () {},
-                                ),
-                              ),
+                              child: Builder(builder: (context) {
+                                switch (type) {
+                                  case CommunityTapType.normal:
+                                    return FlowBlocBuilder<
+                                        CommunityChannelListCubit,
+                                        List<Channel>>.when(
+                                      loading: (context, state) =>
+                                          ListView.separated(
+                                        itemCount: 10,
+                                        scrollDirection: Axis.horizontal,
+                                        separatorBuilder: (context, index) =>
+                                            const SizedBox(
+                                          width: 6,
+                                        ),
+                                        itemBuilder: (context, index) =>
+                                            const ClindLoadingChannelChip(),
+                                      ),
+                                      orElse: (context, state) {
+                                        final List<Channel> data =
+                                            state.data ?? [];
+                                        return ListView.separated(
+                                          itemCount: data.length,
+                                          scrollDirection: Axis.horizontal,
+                                          separatorBuilder: (context, index) =>
+                                              const SizedBox(
+                                            width: 6,
+                                          ),
+                                          itemBuilder: (context, index) =>
+                                              CommunityChannelChip.item(
+                                            data[index],
+                                            onTap: () {},
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  case CommunityTapType.popular:
+                                    return FlowBlocBuilder<
+                                        CommunityPopularChannelListCubit,
+                                        List<Channel>>.when(
+                                      loading: (context, state) =>
+                                          ListView.separated(
+                                        itemCount: 10,
+                                        scrollDirection: Axis.horizontal,
+                                        separatorBuilder: (context, index) =>
+                                            const SizedBox(
+                                          width: 6,
+                                        ),
+                                        itemBuilder: (context, index) =>
+                                            const ClindLoadingChannelChip(),
+                                      ),
+                                      orElse: (context, state) {
+                                        final List<Channel> data =
+                                            state.data ?? [];
+                                        return ListView.separated(
+                                          itemCount: data.length,
+                                          scrollDirection: Axis.horizontal,
+                                          separatorBuilder: (context, index) =>
+                                              const SizedBox(
+                                            width: 6,
+                                          ),
+                                          itemBuilder: (context, index) =>
+                                              CommunityChannelChip.item(
+                                            data[index],
+                                            onTap: () {},
+                                          ),
+                                        );
+                                      },
+                                    );
+                                }
+                              }),
                             ),
                           ),
                           Positioned(
                             top: 0,
                             right: 0,
                             bottom: 0,
-                            child: CommunityAllChannelButton(
-                              '전체',
-                              onTap: () {},
-                            ),
+                            child: Builder(builder: (context) {
+                              switch (type) {
+                                case CommunityTapType.normal:
+                                  return FlowBlocBuilder<
+                                      CommunityChannelListCubit,
+                                      List<Channel>>.when(
+                                    loading: (context, state) =>
+                                        const CommunityAllChannelButton(''),
+                                    orElse: (context, state) =>
+                                        CommunityAllChannelButton(
+                                      '전체',
+                                      onTap: () {},
+                                    ),
+                                  );
+                                case CommunityTapType.popular:
+                                  return FlowBlocBuilder<
+                                      CommunityPopularChannelListCubit,
+                                      List<Channel>>.when(
+                                    loading: (context, state) =>
+                                        const CommunityAllChannelButton(''),
+                                    orElse: (context, state) =>
+                                        CommunityAllChannelButton(
+                                      '전체',
+                                      onTap: () {},
+                                    ),
+                                  );
+                              }
+                            }),
                           )
                         ],
                       ),
@@ -162,23 +270,64 @@ class _CommunityScreenState extends State<CommunityScreen>
                       ),
                     ),
                     const SliverToBoxAdapter(child: SizedBox(height: 9)),
-                    SliverList.separated(
-                      itemCount: 20,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 15),
-                      itemBuilder: (context, index) => ClindPostCard(
-                          imageUrl: '',
-                          channel: '$index',
-                          company: '$index',
-                          createdAt: DateTime.now(),
-                          title: '$index',
-                          onChannelTapped: () {},
-                          onCompanyTapped: () {},
-                          onLikeTapped: () {},
-                          onCommentTapped: () {},
-                          onViewTapped: () {},
-                          onTap: () {}),
-                    ),
+                    Builder(builder: (context) {
+                      switch (type) {
+                        case CommunityTapType.normal:
+                          return FlowBlocBuilder<CommunityPostListCubit,
+                              List<Post>>.when(
+                            loading: (context, state) => SliverList.separated(
+                              itemCount: 20,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 15),
+                              itemBuilder: (context, index) =>
+                                  const ClindLoadingPostCard(),
+                            ),
+                            orElse: (context, state) {
+                              final List<Post> data = state.data ?? [];
+                              return SliverList.separated(
+                                itemCount: data.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 15),
+                                itemBuilder: (context, index) =>
+                                    CommunityPostCard.item(data[index],
+                                        onChannelTapped: () {},
+                                        onCompanyTapped: () {},
+                                        onLikeTapped: () {},
+                                        onCommentTapped: () {},
+                                        onViewTapped: () {},
+                                        onTap: () {}),
+                              );
+                            },
+                          );
+                        case CommunityTapType.popular:
+                          return FlowBlocBuilder<CommunityPoPularPostListCubit,
+                              List<Post>>.when(
+                            loading: (context, state) => SliverList.separated(
+                              itemCount: 20,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 15),
+                              itemBuilder: (context, index) =>
+                                  const ClindLoadingPostCard(),
+                            ),
+                            orElse: (context, state) {
+                              final List<Post> data = state.data ?? [];
+                              return SliverList.separated(
+                                itemCount: data.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 15),
+                                itemBuilder: (context, index) =>
+                                    CommunityPostCard.item(data[index],
+                                        onChannelTapped: () {},
+                                        onCompanyTapped: () {},
+                                        onLikeTapped: () {},
+                                        onCommentTapped: () {},
+                                        onViewTapped: () {},
+                                        onTap: () {}),
+                              );
+                            },
+                          );
+                      }
+                    }),
                     const SliverToBoxAdapter(child: SizedBox(height: 56 + 16))
                   ],
                 ),

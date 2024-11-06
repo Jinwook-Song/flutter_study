@@ -42,7 +42,7 @@ abstract class IClindRoutes {
       case ClindRoute.root:
         return const HomeBlocProvider(child: HomeScreen());
       case ClindRoute.community:
-        return const CommunityScreen();
+        return const CommunityBlocProvider(child: CommunityScreen());
       case ClindRoute.unknown:
         return const SizedBox();
     }
