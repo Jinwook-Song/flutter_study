@@ -8,9 +8,13 @@ class HomeBlocProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlowBlocProvider<HomeTabCubit>(
-      create: (context) => HomeTabCubit(),
-      child: child,
-    );
+    return FlowMultiBlocProvider(providers: [
+      FlowBlocProvider<HomeTabCubit>(
+        create: (context) => HomeTabCubit(),
+      ),
+      FlowBlocProvider<HomeNestedTabCubit>(
+        create: (context) => HomeNestedTabCubit(),
+      ),
+    ], child: child);
   }
 }

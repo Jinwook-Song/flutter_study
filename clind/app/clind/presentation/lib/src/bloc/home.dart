@@ -8,3 +8,12 @@ class HomeTabCubit extends IFlowCubit<int> {
     emitData(index);
   }
 }
+
+class HomeNestedTabCubit extends IFlowCubit<int> {
+  HomeNestedTabCubit() : super(const DataState(data: 0));
+
+  void change(int index) {
+    if (state.data == index) return;
+    emitData(index);
+  }
+}

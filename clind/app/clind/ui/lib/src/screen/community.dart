@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:core_util/util.dart';
 import 'package:domain/domain.dart';
@@ -36,17 +38,40 @@ class _CommunityScreenState extends State<CommunityScreen>
     vsync: this,
   );
 
+  StreamSubscription<int>? _homeNestedTabSubscription;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _refresh());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _subscribeHomeNestedTab();
+      _refresh();
+    });
   }
 
   @override
   void dispose() {
+    _unsubscribeHomeNestedTab();
     _pageController.dispose();
     _tabController.dispose();
     super.dispose();
+  }
+
+  void _subscribeHomeNestedTab() {
+    _homeNestedTabSubscription = context
+        .readFlowBloc<HomeNestedTabCubit>()
+        .stream
+        .map((e) => e.data ?? 0)
+        .listen(
+      (index) {
+        _onChangedTab(index);
+      },
+    );
+  }
+
+  void _unsubscribeHomeNestedTab() {
+    _homeNestedTabSubscription?.cancel();
+    _homeNestedTabSubscription = null;
   }
 
   void _updateTab(int index) {
@@ -263,6 +288,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                                 onCommentTapped: (item) {},
                                 onViewTapped: (item) {},
                                 onTap: (item) {},
+                                isLoadMore: state is LoadMoreState,
                               );
                             },
                           );
@@ -281,6 +307,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                                 onCommentTapped: (item) {},
                                 onViewTapped: (item) {},
                                 onTap: (item) {},
+                                isLoadMore: state is LoadMoreState,
                               );
                             },
                           );
