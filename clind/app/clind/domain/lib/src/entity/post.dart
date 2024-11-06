@@ -18,8 +18,7 @@ class Post with _$Post {
     @Default(0) int likeCount,
     @Default(0) int commentCount,
     @Default(0) int viewCount,
-    @JsonKey(fromJson: msToDateTimeDefaultToday) //
-    required DateTime createdAt,
+    @JsonKey(fromJson: msToDateTimeDefaultToday) required DateTime createdAt,
   }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);

@@ -21,7 +21,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       likeCount: (json['likeCount'] as num?)?.toInt() ?? 0,
       commentCount: (json['commentCount'] as num?)?.toInt() ?? 0,
       viewCount: (json['viewCount'] as num?)?.toInt() ?? 0,
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: msToDateTimeDefaultToday((json['createdAt'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>

@@ -47,19 +47,21 @@ final List<Post> posts = List.generate(
   100,
   (index) => Post(
     id: 'post_$index',
-    imageUrl: 'https://source.unsplash.com/random/300×300',
+    imageUrl: 'https://picsum.photos/300/300',
     channel: Faker().conference.name(),
     company: Faker().company.name(),
     title: Faker().internet.userName(),
     content: Faker().address.city(),
     thumbnailUrls: index % 3 == 0
-        ? ['https://source.unsplash.com/random/300×300', 'https://source.unsplash.com/random/300×300']
+        ? ['https://picsum.photos/300/300', 'https://picsum.photos/300/300']
         : [],
     isLike: false,
     likeCount: index,
     commentCount: index,
     viewCount: Random().nextInt(100000000),
-    createdAt: DateTime.now().subtract(Duration(minutes: index)).millisecondsSinceEpoch,
+    createdAt: DateTime.now()
+        .subtract(Duration(minutes: index))
+        .millisecondsSinceEpoch,
   ),
 );
 
@@ -87,7 +89,8 @@ var postsHandler = (Request request) async {
   final int take = int.tryParse(takeStr) ?? 0;
   final int page = int.tryParse(pageStr) ?? 0;
   return Response.ok(
-    jsonEncode(posts.skip(page * take).take(take).map((e) => e.toJson()).toList()),
+    jsonEncode(
+        posts.skip(page * take).take(take).map((e) => e.toJson()).toList()),
     headers: {
       HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
     },
@@ -109,9 +112,7 @@ var searchPostsHandler = (Request request) async {
         .take(take)
         .map((e) => e.toJson())
         .toList()),
-    headers: {
-      HttpHeaders.contentTypeHeader: ContentType.json.mimeType
-    },
+    headers: {HttpHeaders.contentTypeHeader: ContentType.json.mimeType},
   );
 };
 

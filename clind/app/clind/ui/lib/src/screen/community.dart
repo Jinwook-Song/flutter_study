@@ -166,9 +166,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                                         itemCount: 10,
                                         scrollDirection: Axis.horizontal,
                                         separatorBuilder: (context, index) =>
-                                            const SizedBox(
-                                          width: 6,
-                                        ),
+                                            const SizedBox(width: 6),
                                         itemBuilder: (context, index) =>
                                             const ClindLoadingChannelChip(),
                                       ),
@@ -179,9 +177,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                                           itemCount: data.length,
                                           scrollDirection: Axis.horizontal,
                                           separatorBuilder: (context, index) =>
-                                              const SizedBox(
-                                            width: 6,
-                                          ),
+                                              const SizedBox(width: 6),
                                           itemBuilder: (context, index) =>
                                               CommunityChannelChip.item(
                                             data[index],

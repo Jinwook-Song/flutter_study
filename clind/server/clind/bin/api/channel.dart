@@ -32,7 +32,7 @@ final List<Channel> channels = List.generate(
   10,
   (index) => Channel(
     id: 'channel_$index',
-    imageUrl: 'https://source.unsplash.com/random/300×300',
+    imageUrl: 'https://picsum.photos/300/300',
     name: Faker().conference.name(),
     followCount: Random().nextInt(100000000),
   ),

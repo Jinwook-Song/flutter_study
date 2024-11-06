@@ -35,7 +35,7 @@ class Profile {
 
 const Profile my = Profile(
   id: 'my_profile',
-  imageUrl: 'https://source.unsplash.com/random/300×300',
+  imageUrl: 'https://picsum.photos/300/300',
   company: 'Fast campus',
   name: 'gasigogi',
   postCount: 0,
@@ -47,7 +47,7 @@ final List<Profile> otherProfiles = List.generate(
   100,
   (index) => Profile(
     id: 'other_profile_$index',
-    imageUrl: 'https://source.unsplash.com/random/300×300',
+    imageUrl: 'https://picsum.photos/300/300',
     company: Faker().company.name(),
     name: Faker().person.name(),
     postCount: 0,
