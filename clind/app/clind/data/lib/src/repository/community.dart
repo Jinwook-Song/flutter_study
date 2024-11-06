@@ -23,6 +23,15 @@ class CommunityRepository implements ICommunityRepository {
         jsonList.map((json) => ChannelModel.fromJson(json)).toList();
     return models.map((m) => m.toEntity()).toList();
   }
+
+  @override
+  Future<List<PostEntity>> getPosts({int? take, int? page}) async {
+    final List<dynamic> jsonList =
+        await _communityDataSource.getPosts(take: take, page: page);
+    final List<PostModel> models =
+        jsonList.map((json) => PostModel.fromJson(json)).toList();
+    return models.map((m) => m.toEntity()).toList();
+  }
 }
 
 extension on ChannelModel {
@@ -33,5 +42,23 @@ extension on ChannelModel {
       imageUrl: imageUrl,
       followCount: followCount,
     );
+  }
+}
+
+extension on PostModel {
+  PostEntity toEntity() {
+    return PostEntity(
+        id: id,
+        imageUrl: imageUrl,
+        channel: channel,
+        company: company,
+        title: title,
+        content: content,
+        thumbnailUrls: thumbnailUrls,
+        isLike: isLike,
+        likeCount: likeCount,
+        commentCount: commentCount,
+        viewCount: viewCount,
+        createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt));
   }
 }

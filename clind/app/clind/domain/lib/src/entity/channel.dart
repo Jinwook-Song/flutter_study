@@ -4,10 +4,10 @@ class ChannelEntitiy {
   final String name;
   final int followCount;
 
-  const ChannelEntitiy({
-    this.id = '',
-    this.imageUrl = '',
-    this.name = '',
-    this.followCount = 0,
+  ChannelEntitiy({
+    required this.id,
+    required this.imageUrl,
+    required this.name,
+    required this.followCount,
   });
 }

@@ -12,4 +12,8 @@ class CommunityDataSource {
   Future<dynamic> getPopularChannels() async {
     return await _remoteDataSource.getPopularChannels();
   }
+
+  Future<dynamic> getPosts({int? take, int? page}) {
+    return _remoteDataSource.getPosts(take: take, page: page);
+  }
 }

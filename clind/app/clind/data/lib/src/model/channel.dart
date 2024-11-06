@@ -5,10 +5,10 @@ class ChannelModel {
   final int followCount;
 
   const ChannelModel({
-    required this.id,
-    required this.imageUrl,
-    required this.name,
-    required this.followCount,
+    this.id = '',
+    this.imageUrl = '',
+    this.name = '',
+    this.followCount = 0,
   });
 
   factory ChannelModel.fromJson(Map<String, dynamic> json) {
