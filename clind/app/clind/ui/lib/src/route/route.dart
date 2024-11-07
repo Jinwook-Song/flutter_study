@@ -48,7 +48,7 @@ abstract class IClindRoutes {
       case ClindRoute.community:
         return const CommunityBlocProvider(child: CommunityScreen());
       case ClindRoute.write:
-        return const WriteScreen();
+        return const WriteBlocProvider(child: WriteScreen());
       case ClindRoute.unknown:
         return const SizedBox();
     }

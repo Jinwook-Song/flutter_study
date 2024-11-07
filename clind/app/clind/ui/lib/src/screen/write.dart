@@ -1,8 +1,11 @@
 import 'package:core_util/util.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
+import 'package:core_flutter_bloc/flutter_bloc.dart';
 
 class WriteScreen extends StatefulWidget {
   const WriteScreen({super.key});
@@ -12,16 +15,19 @@ class WriteScreen extends StatefulWidget {
 }
 
 class _WriteScreenState extends State<WriteScreen> {
-  final ValueNotifier<String> _channelNotifier = ValueNotifier<String>('');
-  final ValueNotifier<String> _titleNotifier = ValueNotifier<String>('');
-  final ValueNotifier<String> _contentNotifier = ValueNotifier<String>('');
-
   @override
-  void dispose() {
-    _channelNotifier.dispose();
-    _titleNotifier.dispose();
-    _contentNotifier.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _refresh(),
+    );
+  }
+
+  Future<void> _refresh() async {
+    await Future.wait([
+      context.readFlowBloc<WritePostCubit>().load(),
+      context.readFlowBloc<WriteMeCubit>().load(),
+    ]);
   }
 
   void _hideKeyboard() {
@@ -52,40 +58,29 @@ class _WriteScreenState extends State<WriteScreen> {
         ),
         leadingWidth: 56.0,
         actions: [
-          ValueListenableBuilder<String>(
-            valueListenable: _channelNotifier,
-            builder: (context, channel, child) =>
-                ValueListenableBuilder<String>(
-              valueListenable: _titleNotifier,
-              builder: (context, title, child) =>
-                  ValueListenableBuilder<String>(
-                valueListenable: _contentNotifier,
-                builder: (context, content, child) {
-                  final bool isActive = channel.isNotEmpty &&
-                      title.isNotEmpty &&
-                      content.isNotEmpty;
-                  return ClindAppBarTextButton(
-                    text: '등록',
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.only(
-                      right: 20.0,
-                    ),
-                    color:
-                        isActive ? ColorName.blue : context.colorScheme.gray600,
-                    onTap: () {
-                      if (!isActive) return;
-                      ClindDialog.showConfirm(
-                        context,
-                        title: "'$channel'에 글을 등록하시겠습니까?",
-                        onConfirm: () {
-                          // TODO: API
-                        },
-                      );
+          FlowBlocBuilder<WritePostCubit, Post>(
+            builder: (context, state) {
+              final Post post = state.data ?? Post.empty();
+              final isActive = post.isActive;
+              return ClindAppBarTextButton(
+                text: '등록',
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.only(
+                  right: 20.0,
+                ),
+                color: isActive ? ColorName.blue : context.colorScheme.gray600,
+                onTap: () {
+                  if (!isActive) return;
+                  ClindDialog.showConfirm(
+                    context,
+                    title: "'${post.channel}'에 글을 등록하시겠습니까?",
+                    onConfirm: () async {
+                      await context.readFlowBloc<WritePostCubit>().publish();
                     },
                   );
                 },
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),
@@ -99,11 +94,10 @@ class _WriteScreenState extends State<WriteScreen> {
               const SizedBox(height: 5.0),
               GestureDetector(
                 onTap: () {
-                  if (_channelNotifier.value.isEmpty) {
-                    _channelNotifier.value = '회사생활';
-                  } else {
-                    _channelNotifier.value = '';
-                  }
+                  final WritePostCubit cubit =
+                      context.readFlowBloc<WritePostCubit>();
+                  final Post post = cubit.state.data ?? Post.empty();
+                  cubit.update(channel: post.channel.isEmpty ? '회사생활' : '');
                 },
                 behavior: HitTestBehavior.translucent,
                 child: Container(
@@ -117,17 +111,22 @@ class _WriteScreenState extends State<WriteScreen> {
                     child: Row(
                       children: [
                         Expanded(
-                          child: ValueListenableBuilder<String>(
-                            valueListenable: _channelNotifier,
-                            builder: (context, value, child) => Text(
-                              value.isEmpty ? '등록 위치를 선택하세요' : value,
-                              style:
-                                  context.textTheme.default16SemiBold.copyWith(
-                                color: context.colorScheme.gray100,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          child: FlowBlocBuilder<WritePostCubit, Post>(
+                            builder: (context, state) {
+                              final Post post = state.data ?? Post.empty();
+
+                              return Text(
+                                post.channel.isEmpty
+                                    ? '등록 위치를 선택하세요'
+                                    : post.channel,
+                                style: context.textTheme.default16SemiBold
+                                    .copyWith(
+                                  color: context.colorScheme.gray100,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              );
+                            },
                           ),
                         ),
                         ClindIcon.expandMore(
@@ -145,18 +144,29 @@ class _WriteScreenState extends State<WriteScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ValueListenableBuilder<String>(
-                      valueListenable: _channelNotifier,
-                      builder: (context, value, child) {
-                        if (value.isNotEmpty) return const SizedBox.shrink();
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Text(
-                            '작성자: 설계사D · 서울건설',
-                            style: context.textTheme.default12Regular.copyWith(
-                              color: context.colorScheme.gray600,
-                            ),
-                          ),
+                    FlowBlocBuilder<WritePostCubit, Post>(
+                      builder: (context, state) {
+                        final Post post = state.data ?? Post.empty();
+                        if (post.channel.isNotEmpty) {
+                          return const SizedBox.shrink();
+                        }
+                        return FlowBlocBuilder<WriteMeCubit, User>(
+                          builder: (context, state) {
+                            final User user = state.data ?? const User();
+                            if (user.name.isEmpty) {
+                              return const SizedBox.shrink();
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              child: Text(
+                                '작성자: ${user.name} · ${user.company}',
+                                style:
+                                    context.textTheme.default12Regular.copyWith(
+                                  color: context.colorScheme.gray600,
+                                ),
+                              ),
+                            );
+                          },
                         );
                       },
                     ),
@@ -176,8 +186,12 @@ class _WriteScreenState extends State<WriteScreen> {
                       ),
                       keyboardAppearance: context.colorScheme.brightness,
                       textInputAction: TextInputAction.next,
-                      onChanged: (value) => _titleNotifier.value = value,
-                      onSubmitted: (value) => _titleNotifier.value = value,
+                      onChanged: (value) => context
+                          .readFlowBloc<WritePostCubit>()
+                          .update(title: value),
+                      onSubmitted: (value) => context
+                          .readFlowBloc<WritePostCubit>()
+                          .update(title: value),
                     ),
                     const SizedBox(height: 20.0),
                     CoreTextField(
@@ -198,12 +212,12 @@ class _WriteScreenState extends State<WriteScreen> {
                       textInputAction: TextInputAction.newline,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      onChanged: (value) {
-                        _contentNotifier.value = value;
-                      },
-                      onSubmitted: (value) {
-                        _contentNotifier.value = value;
-                      },
+                      onChanged: (value) => context
+                          .readFlowBloc<WritePostCubit>()
+                          .update(content: value),
+                      onSubmitted: (value) => context
+                          .readFlowBloc<WritePostCubit>()
+                          .update(content: value),
                     ),
                   ],
                 ),
@@ -215,4 +229,9 @@ class _WriteScreenState extends State<WriteScreen> {
       ),
     );
   }
+}
+
+extension on Post {
+  bool get isActive =>
+      channel.isNotEmpty && title.isNotEmpty && content.isNotEmpty;
 }
