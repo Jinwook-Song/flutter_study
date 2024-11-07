@@ -6,6 +6,7 @@ import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
+import 'package:ui/src/route/route.dart';
 
 class WriteScreen extends StatefulWidget {
   const WriteScreen({super.key});
@@ -75,7 +76,15 @@ class _WriteScreenState extends State<WriteScreen> {
                     context,
                     title: "'${post.channel}'에 글을 등록하시겠습니까?",
                     onConfirm: () async {
-                      await context.readFlowBloc<WritePostCubit>().publish();
+                      goToPostRef(String id) async {
+                        await IClindRouteTo.post(context, id: id);
+                      }
+
+                      final WritePostCubit cubit =
+                          context.readFlowBloc<WritePostCubit>();
+                      await cubit.publish();
+                      final Post result = cubit.state.data ?? post;
+                      goToPostRef(result.id);
                     },
                   );
                 },
