@@ -9,6 +9,7 @@ abstract class IPostRemoteDataSource {
     required String title,
     required String content,
   });
+  Future<dynamic> getPost({required String id});
 }
 
 class PostRemoteDataSource extends IPostRemoteDataSource {
@@ -41,5 +42,10 @@ class PostRemoteDataSource extends IPostRemoteDataSource {
       title: title,
       content: content,
     );
+  }
+
+  @override
+  Future getPost({required String id}) {
+    return _api.getPost(id: id);
   }
 }

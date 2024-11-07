@@ -41,4 +41,10 @@ class PostApi {
       },
     ).then((value) => value.data);
   }
+
+  Future<dynamic> getPost({required String id}) {
+    return _client
+        .get<dynamic>('/post-api/post/$id')
+        .then((value) => value.data);
+  }
 }
