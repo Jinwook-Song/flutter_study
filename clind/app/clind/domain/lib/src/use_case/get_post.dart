@@ -1,20 +1,20 @@
 import 'package:core_util/util.dart';
 import 'package:domain/domain.dart';
 
-class GetPostUseCasae implements IUseCase<Post, GetPostParams> {
+class GetPostUseCase implements IUseCase<Post, GetPostParams> {
   final IPostRepository _postRepository;
 
-  GetPostUseCasae(this._postRepository);
+  GetPostUseCase(this._postRepository);
 
   @override
   Future<Post> execute([GetPostParams? params]) async {
     if (params == null) return Post.empty();
-    return _postRepository.getPost(id: params.id);
+    return _postRepository.getPost(id: params.postId);
   }
 }
 
 class GetPostParams {
-  final String id;
+  final String postId;
 
-  const GetPostParams({required this.id});
+  const GetPostParams({required this.postId});
 }
