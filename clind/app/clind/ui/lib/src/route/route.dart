@@ -51,7 +51,7 @@ abstract class IClindRoutes {
         return const CommunityBlocProvider(child: CommunityScreen());
       case ClindRoute.post:
         final String id = queryParameters['id'] ?? '';
-        return PostScreen(id: id);
+        return PostBlocProvider(child: PostScreen(id: id));
       case ClindRoute.write:
         return const WriteBlocProvider(child: WriteScreen());
       case ClindRoute.unknown:
