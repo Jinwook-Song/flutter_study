@@ -26,4 +26,19 @@ class PostApi {
       },
     ).then((value) => value.data);
   }
+
+  Future<dynamic> createPost({
+    required String channel,
+    required String title,
+    required String content,
+  }) {
+    return _client.post<dynamic>(
+      '/post-api/post/create',
+      data: {
+        'channel': channel,
+        'title': title,
+        'content': content,
+      },
+    ).then((value) => value.data);
+  }
 }

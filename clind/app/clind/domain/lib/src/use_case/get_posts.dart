@@ -8,7 +8,7 @@ class GetPostsUseCase implements IUseCase<List<Post>, GetPostsParams> {
 
   @override
   Future<List<Post>> execute([GetPostsParams? params]) {
-    final GetPostsParams input = params ?? GetPostsParams();
+    final GetPostsParams input = params ?? const GetPostsParams();
     return _communityRepository.getPosts(
       take: input.take,
       page: input.page,
@@ -20,5 +20,8 @@ class GetPostsParams {
   final int take;
   final int page;
 
-  GetPostsParams({this.take = 10, this.page = 0});
+  const GetPostsParams({
+    this.take = 10,
+    this.page = 0,
+  });
 }

@@ -4,6 +4,11 @@ abstract class IPostRemoteDataSource {
   Future<dynamic> getChannels();
   Future<dynamic> getPopularChannels();
   Future<dynamic> getPosts({int? take, int? page});
+  Future<dynamic> createPost({
+    required String channel,
+    required String title,
+    required String content,
+  });
 }
 
 class PostRemoteDataSource extends IPostRemoteDataSource {
@@ -24,5 +29,17 @@ class PostRemoteDataSource extends IPostRemoteDataSource {
   @override
   Future<dynamic> getPosts({int? take, int? page}) {
     return _api.getPosts(take: take, page: page);
+  }
+
+  @override
+  Future createPost(
+      {required String channel,
+      required String title,
+      required String content}) {
+    return _api.createPost(
+      channel: channel,
+      title: title,
+      content: content,
+    );
   }
 }
