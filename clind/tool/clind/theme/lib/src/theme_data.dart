@@ -77,6 +77,8 @@ extension on ClindTextTheme {
 
 extension ClindTextThemeDefaultExtension on ClindTextTheme {
   // w600
+  TextStyle get default20SemiBold => defaultTextStyleForSize(20.0).toSemiBold();
+
   TextStyle get default17SemiBold => defaultTextStyleForSize(17.0).toSemiBold();
 
   TextStyle get default16SemiBold => defaultTextStyleForSize(16.0).toSemiBold();
