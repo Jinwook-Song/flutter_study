@@ -10,6 +10,11 @@ abstract class IPostRemoteDataSource {
     required String content,
   });
   Future<dynamic> getPost({required String id});
+  Future<dynamic> getComments({
+    required String postId,
+    int? take,
+    int? page,
+  });
 }
 
 class PostRemoteDataSource extends IPostRemoteDataSource {
@@ -47,5 +52,18 @@ class PostRemoteDataSource extends IPostRemoteDataSource {
   @override
   Future getPost({required String id}) {
     return _api.getPost(id: id);
+  }
+
+  @override
+  Future getComments({
+    required String postId,
+    int? take,
+    int? page,
+  }) {
+    return _api.getComments(
+      postId: postId,
+      take: take,
+      page: page,
+    );
   }
 }

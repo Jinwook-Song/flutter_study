@@ -47,4 +47,19 @@ class PostApi {
         .get<dynamic>('/post-api/post/$id')
         .then((value) => value.data);
   }
+
+  Future<dynamic> getComments({
+    required String postId,
+    int? take,
+    int? page,
+  }) {
+    return _client.get<dynamic>(
+      '/post-api/comments/$postId',
+      queryParameters: {
+        'postId': postId,
+        if (take != null) 'take': take,
+        if (page != null) 'page': page,
+      },
+    ).then((value) => value.data);
+  }
 }

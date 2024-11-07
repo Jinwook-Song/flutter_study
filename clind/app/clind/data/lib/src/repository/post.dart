@@ -11,4 +11,18 @@ class PostRepository implements IPostRepository {
     final dynamic json = await _postDataSource.getPost(id: id);
     return Post.fromJson(json);
   }
+
+  @override
+  Future<List<Comment>> getComments({
+    required String postId,
+    int take = 10,
+    int page = 0,
+  }) async {
+    final List<dynamic> jsonList = await _postDataSource.getComments(
+      postId: postId,
+      take: take,
+      page: page,
+    );
+    return jsonList.map((json) => Comment.fromJson(json)).toList();
+  }
 }

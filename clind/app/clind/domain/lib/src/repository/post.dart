@@ -2,4 +2,10 @@ import 'package:domain/src/entity/entity.dart';
 
 abstract class IPostRepository {
   Future<Post> getPost({required String id});
+
+  Future<List<Comment>> getComments({
+    required String postId,
+    int take,
+    int page,
+  });
 }

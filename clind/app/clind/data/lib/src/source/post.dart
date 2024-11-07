@@ -12,4 +12,16 @@ class PostDataSource {
   }) async {
     return await _postRemoteDataSource.getPost(id: id);
   }
+
+  Future<dynamic> getComments({
+    required String postId,
+    int? take,
+    int? page,
+  }) async {
+    return await _postRemoteDataSource.getComments(
+      postId: postId,
+      take: take,
+      page: page,
+    );
+  }
 }
