@@ -5,7 +5,8 @@ import 'package:ui/ui.dart';
 enum ClindRoute {
   root,
   unknown,
-  community;
+  community,
+  write;
 
   static String encode(ClindRoute route) => route.path;
 
@@ -19,6 +20,9 @@ extension ClindRouteX on ClindRoute {
   String get path {
     const String root = '/';
     if (this == ClindRoute.root) return root;
+    if (this == ClindRoute.write) {
+      return '${ClindRoute.community.path}/$name';
+    }
     return '$root$name';
   }
 }
@@ -43,6 +47,8 @@ abstract class IClindRoutes {
         return const HomeBlocProvider(child: HomeScreen());
       case ClindRoute.community:
         return const CommunityBlocProvider(child: CommunityScreen());
+      case ClindRoute.write:
+        return const WriteScreen();
       case ClindRoute.unknown:
         return const SizedBox();
     }
@@ -96,6 +102,14 @@ abstract class IClindRouteTo {
     return push<void>(
       context,
       route: ClindRoute.community,
+    );
+  }
+
+  static Future<void> write(BuildContext context) {
+    return push<void>(
+      context,
+      route: ClindRoute.write,
+      fullscreenDialog: true,
     );
   }
 }
