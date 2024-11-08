@@ -1,5 +1,7 @@
 import 'package:core_util/util.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
 
 class PostCommentTile extends StatelessWidget {
@@ -17,6 +19,19 @@ class PostCommentTile extends StatelessWidget {
     required this.createdAt,
     required this.onTap,
   });
+
+  factory PostCommentTile.item(
+    Comment comment, {
+    required VoidCallback onTap,
+  }) {
+    return PostCommentTile(
+      name: comment.user.name,
+      company: comment.user.company,
+      content: comment.content,
+      createdAt: comment.createdAt,
+      onTap: onTap,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +77,53 @@ class PostCommentTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class PostCommentListView extends StatelessWidget {
+  final List<Comment> comments;
+  final Function(Comment) onTap;
+  final bool isLoadMore;
+  const PostCommentListView({
+    super.key,
+    required this.comments,
+    required this.onTap,
+    this.isLoadMore = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList.builder(
+      itemCount: comments.length,
+      itemBuilder: (context, index) {
+        final Comment comment = comments[index];
+        final Widget child = PostCommentTile.item(
+          comment,
+          onTap: () {},
+        );
+        if (isLoadMore) {
+          if (index == comments.length - 1) {
+            return Column(
+              children: [
+                child,
+                SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: Center(
+                    child: ClindIcon.restartAlt(
+                      size: 44,
+                      color: context.colorScheme.gray600,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+        }
+
+        return child;
+      },
     );
   }
 }

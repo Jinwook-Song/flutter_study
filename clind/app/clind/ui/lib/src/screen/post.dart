@@ -1,8 +1,11 @@
 import 'package:core_util/util.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
 import 'package:ui/ui.dart';
+import 'package:core_flutter_bloc/flutter_bloc.dart';
 
 class PostScreen extends StatefulWidget {
   final String id;
@@ -17,6 +20,25 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _refresh(),
+    );
+  }
+
+  Future<void> _refresh() async {
+    await Future.wait([
+      context.readFlowBloc<PostCubit>().load(postId: widget.id),
+      context.readFlowBloc<PostCommentListCubit>().load(postId: widget.id),
+    ]);
+  }
+
+  Future<void> _loadMore() async {
+    context.readFlowBloc<PostCommentListCubit>().loadMore();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +59,12 @@ class _PostScreenState extends State<PostScreen> {
         child: ColoredBox(
           color: context.colorScheme.darkBlack,
           child: CoreRefreshIndicator(
-            onRefresh: () async {},
+            onRefresh: _refresh,
             indicator: ClindIcon.restartAlt(
               color: context.colorScheme.gray600,
             ),
             child: CoreLoadMore(
-              onLoadMore: () async {},
+              onLoadMore: _loadMore,
               child: CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
@@ -50,40 +72,46 @@ class _PostScreenState extends State<PostScreen> {
                       color: context.colorScheme.bg2,
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClindProfileTile(
-                              imageUrl: '',
-                              channel: '설계사',
-                              company: '서울건설',
-                              createdAt: DateTime.now(),
-                              onChannelTapped: () {},
-                              onCompanyTapped: () {},
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              '안녕하세요',
-                              style:
-                                  context.textTheme.default20SemiBold.copyWith(
-                                color: context.colorScheme.gray100,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              '반갑습니다',
-                              style: context.textTheme.default15Medium.copyWith(
-                                color: context.colorScheme.gray200,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                          ],
+                        child: FlowBlocBuilder<PostCubit, Post>(
+                          builder: (context, state) {
+                            final Post post = state.data ?? Post.empty();
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClindProfileTile(
+                                  imageUrl: post.imageUrl,
+                                  channel: post.channel,
+                                  company: post.company,
+                                  createdAt: post.createdAt,
+                                  onChannelTapped: () {},
+                                  onCompanyTapped: () {},
+                                ),
+                                const SizedBox(
+                                  height: 20.0,
+                                ),
+                                Text(
+                                  post.title,
+                                  style: context.textTheme.default20SemiBold
+                                      .copyWith(
+                                    color: context.colorScheme.gray100,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20.0,
+                                ),
+                                Text(
+                                  post.content,
+                                  style: context.textTheme.default15Medium
+                                      .copyWith(
+                                    color: context.colorScheme.gray200,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20.0,
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -94,15 +122,17 @@ class _PostScreenState extends State<PostScreen> {
                       onTap: () {},
                     ),
                   ),
-                  SliverList.builder(
-                    itemCount: 2,
-                    itemBuilder: (context, index) => PostCommentTile(
-                      name: '공무원Q',
-                      company: '경기컴퍼니',
-                      content: '정말 안녕하신가요 야근 괜찮으십니까',
-                      createdAt: DateTime.now(),
-                      onTap: () {},
-                    ),
+                  FlowBlocBuilder<PostCommentListCubit, List<Comment>>(
+                    builder: (context, state) {
+                      final List<Comment> comments = state.data ?? [];
+
+                      if (comments.isEmpty) return const SliverToBoxAdapter();
+                      return PostCommentListView(
+                        comments: comments,
+                        onTap: (comment) {},
+                        isLoadMore: state is LoadMoreState,
+                      );
+                    },
                   ),
                 ],
               ),

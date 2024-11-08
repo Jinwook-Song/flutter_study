@@ -287,7 +287,9 @@ class _CommunityScreenState extends State<CommunityScreen>
                                 onLikeTapped: (item) {},
                                 onCommentTapped: (item) {},
                                 onViewTapped: (item) {},
-                                onTap: (item) {},
+                                onTap: (item) {
+                                  IClindRouteTo.post(context, id: item.id);
+                                },
                                 isLoadMore: state is LoadMoreState,
                               );
                             },
@@ -306,7 +308,9 @@ class _CommunityScreenState extends State<CommunityScreen>
                                 onLikeTapped: (item) {},
                                 onCommentTapped: (item) {},
                                 onViewTapped: (item) {},
-                                onTap: (item) {},
+                                onTap: (item) {
+                                  IClindRouteTo.post(context, id: item.id);
+                                },
                                 isLoadMore: state is LoadMoreState,
                               );
                             },
