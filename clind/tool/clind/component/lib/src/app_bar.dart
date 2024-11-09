@@ -10,6 +10,7 @@ class ClindAppBar extends AppBar {
     super.title,
     super.automaticallyImplyLeading = false,
     super.actions,
+    super.bottom,
     super.leadingWidth = 41.0,
     super.elevation = 0,
     double? titleSpacing,
@@ -19,7 +20,8 @@ class ClindAppBar extends AppBar {
   }) : super(
           scrolledUnderElevation: 0,
           titleSpacing: titleSpacing ?? context.appBarTheme.titleSpacing,
-          backgroundColor: backgroundColor ?? context.appBarTheme.backgroundColor,
+          backgroundColor:
+              backgroundColor ?? context.appBarTheme.backgroundColor,
           centerTitle: centerTitle ?? context.appBarTheme.centerTitle,
           toolbarHeight: toolbarHeight ?? context.appBarTheme.toolbarHeight,
           systemOverlayStyle: context.appBarTheme.systemOverlayStyle,

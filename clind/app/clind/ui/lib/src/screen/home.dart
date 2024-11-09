@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 tabBuilder: (context, index) {
                   final Uri url = switch (index) {
                     0 => Uri(path: ClindRoute.community.path),
+                    1 => Uri(path: ClindRoute.notification.path),
                     _ => Uri(path: ClindRoute.community.path),
                   };
                   return IClindRoutes.findScreen(url);
