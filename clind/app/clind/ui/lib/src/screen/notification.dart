@@ -1,8 +1,11 @@
 import 'package:core_util/util.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
-import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
+import 'package:core_flutter_bloc/flutter_bloc.dart';
+import 'package:ui/src/widget/notification_tile.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -12,6 +15,18 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _refresh(),
+    );
+  }
+
+  Future<void> _refresh() async {
+    await context.readFlowBloc<NotificationListCubit>().load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,24 +55,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
       ),
       body: CoreRefreshIndicator(
-        onRefresh: () async {},
+        onRefresh: _refresh,
         indicator: ClindIcon.restartAlt(
           color: context.colorScheme.gray600,
         ),
         child: CoreLoadMore(
           onLoadMore: () async {},
-          child: ListView.separated(
-            itemCount: 5,
-            itemBuilder: (context, index) => ClindNotificationTile(
-              leading: ClindIcon.circleNotifications(
-                color: ColorName.mainRed,
-              ),
-              title: '(광고) 주간베스트!',
-              content: '"어서오세요, 신입mz께서 기다립니다"',
-              createdAt: DateTime.now(),
-              onTap: () {},
-            ),
-            separatorBuilder: (context, index) => ClindDivider.horizontal(),
+          child:
+              FlowBlocBuilder<NotificationListCubit, List<ClindNotification>>(
+            builder: (context, state) {
+              final List<ClindNotification> items = state.data ?? [];
+              return ListView.separated(
+                itemCount: items.length,
+                itemBuilder: (context, index) => NotificationTile.item(
+                  items[index],
+                  onTap: () {},
+                ),
+                separatorBuilder: (context, index) => ClindDivider.horizontal(),
+              );
+            },
           ),
         ),
       ),

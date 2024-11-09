@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Notification _$NotificationFromJson(Map<String, dynamic> json) {
-  return _Notification.fromJson(json);
+ClindNotification _$ClindNotificationFromJson(Map<String, dynamic> json) {
+  return _ClindNotification.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Notification {
+mixin _$ClindNotification {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
@@ -28,21 +28,21 @@ mixin _$Notification {
   DateTime get createdAt => throw _privateConstructorUsedError;
   NotificationType get type => throw _privateConstructorUsedError;
 
-  /// Serializes this Notification to a JSON map.
+  /// Serializes this ClindNotification to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Notification
+  /// Create a copy of ClindNotification
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $NotificationCopyWith<Notification> get copyWith =>
+  $ClindNotificationCopyWith<ClindNotification> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NotificationCopyWith<$Res> {
-  factory $NotificationCopyWith(
-          Notification value, $Res Function(Notification) then) =
-      _$NotificationCopyWithImpl<$Res, Notification>;
+abstract class $ClindNotificationCopyWith<$Res> {
+  factory $ClindNotificationCopyWith(
+          ClindNotification value, $Res Function(ClindNotification) then) =
+      _$ClindNotificationCopyWithImpl<$Res, ClindNotification>;
   @useResult
   $Res call(
       {String id,
@@ -54,16 +54,16 @@ abstract class $NotificationCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NotificationCopyWithImpl<$Res, $Val extends Notification>
-    implements $NotificationCopyWith<$Res> {
-  _$NotificationCopyWithImpl(this._value, this._then);
+class _$ClindNotificationCopyWithImpl<$Res, $Val extends ClindNotification>
+    implements $ClindNotificationCopyWith<$Res> {
+  _$ClindNotificationCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Notification
+  /// Create a copy of ClindNotification
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -105,11 +105,11 @@ class _$NotificationCopyWithImpl<$Res, $Val extends Notification>
 }
 
 /// @nodoc
-abstract class _$$NotificationImplCopyWith<$Res>
-    implements $NotificationCopyWith<$Res> {
-  factory _$$NotificationImplCopyWith(
-          _$NotificationImpl value, $Res Function(_$NotificationImpl) then) =
-      __$$NotificationImplCopyWithImpl<$Res>;
+abstract class _$$ClindNotificationImplCopyWith<$Res>
+    implements $ClindNotificationCopyWith<$Res> {
+  factory _$$ClindNotificationImplCopyWith(_$ClindNotificationImpl value,
+          $Res Function(_$ClindNotificationImpl) then) =
+      __$$ClindNotificationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -122,14 +122,14 @@ abstract class _$$NotificationImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$NotificationImplCopyWithImpl<$Res>
-    extends _$NotificationCopyWithImpl<$Res, _$NotificationImpl>
-    implements _$$NotificationImplCopyWith<$Res> {
-  __$$NotificationImplCopyWithImpl(
-      _$NotificationImpl _value, $Res Function(_$NotificationImpl) _then)
+class __$$ClindNotificationImplCopyWithImpl<$Res>
+    extends _$ClindNotificationCopyWithImpl<$Res, _$ClindNotificationImpl>
+    implements _$$ClindNotificationImplCopyWith<$Res> {
+  __$$ClindNotificationImplCopyWithImpl(_$ClindNotificationImpl _value,
+      $Res Function(_$ClindNotificationImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Notification
+  /// Create a copy of ClindNotification
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -141,7 +141,7 @@ class __$$NotificationImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? type = null,
   }) {
-    return _then(_$NotificationImpl(
+    return _then(_$ClindNotificationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -172,8 +172,8 @@ class __$$NotificationImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NotificationImpl implements _Notification {
-  const _$NotificationImpl(
+class _$ClindNotificationImpl implements _ClindNotification {
+  const _$ClindNotificationImpl(
       {this.id = '',
       this.title = '',
       this.content = '',
@@ -181,8 +181,8 @@ class _$NotificationImpl implements _Notification {
       @JsonKey(fromJson: msToDateTimeDefaultToday) required this.createdAt,
       this.type = NotificationType.unknown});
 
-  factory _$NotificationImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NotificationImplFromJson(json);
+  factory _$ClindNotificationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClindNotificationImplFromJson(json);
 
   @override
   @JsonKey()
@@ -205,14 +205,14 @@ class _$NotificationImpl implements _Notification {
 
   @override
   String toString() {
-    return 'Notification(id: $id, title: $title, content: $content, route: $route, createdAt: $createdAt, type: $type)';
+    return 'ClindNotification(id: $id, title: $title, content: $content, route: $route, createdAt: $createdAt, type: $type)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NotificationImpl &&
+            other is _$ClindNotificationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
@@ -227,34 +227,35 @@ class _$NotificationImpl implements _Notification {
   int get hashCode =>
       Object.hash(runtimeType, id, title, content, route, createdAt, type);
 
-  /// Create a copy of Notification
+  /// Create a copy of ClindNotification
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$NotificationImplCopyWith<_$NotificationImpl> get copyWith =>
-      __$$NotificationImplCopyWithImpl<_$NotificationImpl>(this, _$identity);
+  _$$ClindNotificationImplCopyWith<_$ClindNotificationImpl> get copyWith =>
+      __$$ClindNotificationImplCopyWithImpl<_$ClindNotificationImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NotificationImplToJson(
+    return _$$ClindNotificationImplToJson(
       this,
     );
   }
 }
 
-abstract class _Notification implements Notification {
-  const factory _Notification(
+abstract class _ClindNotification implements ClindNotification {
+  const factory _ClindNotification(
       {final String id,
       final String title,
       final String content,
       final String route,
       @JsonKey(fromJson: msToDateTimeDefaultToday)
       required final DateTime createdAt,
-      final NotificationType type}) = _$NotificationImpl;
+      final NotificationType type}) = _$ClindNotificationImpl;
 
-  factory _Notification.fromJson(Map<String, dynamic> json) =
-      _$NotificationImpl.fromJson;
+  factory _ClindNotification.fromJson(Map<String, dynamic> json) =
+      _$ClindNotificationImpl.fromJson;
 
   @override
   String get id;
@@ -270,10 +271,10 @@ abstract class _Notification implements Notification {
   @override
   NotificationType get type;
 
-  /// Create a copy of Notification
+  /// Create a copy of ClindNotification
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NotificationImplCopyWith<_$NotificationImpl> get copyWith =>
+  _$$ClindNotificationImplCopyWith<_$ClindNotificationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

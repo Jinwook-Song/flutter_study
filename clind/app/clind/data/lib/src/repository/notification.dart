@@ -7,9 +7,9 @@ class NotificationRepository implements INotificationRepository {
   NotificationRepository(this._notificationDataSource);
 
   @override
-  Future<List<Notification>> getNotifications() async {
+  Future<List<ClindNotification>> getNotifications() async {
     final List<dynamic> jsonList =
         await _notificationDataSource.getNotifications();
-    return jsonList.map((json) => Notification.fromJson(json)).toList();
+    return jsonList.map((json) => ClindNotification.fromJson(json)).toList();
   }
 }

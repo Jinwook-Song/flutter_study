@@ -6,18 +6,18 @@ part 'notification.freezed.dart';
 part 'notification.g.dart';
 
 @freezed
-class Notification with _$Notification {
-  const factory Notification({
+class ClindNotification with _$ClindNotification {
+  const factory ClindNotification({
     @Default('') String id,
     @Default('') String title,
     @Default('') String content,
     @Default('') String route,
     @JsonKey(fromJson: msToDateTimeDefaultToday) required DateTime createdAt,
     @Default(NotificationType.unknown) NotificationType type,
-  }) = _Notification;
+  }) = _ClindNotification;
 
-  factory Notification.fromJson(Map<String, dynamic> json) =>
-      _$NotificationFromJson(json);
+  factory ClindNotification.fromJson(Map<String, dynamic> json) =>
+      _$ClindNotificationFromJson(json);
 }
 
 @JsonEnum()
