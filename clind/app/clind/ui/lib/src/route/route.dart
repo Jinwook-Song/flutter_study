@@ -62,7 +62,7 @@ abstract class IClindRoutes {
       case ClindRoute.my:
         return const MyBlocProvider(child: MyScreen());
       case ClindRoute.search:
-        return const SearchScreen();
+        return const SearchBlocProvider(child: SearchScreen());
       case ClindRoute.unknown:
         return const SizedBox();
     }
