@@ -1,7 +1,7 @@
 import 'package:tool_clind_network/network.dart';
 
 abstract class IProfileRemoteDataSource {
-  Future<dynamic> getMe();
+  Future<dynamic> getMy();
 }
 
 class ProfileRemoteDataSource extends IProfileRemoteDataSource {
@@ -10,7 +10,7 @@ class ProfileRemoteDataSource extends IProfileRemoteDataSource {
   ProfileRemoteDataSource(this._api);
 
   @override
-  Future<dynamic> getMe() {
-    return _api.getMe();
+  Future<dynamic> getMy() {
+    return _api.getMy();
   }
 }

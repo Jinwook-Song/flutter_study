@@ -7,5 +7,5 @@ abstract class IWriteRepository {
     required String content,
   });
 
-  Future<User> getMe();
+  Future<User> getMy();
 }

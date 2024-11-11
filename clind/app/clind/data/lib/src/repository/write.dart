@@ -21,8 +21,8 @@ class WriteRepository implements IWriteRepository {
   }
 
   @override
-  Future<User> getMe() async {
-    final dynamic json = await _writeDataSource.getMe();
+  Future<User> getMy() async {
+    final dynamic json = await _writeDataSource.getMy();
     return User.fromJson(json);
   }
 }

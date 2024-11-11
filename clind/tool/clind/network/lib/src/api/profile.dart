@@ -5,7 +5,7 @@ class ProfileApi {
 
   ProfileApi(this._client);
 
-  Future<dynamic> getMe() {
+  Future<dynamic> getMy() {
     return _client.get<dynamic>('/profile-api/my').then((value) => value.data);
   }
 }

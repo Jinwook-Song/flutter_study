@@ -21,7 +21,7 @@ class WriteDataSource {
     );
   }
 
-  Future<dynamic> getMe() async {
-    return await _profileRemoteDataSource.getMe();
+  Future<dynamic> getMy() async {
+    return await _profileRemoteDataSource.getMy();
   }
 }

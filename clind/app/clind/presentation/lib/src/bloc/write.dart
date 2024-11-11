@@ -49,7 +49,7 @@ class WritePostCubit extends IFlowCubit<Post> {
 }
 
 class WriteMeCubit extends IFlowCubit<User> {
-  final GetMeUseCasae _getMeUseCasae;
+  final GetMyUseCasae _getMeUseCasae;
 
   WriteMeCubit(this._getMeUseCasae);
 

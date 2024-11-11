@@ -37,8 +37,8 @@ class WriteBlocProvider extends StatelessWidget {
                   context.readFlowRepository<IWriteRepository>(),
                 ),
               ),
-              FlowRepositoryProvider<GetMeUseCasae>(
-                create: (context) => GetMeUseCasae(
+              FlowRepositoryProvider<GetMyUseCasae>(
+                create: (context) => GetMyUseCasae(
                   context.readFlowRepository<IWriteRepository>(),
                 ),
               ),
@@ -52,7 +52,7 @@ class WriteBlocProvider extends StatelessWidget {
                 ),
                 FlowBlocProvider<WriteMeCubit>(
                   create: (context) => WriteMeCubit(
-                    context.readFlowRepository<GetMeUseCasae>(),
+                    context.readFlowRepository<GetMyUseCasae>(),
                   ),
                 ),
               ],
