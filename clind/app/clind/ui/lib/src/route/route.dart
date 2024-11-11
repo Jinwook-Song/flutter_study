@@ -8,7 +8,8 @@ enum ClindRoute {
   community,
   post,
   write,
-  notification;
+  notification,
+  my;
 
   static String encode(ClindRoute route) => route.path;
 
@@ -57,6 +58,8 @@ abstract class IClindRoutes {
         return const WriteBlocProvider(child: WriteScreen());
       case ClindRoute.notification:
         return const NotificationBlocProvider(child: NotificationScreen());
+      case ClindRoute.my:
+        return const MyScreen();
       case ClindRoute.unknown:
         return const SizedBox();
     }
@@ -136,6 +139,13 @@ abstract class IClindRouteTo {
     return push<void>(
       context,
       route: ClindRoute.notification,
+    );
+  }
+
+  static Future<void> my(BuildContext context) {
+    return push<void>(
+      context,
+      route: ClindRoute.my,
     );
   }
 }

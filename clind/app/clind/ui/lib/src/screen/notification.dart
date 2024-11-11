@@ -30,7 +30,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   Future<void> _landing(String route) async {
     final Uri uri = Uri.tryParse(route) ?? Uri();
-    print(uri);
 
     int? tabIndex;
 
