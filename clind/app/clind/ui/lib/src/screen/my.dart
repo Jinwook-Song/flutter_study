@@ -1,8 +1,11 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
 import 'package:ui/ui.dart';
+import 'package:core_flutter_bloc/flutter_bloc.dart';
 
 class MyScreen extends StatefulWidget {
   const MyScreen({super.key});
@@ -12,6 +15,18 @@ class MyScreen extends StatefulWidget {
 }
 
 class _MyScreenState extends State<MyScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _refresh(),
+    );
+  }
+
+  Future<void> _refresh() async {
+    await context.readFlowBloc<MyCubit>().load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +57,16 @@ class _MyScreenState extends State<MyScreen> {
       body: SizedBox.expand(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: MyProfileCard(
-                name: '영업사원 E',
-                onModify: () {},
-              ),
+            FlowBlocBuilder<MyCubit, User>(
+              builder: (context, state) {
+                final User user = state.data ?? const User();
+                return SliverToBoxAdapter(
+                  child: MyProfileCard.item(
+                    user,
+                    onModify: () {},
+                  ),
+                );
+              },
             ),
             const SliverToBoxAdapter(
               child: SizedBox(

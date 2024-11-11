@@ -59,7 +59,7 @@ abstract class IClindRoutes {
       case ClindRoute.notification:
         return const NotificationBlocProvider(child: NotificationScreen());
       case ClindRoute.my:
-        return const MyScreen();
+        return const MyBlocProvider(child: MyScreen());
       case ClindRoute.unknown:
         return const SizedBox();
     }

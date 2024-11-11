@@ -1,3 +1,4 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
@@ -17,6 +18,19 @@ class MyProfileCard extends StatelessWidget {
     this.commentCount = 0,
     this.likeCount = 0,
   });
+
+  factory MyProfileCard.item(
+    User user, {
+    required VoidCallback onModify,
+  }) {
+    return MyProfileCard(
+      name: user.name,
+      onModify: onModify,
+      postCount: user.postCount,
+      commentCount: user.commentCount,
+      likeCount: user.likeCount,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
