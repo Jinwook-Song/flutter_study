@@ -62,4 +62,19 @@ class PostApi {
       },
     ).then((value) => value.data);
   }
+
+  Future<dynamic> getSearchPosts({
+    String query = '',
+    int? take,
+    int? page,
+  }) {
+    return _client.get<dynamic>(
+      '/post-api/posts/search',
+      queryParameters: {
+        'query': query,
+        if (take != null) 'take': take,
+        if (page != null) 'page': page,
+      },
+    ).then((value) => value.data);
+  }
 }

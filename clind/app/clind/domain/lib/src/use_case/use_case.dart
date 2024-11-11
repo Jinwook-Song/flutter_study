@@ -7,3 +7,4 @@ export 'get_notifications.dart';
 export 'get_popular_channels.dart';
 export 'get_post.dart';
 export 'get_posts.dart';
+export 'get_search_posts.dart';
