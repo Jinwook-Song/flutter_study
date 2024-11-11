@@ -1,0 +1,16 @@
+name: setting
+description: 'setting package'
+publish_to: none
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  add:
+    path: ../add
+
+flutter:
+  uses-material-design: true
