@@ -5,7 +5,6 @@ import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
-import 'package:ui/src/widget/notification_tile.dart';
 import 'package:ui/ui.dart';
 
 class NotificationScreen extends StatefulWidget {

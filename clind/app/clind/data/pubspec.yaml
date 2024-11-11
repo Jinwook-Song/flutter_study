@@ -10,6 +10,8 @@ dependencies:
   domain:
     path: ../domain
 
+  core_storage:
+    path: ../../../core/storage
   core_util:
     path: ../../../core/util
 
