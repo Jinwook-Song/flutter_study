@@ -85,6 +85,8 @@ extension ClindTextThemeDefaultExtension on ClindTextTheme {
 
   TextStyle get default15SemiBold => defaultTextStyleForSize(15.0).toSemiBold();
 
+  TextStyle get default14SemiBold => defaultTextStyleForSize(14.0).toSemiBold();
+
   // w500
   TextStyle get default17Medium => defaultTextStyleForSize(17.0).toMedium();
 

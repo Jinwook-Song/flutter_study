@@ -152,7 +152,9 @@ class _CommunityScreenState extends State<CommunityScreen>
                 ),
               ),
               leadingWidth: 55,
-              title: ClindSearchBar(text: '관심있는 글 검색', onTap: () {}),
+              title: ClindSearchBar(
+                  text: '관심있는 글 검색',
+                  onTap: () => IClindRouteTo.search(context)),
               titleSpacing: 0,
               actions: [
                 Padding(
@@ -165,14 +167,14 @@ class _CommunityScreenState extends State<CommunityScreen>
                 )
               ],
               bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(45),
-                  child: CommunityTabBar(
-                    controller: _tabController,
-                    tabs: CommunityTabType.values
-                        .map((tab) => tab.title)
-                        .toList(),
-                    onTap: _onChangedTab,
-                  )),
+                preferredSize: const Size.fromHeight(45),
+                child: CommunityTabBar(
+                  controller: _tabController,
+                  tabs:
+                      CommunityTabType.values.map((tab) => tab.title).toList(),
+                  onTap: _onChangedTab,
+                ),
+              ),
             )
           ];
         },
