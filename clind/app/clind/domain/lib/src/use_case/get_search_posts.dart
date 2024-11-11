@@ -1,10 +1,10 @@
 import 'package:core_util/util.dart';
 import 'package:domain/domain.dart';
 
-class GetSearchPosts extends IUseCase<List<Post>, GetSearchPostsParams> {
+class GetSearchPostsUseCase extends IUseCase<List<Post>, GetSearchPostsParams> {
   final ISearchRepository _searchRepository;
 
-  GetSearchPosts(this._searchRepository);
+  GetSearchPostsUseCase(this._searchRepository);
 
   @override
   Future<List<Post>> execute([GetSearchPostsParams? params]) {
