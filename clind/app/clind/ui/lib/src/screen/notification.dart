@@ -1,5 +1,6 @@
 import 'package:core_util/util.dart';
 import 'package:domain/domain.dart';
+import 'package:feature_community/clind.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
@@ -32,7 +33,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
     int? tabIndex;
 
-    if (uri.path == ClindRoute.community.path) {
+    if (uri.path == CommunityRoute.community.path) {
       tabIndex = 0;
     } else if (uri.path == ClindRoute.notification.path) {
       tabIndex = 1;

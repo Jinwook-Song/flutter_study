@@ -1,5 +1,6 @@
 import 'package:core_util/util.dart';
 import 'package:domain/domain.dart';
+import 'package:feature_community/clind.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
@@ -148,7 +149,7 @@ class _SearchScreenState extends State<SearchScreen>
                                     onLikeTapped: (item) {},
                                     onCommentTapped: (item) {},
                                     onViewTapped: (item) {},
-                                    onTap: (item) => IClindRouteTo.post(
+                                    onTap: (item) => ICommunityRouteTo.post(
                                       context,
                                       id: item.id,
                                     ),

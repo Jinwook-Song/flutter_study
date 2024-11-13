@@ -5,9 +5,6 @@ import 'package:ui/ui.dart';
 enum ClindRoute {
   root,
   unknown,
-  community,
-  post,
-  write,
   notification,
   my,
   search;
@@ -24,9 +21,7 @@ extension ClindRouteX on ClindRoute {
   String get path {
     const String root = '/';
     if (this == ClindRoute.root) return root;
-    if (this == ClindRoute.post || this == ClindRoute.write) {
-      return '${ClindRoute.community.path}/$name';
-    }
+
     return '$root$name';
   }
 }
@@ -46,17 +41,9 @@ abstract class IClindRoutes {
 
   static Widget findScreen(Uri uri) {
     final ClindRoute route = ClindRoute.decode(uri.path);
-    final Map<String, String> queryParameters = {...uri.queryParameters};
     switch (route) {
       case ClindRoute.root:
         return const HomeBlocProvider(child: HomeScreen());
-      case ClindRoute.community:
-        return const CommunityBlocProvider(child: CommunityScreen());
-      case ClindRoute.post:
-        final String id = queryParameters['id'] ?? '';
-        return PostBlocProvider(child: PostScreen(id: id));
-      case ClindRoute.write:
-        return const WriteBlocProvider(child: WriteScreen());
       case ClindRoute.notification:
         return const NotificationBlocProvider(child: NotificationScreen());
       case ClindRoute.my:
@@ -109,32 +96,6 @@ abstract class IClindRouteTo {
     return push<void>(
       context,
       route: ClindRoute.root,
-    );
-  }
-
-  static Future<void> community(BuildContext context) {
-    return push<void>(
-      context,
-      route: ClindRoute.community,
-    );
-  }
-
-  static Future<void> post(
-    BuildContext context, {
-    required String id,
-  }) {
-    return push<void>(
-      context,
-      route: ClindRoute.post,
-      queryParameters: {'id': id},
-    );
-  }
-
-  static Future<void> write(BuildContext context) {
-    return push<void>(
-      context,
-      route: ClindRoute.write,
-      fullscreenDialog: true,
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:core_util/util.dart';
+import 'package:feature_community/clind.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:presentation/presentation.dart';
@@ -35,10 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 tabCount: ClindNavigationType.values.length,
                 tabBuilder: (context, index) {
                   final Uri url = switch (index) {
-                    0 => Uri(path: ClindRoute.community.path),
+                    0 => Uri(path: CommunityRoute.community.path),
                     1 => Uri(path: ClindRoute.notification.path),
                     2 => Uri(path: ClindRoute.my.path),
-                    _ => Uri(path: ClindRoute.community.path),
+                    _ => Uri(path: ClindRoute.unknown.path),
                   };
                   return IClindRoutes.findScreen(url);
                 },
@@ -57,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
         switch (state.data) {
           case 0:
           case 1:
-            return ClindWriteButton(onTap: () => IClindRouteTo.write(context));
+            return ClindWriteButton(
+                onTap: () => ICommunityRouteTo.write(context));
           default:
             return const SizedBox.shrink();
         }

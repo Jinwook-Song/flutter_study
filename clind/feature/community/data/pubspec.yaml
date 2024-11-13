@@ -1,0 +1,14 @@
+name: community_data
+description: feature community data package
+publish_to: none
+
+environment:
+  sdk: ^3.5.3
+  flutter: '>=1.17.0'
+
+dependencies:
+  community_domain:
+    path: ../domain
+
+  tool_clind_network:
+    path: ../../../tool/clind/network
