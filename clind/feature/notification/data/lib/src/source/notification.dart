@@ -1,4 +1,4 @@
-import 'package:data/data.dart';
+import 'package:notification_data/data.dart';
 
 class NotificationDataSource {
   final INotificationRemoteDataSource _notificationRemoteDataSource;

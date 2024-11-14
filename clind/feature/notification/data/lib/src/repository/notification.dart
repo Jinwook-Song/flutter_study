@@ -1,5 +1,5 @@
-import 'package:data/data.dart';
-import 'package:domain/domain.dart';
+import 'package:notification_data/data.dart';
+import 'package:notification_domain/domain.dart';
 
 class NotificationRepository implements INotificationRepository {
   final NotificationDataSource _notificationDataSource;

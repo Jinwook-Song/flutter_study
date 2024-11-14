@@ -32,3 +32,5 @@ dependencies:
 
   feature_community:
     path: ../../../feature/community/target/clind
+  feature_notification:
+    path: ../../../feature/notification/target/clind

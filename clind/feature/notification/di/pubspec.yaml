@@ -1,0 +1,26 @@
+name: notification_di
+description: feature notification di package
+publish_to: none
+
+environment:
+  sdk: ^3.5.3
+  flutter: '>=1.17.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  notification_data:
+    path: ../data
+  notification_domain:
+    path: ../domain
+  notification_presentation:
+    path: ../presentation
+
+  core_flutter_bloc:
+    path: ../../../core/flutter_bloc
+  core_util:
+    path: ../../../core/util
+
+  tool_clind_network:
+    path: ../../../tool/clind/network

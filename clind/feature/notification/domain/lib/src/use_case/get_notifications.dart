@@ -1,5 +1,5 @@
 import 'package:core_util/util.dart';
-import 'package:domain/domain.dart';
+import 'package:notification_domain/domain.dart';
 
 class GetNotificationsUsecase
     implements IUseCase<List<ClindNotification>, void> {

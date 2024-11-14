@@ -1,5 +1,5 @@
 import 'package:core_bloc/bloc.dart';
-import 'package:domain/domain.dart';
+import 'package:notification_domain/domain.dart';
 
 class NotificationListCubit extends IFlowCubit<List<ClindNotification>> {
   final GetNotificationsUsecase _notificationsUsecase;

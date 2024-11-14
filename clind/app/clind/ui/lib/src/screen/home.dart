@@ -1,6 +1,7 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:core_util/util.dart';
 import 'package:feature_community/clind.dart';
+import 'package:feature_notification/clind.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:presentation/presentation.dart';
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 tabBuilder: (context, index) {
                   final Uri url = switch (index) {
                     0 => Uri(path: CommunityRoute.community.path),
-                    1 => Uri(path: ClindRoute.notification.path),
+                    1 => Uri(path: NotificationRoute.notification.path),
                     2 => Uri(path: ClindRoute.my.path),
                     _ => Uri(path: ClindRoute.unknown.path),
                   };
