@@ -1,4 +1,4 @@
-import 'package:domain/domain.dart';
+import 'package:my_domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';

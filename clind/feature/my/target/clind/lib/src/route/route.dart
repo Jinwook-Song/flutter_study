@@ -1,30 +1,27 @@
-import 'package:di/di.dart';
+import 'package:my_di/di.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/ui.dart';
+import 'package:feature_my/clind.dart';
 
-enum ClindRoute {
-  root,
-  unknown,
-  search;
+enum MyRoute {
+  my,
+  unknown;
 
-  static String encode(ClindRoute route) => route.path;
+  static String encode(MyRoute route) => route.path;
 
-  static ClindRoute decode(String path) => ClindRoute.values.firstWhere(
+  static MyRoute decode(String path) => MyRoute.values.firstWhere(
         (e) => e.path == path,
-        orElse: () => ClindRoute.unknown,
+        orElse: () => MyRoute.unknown,
       );
 }
 
-extension ClindRouteX on ClindRoute {
+extension MyRouteX on MyRoute {
   String get path {
-    const String root = '/';
-    if (this == ClindRoute.root) return root;
-
-    return '$root$name';
+    if (this == MyRoute.my) return '/$name';
+    return '${MyRoute.my.path}/$name';
   }
 }
 
-abstract class IClindRoutes {
+abstract class MyRoutes {
   static Route<dynamic> find(RouteSettings settings) {
     final Uri uri = Uri.tryParse(settings.name ?? '') ?? Uri();
     final Map<String, String> queryParameters = {...uri.queryParameters};
@@ -38,19 +35,17 @@ abstract class IClindRoutes {
   }
 
   static Widget findScreen(Uri uri) {
-    final ClindRoute route = ClindRoute.decode(uri.path);
+    final MyRoute route = MyRoute.decode(uri.path);
     switch (route) {
-      case ClindRoute.root:
-        return const HomeBlocProvider(child: HomeScreen());
-      case ClindRoute.search:
-        return const SearchBlocProvider(child: SearchScreen());
-      case ClindRoute.unknown:
+      case MyRoute.my:
+        return const MyBlocProvider(child: MyScreen());
+      case MyRoute.unknown:
         return const SizedBox();
     }
   }
 }
 
-abstract class IClindRouteTo {
+abstract class MyRouteTo {
   static Future<T?> pushNamed<T extends Object?>(
     BuildContext context, {
     required String path,
@@ -74,7 +69,7 @@ abstract class IClindRouteTo {
 
   static Future<T?> push<T extends Object?>(
     BuildContext context, {
-    required ClindRoute route,
+    required MyRoute route,
     Map<String, String>? queryParameters,
     bool fullscreenDialog = false,
   }) {
@@ -86,17 +81,10 @@ abstract class IClindRouteTo {
     );
   }
 
-  static Future<void> root(BuildContext context) {
+  static Future<void> my(BuildContext context) {
     return push<void>(
       context,
-      route: ClindRoute.root,
-    );
-  }
-
-  static Future<void> search(BuildContext context) {
-    return push<void>(
-      context,
-      route: ClindRoute.search,
+      route: MyRoute.my,
     );
   }
 }

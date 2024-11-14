@@ -227,6 +227,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  feature_my:
+    dependency: transitive
+    description:
+      path: "../../feature/my/target/clind"
+      relative: true
+    source: path
+    version: "0.0.0"
   feature_notification:
     dependency: transitive
     description:
@@ -454,6 +461,34 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+  my_data:
+    dependency: transitive
+    description:
+      path: "../../feature/my/data"
+      relative: true
+    source: path
+    version: "0.0.0"
+  my_di:
+    dependency: transitive
+    description:
+      path: "../../feature/my/di"
+      relative: true
+    source: path
+    version: "0.0.0"
+  my_domain:
+    dependency: transitive
+    description:
+      path: "../../feature/my/domain"
+      relative: true
+    source: path
+    version: "0.0.0"
+  my_presentation:
+    dependency: transitive
+    description:
+      path: "../../feature/my/presentation"
+      relative: true
+    source: path
+    version: "0.0.0"
   nested:
     dependency: transitive
     description:

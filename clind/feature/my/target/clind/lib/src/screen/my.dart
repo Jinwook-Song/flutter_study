@@ -1,10 +1,10 @@
-import 'package:domain/domain.dart';
+import 'package:my_domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation.dart';
+import 'package:my_presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
-import 'package:ui/ui.dart';
+import 'package:feature_my/clind.dart';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 
 class MyScreen extends StatefulWidget {

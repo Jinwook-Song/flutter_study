@@ -1,5 +1,5 @@
 import 'package:core_util/util.dart';
-import 'package:domain/domain.dart';
+import 'package:my_domain/domain.dart';
 
 class GetMy2UseCasae implements IUseCase<User, void> {
   final IMyRepository _myRepository;

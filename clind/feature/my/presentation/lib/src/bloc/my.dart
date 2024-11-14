@@ -1,5 +1,5 @@
 import 'package:core_bloc/bloc.dart';
-import 'package:domain/domain.dart';
+import 'package:my_domain/domain.dart';
 
 class MyCubit extends IFlowCubit<User> {
   final GetMy2UseCasae _getMy2UseCasae;

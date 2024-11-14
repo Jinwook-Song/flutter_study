@@ -1,5 +1,5 @@
-import 'package:data/data.dart';
-import 'package:domain/domain.dart';
+import 'package:my_data/data.dart';
+import 'package:my_domain/domain.dart';
 
 class MyRepository implements IMyRepository {
   final MyDataSource _myDataSource;

@@ -1,4 +1,4 @@
-import 'package:data/data.dart';
+import 'package:my_data/data.dart';
 
 class MyDataSource {
   final IProfileRemoteDataSource _profileRemoteDataSource;
