@@ -21,7 +21,7 @@ extension MyRouteX on MyRoute {
   }
 }
 
-abstract class MyRoutes {
+abstract class IMyRoutes {
   static Route<dynamic> find(RouteSettings settings) {
     final Uri uri = Uri.tryParse(settings.name ?? '') ?? Uri();
     final Map<String, String> queryParameters = {...uri.queryParameters};
@@ -45,7 +45,7 @@ abstract class MyRoutes {
   }
 }
 
-abstract class MyRouteTo {
+abstract class IMyRouteTo {
   static Future<T?> pushNamed<T extends Object?>(
     BuildContext context, {
     required String path,

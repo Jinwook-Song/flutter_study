@@ -23,7 +23,7 @@ extension NotificationRouteX on NotificationRoute {
   }
 }
 
-abstract class NotificationRoutes {
+abstract class INotificationRoutes {
   static Route<dynamic> find(RouteSettings settings) {
     final Uri uri = Uri.tryParse(settings.name ?? '') ?? Uri();
     final Map<String, String> queryParameters = {...uri.queryParameters};
@@ -47,7 +47,7 @@ abstract class NotificationRoutes {
   }
 }
 
-abstract class NotificationRouteTo {
+abstract class INotificationRouteTo {
   static Future<T?> pushNamed<T extends Object?>(
     BuildContext context, {
     required String path,

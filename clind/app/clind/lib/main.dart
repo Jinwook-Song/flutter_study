@@ -1,6 +1,10 @@
 import 'package:core_util/util.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ui/ui.dart';
+import 'package:feature_community/clind.dart';
+import 'package:feature_my/clind.dart';
+import 'package:feature_notification/clind.dart';
+import 'package:feature_search/clind.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -47,7 +51,33 @@ class _ClindAppState extends State<ClindApp> {
           Locale('ko'),
         ],
         initialRoute: ClindRoute.root.path,
-        onGenerateRoute: (settings) => IClindRoutes.find(settings),
+        onGenerateRoute: (settings) {
+          final Uri uri = Uri.tryParse(settings.name ?? '') ?? Uri();
+          final String path = uri.path;
+
+          final CommunityRoute communityRoute = CommunityRoute.decode(path);
+          if (communityRoute != CommunityRoute.unknown) {
+            return ICommunityRoutes.find(settings);
+          }
+
+          final MyRoute myRoute = MyRoute.decode(path);
+          if (myRoute != MyRoute.unknown) {
+            return IMyRoutes.find(settings);
+          }
+
+          final NotificationRoute notificationRoute =
+              NotificationRoute.decode(path);
+          if (notificationRoute != NotificationRoute.unknown) {
+            return INotificationRoutes.find(settings);
+          }
+
+          final SearchRoute searchRoute = SearchRoute.decode(path);
+          if (searchRoute != SearchRoute.unknown) {
+            return ISearchRoutes.find(settings);
+          }
+
+          return IClindRoutes.find(settings);
+        },
       ),
     );
   }

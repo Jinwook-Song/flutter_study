@@ -37,13 +37,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 currentTabIndex: state.data,
                 tabCount: ClindNavigationType.values.length,
                 tabBuilder: (context, index) {
-                  final Uri url = switch (index) {
-                    0 => Uri(path: CommunityRoute.community.path),
-                    1 => Uri(path: NotificationRoute.notification.path),
-                    2 => Uri(path: MyRoute.my.path),
-                    _ => Uri(path: ClindRoute.unknown.path),
+                  final Widget screen = switch (index) {
+                    0 => ICommunityRoutes.findScreen(
+                        Uri(path: CommunityRoute.community.path)),
+                    1 => INotificationRoutes.findScreen(
+                        Uri(path: NotificationRoute.notification.path)),
+                    2 => IMyRoutes.findScreen(
+                        Uri(path: MyRoute.my.path),
+                      ),
+                    _ => IClindRoutes.findScreen(
+                        Uri(path: ClindRoute.unknown.path)),
                   };
-                  return IClindRoutes.findScreen(url);
+                  return screen;
                 },
               )),
       bottomNavigationBar: FlowBlocBuilder<HomeTabCubit, int>.when(

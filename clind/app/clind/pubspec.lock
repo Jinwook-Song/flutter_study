@@ -221,28 +221,28 @@ packages:
     source: hosted
     version: "1.3.2"
   feature_community:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../feature/community/target/clind"
       relative: true
     source: path
     version: "0.0.0"
   feature_my:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../feature/my/target/clind"
       relative: true
     source: path
     version: "0.0.0"
   feature_notification:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../feature/notification/target/clind"
       relative: true
     source: path
     version: "0.0.0"
   feature_search:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../feature/search/target/clind"
       relative: true

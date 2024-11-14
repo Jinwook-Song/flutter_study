@@ -20,6 +20,15 @@ dependencies:
   tool_clind_theme:
     path: ../../tool/clind/theme
 
+  feature_community:
+    path: ../../feature/community/target/clind
+  feature_my:
+    path: ../../feature/my/target/clind
+  feature_notification:
+    path: ../../feature/notification/target/clind
+  feature_search:
+    path: ../../feature/search/target/clind
+
   ui:
     path: ui
 
