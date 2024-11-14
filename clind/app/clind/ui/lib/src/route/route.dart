@@ -4,8 +4,7 @@ import 'package:ui/ui.dart';
 
 enum ClindRoute {
   root,
-  unknown,
-  search;
+  unknown;
 
   static String encode(ClindRoute route) => route.path;
 
@@ -42,8 +41,6 @@ abstract class IClindRoutes {
     switch (route) {
       case ClindRoute.root:
         return const HomeBlocProvider(child: HomeScreen());
-      case ClindRoute.search:
-        return const SearchBlocProvider(child: SearchScreen());
       case ClindRoute.unknown:
         return const SizedBox();
     }
@@ -90,13 +87,6 @@ abstract class IClindRouteTo {
     return push<void>(
       context,
       route: ClindRoute.root,
-    );
-  }
-
-  static Future<void> search(BuildContext context) {
-    return push<void>(
-      context,
-      route: ClindRoute.search,
     );
   }
 }

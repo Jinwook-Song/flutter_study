@@ -1,4 +1,4 @@
-import 'package:domain/domain.dart';
+import 'package:search_domain/domain.dart';
 
 abstract class ISearchRepository {
   Future<List<Channel>> getPopularChannels();

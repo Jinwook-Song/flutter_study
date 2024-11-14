@@ -34,3 +34,6 @@ dependencies:
     path: ../../../../app/clind/presentation
   ui:
     path: ../../../../app/clind/ui
+
+  feature_search:
+    path: ../../../../feature/search/target/clind

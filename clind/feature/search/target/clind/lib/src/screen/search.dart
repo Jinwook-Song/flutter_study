@@ -1,11 +1,11 @@
 import 'package:core_util/util.dart';
-import 'package:domain/domain.dart';
+import 'package:search_domain/domain.dart';
 import 'package:feature_community/clind.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation.dart';
+import 'package:search_presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
-import 'package:ui/ui.dart';
+import 'package:feature_search/clind.dart';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 
 class SearchScreen extends StatefulWidget {

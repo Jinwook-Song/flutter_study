@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:data/data.dart';
-import 'package:domain/domain.dart';
+import 'package:search_data/data.dart';
+import 'package:search_domain/domain.dart';
 
 class SearchRepository implements ISearchRepository {
   final SearchDataSource _searchDataSource;

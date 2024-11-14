@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:core_bloc/bloc.dart';
-import 'package:domain/domain.dart';
+import 'package:search_domain/domain.dart';
 
 class SearchQueryCubit extends IFlowCubit<String> {
   SearchQueryCubit() : super(const DataState(data: ''));
@@ -71,7 +71,7 @@ class SearchRecentChannelListCubit extends IFlowCubit<List<Channel>> {
 }
 
 class SearchPopularChannelListCubit extends IFlowCubit<List<Channel>> {
-  final GetPopularChannels2UseCase _popularChannels2UseCase;
+  final GetPopularChannelsUseCase _popularChannels2UseCase;
 
   SearchPopularChannelListCubit(this._popularChannels2UseCase);
 

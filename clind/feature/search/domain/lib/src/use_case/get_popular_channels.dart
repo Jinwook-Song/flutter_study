@@ -1,10 +1,10 @@
 import 'package:core_util/util.dart';
-import 'package:domain/domain.dart';
+import 'package:search_domain/domain.dart';
 
-class GetPopularChannels2UseCase implements IUseCase<List<Channel>, void> {
+class GetPopularChannelsUseCase implements IUseCase<List<Channel>, void> {
   final ISearchRepository _searchRepository;
 
-  GetPopularChannels2UseCase(this._searchRepository);
+  GetPopularChannelsUseCase(this._searchRepository);
 
   @override
   Future<List<Channel>> execute([void params]) {

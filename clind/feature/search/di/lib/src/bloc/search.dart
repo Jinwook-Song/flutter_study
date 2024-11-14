@@ -1,8 +1,8 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
-import 'package:data/data.dart';
-import 'package:domain/domain.dart';
+import 'package:search_data/data.dart';
+import 'package:search_domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation.dart';
+import 'package:search_presentation/presentation.dart';
 import 'package:tool_clind_network/network.dart';
 
 class SearchBlocProvider extends StatelessWidget {
@@ -36,8 +36,8 @@ class SearchBlocProvider extends StatelessWidget {
                   context.readFlowRepository<ISearchRepository>(),
                 ),
               ),
-              FlowRepositoryProvider<GetPopularChannels2UseCase>(
-                create: (context) => GetPopularChannels2UseCase(
+              FlowRepositoryProvider<GetPopularChannelsUseCase>(
+                create: (context) => GetPopularChannelsUseCase(
                   context.readFlowRepository<ISearchRepository>(),
                 ),
               ),
@@ -67,7 +67,7 @@ class SearchBlocProvider extends StatelessWidget {
                 ),
                 FlowBlocProvider<SearchPopularChannelListCubit>(
                   create: (context) => SearchPopularChannelListCubit(
-                    context.readFlowRepository<GetPopularChannels2UseCase>(),
+                    context.readFlowRepository<GetPopularChannelsUseCase>(),
                   ),
                 ),
                 FlowBlocProvider<SearchPostListCubit>(

@@ -1,4 +1,4 @@
-import 'package:domain/domain.dart';
+import 'package:search_domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:tool_clind_component/component.dart';
 

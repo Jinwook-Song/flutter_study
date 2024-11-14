@@ -1,4 +1,4 @@
-import 'package:data/data.dart';
+import 'package:search_data/data.dart';
 
 class SearchDataSource {
   static const String recentSearchKey = 'recentSearchKey';

@@ -1,5 +1,5 @@
 import 'package:core_util/util.dart';
-import 'package:domain/domain.dart';
+import 'package:search_domain/domain.dart';
 
 class SetRecentSearchChannelsUseCase
     implements IUseCase<bool, SetRecentSearchChannelsParams> {

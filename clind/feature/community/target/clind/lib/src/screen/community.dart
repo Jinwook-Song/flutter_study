@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:core_util/util.dart';
 import 'package:community_domain/domain.dart';
+import 'package:feature_search/clind.dart';
 import 'package:flutter/material.dart';
 import 'package:community_presentation/presentation.dart';
 import 'package:presentation/presentation.dart';
@@ -10,7 +11,6 @@ import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
 
 import 'package:feature_community/clind.dart';
-import 'package:ui/ui.dart';
 
 enum CommunityTabType {
   normal(title: '홈'),
@@ -156,7 +156,7 @@ class _CommunityScreenState extends State<CommunityScreen>
               leadingWidth: 55,
               title: ClindSearchBar(
                   text: '관심있는 글 검색',
-                  onTap: () => IClindRouteTo.search(context)),
+                  onTap: () => ISearchRouteTo.search(context)),
               titleSpacing: 0,
               actions: [
                 Padding(
