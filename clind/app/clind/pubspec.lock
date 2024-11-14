@@ -757,14 +757,14 @@ packages:
     source: hosted
     version: "0.7.3"
   tool_clind_component:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "../../tool/clind/component"
       relative: true
     source: path
     version: "0.0.0"
   tool_clind_network:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "../../tool/clind/network"
       relative: true
