@@ -15,11 +15,6 @@ abstract class IPostRemoteDataSource {
     int? take,
     int? page,
   });
-  Future<dynamic> getSearchPosts({
-    String query = '',
-    int? take,
-    int? page,
-  });
 }
 
 class PostRemoteDataSource extends IPostRemoteDataSource {
@@ -67,19 +62,6 @@ class PostRemoteDataSource extends IPostRemoteDataSource {
   }) {
     return _api.getComments(
       postId: postId,
-      take: take,
-      page: page,
-    );
-  }
-
-  @override
-  Future getSearchPosts({
-    String query = '',
-    int? take,
-    int? page,
-  }) {
-    return _api.getSearchPosts(
-      query: query,
       take: take,
       page: page,
     );
