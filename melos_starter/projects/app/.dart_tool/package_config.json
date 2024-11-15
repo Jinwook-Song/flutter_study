@@ -1,0 +1,83 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "add",
+      "rootUri": "../../../packages/add",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "characters",
+      "rootUri": "file:///Users/jinwooksong/.pub-cache/hosted/pub.dev/characters-1.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "collection",
+      "rootUri": "file:///Users/jinwooksong/.pub-cache/hosted/pub.dev/collection-1.18.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "flutter",
+      "rootUri": "file:///Users/jinwooksong/fvm/versions/3.24.3/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "flutter_lints",
+      "rootUri": "file:///Users/jinwooksong/.pub-cache/hosted/pub.dev/flutter_lints-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "lints",
+      "rootUri": "file:///Users/jinwooksong/.pub-cache/hosted/pub.dev/lints-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "material_color_utilities",
+      "rootUri": "file:///Users/jinwooksong/.pub-cache/hosted/pub.dev/material_color_utilities-0.11.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "meta",
+      "rootUri": "file:///Users/jinwooksong/.pub-cache/hosted/pub.dev/meta-1.15.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "setting",
+      "rootUri": "../../../packages/setting",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "sky_engine",
+      "rootUri": "file:///Users/jinwooksong/fvm/versions/3.24.3/bin/cache/pkg/sky_engine",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "vector_math",
+      "rootUri": "file:///Users/jinwooksong/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "melos_starter",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    }
+  ],
+  "generated": "2024-11-15T00:16:24.949079Z",
+  "generator": "pub",
+  "generatorVersion": "3.5.3",
+  "flutterRoot": "file:///Users/jinwooksong/fvm/versions/3.24.3",
+  "flutterVersion": "3.24.3",
+  "pubCache": "file:///Users/jinwooksong/.pub-cache"
+}
