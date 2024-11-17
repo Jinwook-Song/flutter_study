@@ -1,5 +1,6 @@
 import 'package:add/add.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({super.key});
@@ -20,14 +21,24 @@ class AddScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: null,
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const AddDetailScreen(),
-            ),
-          );
-        },
+        onPressed: () => Modular.to.pushNamed('/add/detail'),
       ),
+    );
+  }
+}
+
+class AddModule extends Module {
+  AddModule();
+
+  @override
+  void routes(RouteManager r) {
+    r.child(
+      '/add',
+      child: (context) => AddScreen(),
+    );
+    r.child(
+      '/add/detail',
+      child: (context) => AddDetailScreen(),
     );
   }
 }

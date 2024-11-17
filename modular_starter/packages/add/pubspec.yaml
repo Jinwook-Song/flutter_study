@@ -13,3 +13,5 @@ dependencies:
 
   setting:
     path: ../setting
+
+  flutter_modular: ^6.3.4

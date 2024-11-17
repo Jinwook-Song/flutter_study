@@ -13,3 +13,5 @@ dependencies:
 
   add:
     path: ../add
+
+  flutter_modular: ^6.3.4

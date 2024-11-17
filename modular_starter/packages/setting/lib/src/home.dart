@@ -1,4 +1,6 @@
+import 'package:add/add.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:setting/setting.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -20,14 +22,24 @@ class SettingScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: null,
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const SettingDetailScreen(),
-            ),
-          );
-        },
+        onPressed: () => Modular.to.pushNamed('/setting/detail'),
       ),
+    );
+  }
+}
+
+class SettingModule extends Module {
+  SettingModule();
+
+  @override
+  void routes(RouteManager r) {
+    r.child(
+      '/setting',
+      child: (context) => SettingScreen(),
+    );
+    r.child(
+      '/setting/detail',
+      child: (context) => SettingDetailScreen(),
     );
   }
 }

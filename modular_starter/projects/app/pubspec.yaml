@@ -20,5 +20,7 @@ dependencies:
   setting:
     path: ../../packages/setting
 
+  flutter_modular: ^6.3.4
+
 flutter:
   uses-material-design: true
