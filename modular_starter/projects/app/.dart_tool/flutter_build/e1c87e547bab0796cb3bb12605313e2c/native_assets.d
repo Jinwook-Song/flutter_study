@@ -1,0 +1,1 @@
+ /Users/jinwooksong/repository/mine/app/flutter_study/melos_starter/projects/app/.dart_tool/flutter_build/e1c87e547bab0796cb3bb12605313e2c/native_assets.yaml: 

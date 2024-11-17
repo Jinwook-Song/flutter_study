@@ -1,0 +1,1 @@
+ /Users/jinwooksong/repository/mine/app/flutter_study/modular_starter/projects/app/.dart_tool/flutter_build/3632ec2f372028c41391dc6fbaa75b3b/native_assets.yaml: 
