@@ -1,7 +1,7 @@
+import 'package:clind/screen/srceen.dart';
 import 'package:core_util/util.dart';
 import 'package:di/di.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/ui.dart';
 
 enum ClindRoute {
   root,

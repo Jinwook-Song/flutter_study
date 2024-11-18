@@ -8,4 +8,4 @@ environment:
 
 dependencies:
   core_util:
-    path: ../../../core/util
+    path: ../../core/util

@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
-import 'package:ui/src/route/route.dart';
-import 'package:ui/src/screen/splash.dart';
+import '../route/route.dart';
+import 'splash.dart';
 import 'package:tool_clind_theme/theme.dart';
 
 class HomeScreen extends StatefulWidget {

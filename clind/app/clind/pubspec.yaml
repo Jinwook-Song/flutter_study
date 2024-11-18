@@ -14,11 +14,20 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  data:
+    path: ../data
+  domain:
+    path: ../domain
+  presentation:
+    path: ../presentation
+
+  di:
+    path: ../di
+
+  core_flutter_bloc:
+    path: ../../core/flutter_bloc
   core_util:
     path: ../../core/util
-
-  tool_clind_theme:
-    path: ../../tool/clind/theme
 
   feature_community:
     path: ../../feature/community/target/clind
@@ -29,8 +38,10 @@ dependencies:
   feature_search:
     path: ../../feature/search/target/clind
 
-  ui:
-    path: ui
+  tool_clind_component:
+    path: ../../tool/clind/component
+  tool_clind_theme:
+    path: ../../tool/clind/theme
 
   flutter_native_splash: ^2.4.2
   icons_launcher: ^3.0.0

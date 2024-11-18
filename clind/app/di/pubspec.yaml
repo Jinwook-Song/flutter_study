@@ -18,4 +18,4 @@ dependencies:
     path: ../presentation
 
   core_flutter_bloc:
-    path: ../../../core/flutter_bloc
+    path: ../../core/flutter_bloc

@@ -11,4 +11,4 @@ dependencies:
     path: ../domain
 
   core_util:
-    path: ../../../core/util
+    path: ../../core/util
