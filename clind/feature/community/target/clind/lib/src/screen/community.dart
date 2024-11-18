@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:core_util/util.dart';
 import 'package:community_domain/domain.dart';
-import 'package:feature_search/clind.dart';
 import 'package:flutter/material.dart';
-import 'package:community_presentation/presentation.dart';
-import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
 
@@ -40,7 +37,7 @@ class _CommunityScreenState extends State<CommunityScreen>
     vsync: this,
   );
 
-  StreamSubscription<int>? _homeNestedTabSubscription;
+  StreamSubscription<CommunityNestedTabEvent>? _homeNestedTabSubscription;
 
   @override
   void initState() {
@@ -60,15 +57,10 @@ class _CommunityScreenState extends State<CommunityScreen>
   }
 
   void _subscribeHomeNestedTab() {
-    _homeNestedTabSubscription = context
-        .readFlowBloc<HomeNestedTabCubit>()
-        .stream
-        .map((e) => e.data ?? 0)
-        .listen(
-      (index) {
-        _onChangedTab(index);
-      },
-    );
+    _homeNestedTabSubscription =
+        Modular.get<EventBus>().on<CommunityNestedTabEvent>().listen(
+              (event) => _onChangedTab(event.index),
+            );
   }
 
   void _unsubscribeHomeNestedTab() {
@@ -155,7 +147,12 @@ class _CommunityScreenState extends State<CommunityScreen>
               ),
               leadingWidth: 55,
               title: ClindSearchBar(
-                  text: '관심있는 글 검색', onTap: () => ISearchRouteTo.search()),
+                  text: '관심있는 글 검색',
+                  onTap: () {
+                    Modular.get<EventBus>().fire(
+                      RouteEvent('/search'),
+                    );
+                  }),
               titleSpacing: 0,
               actions: [
                 Padding(

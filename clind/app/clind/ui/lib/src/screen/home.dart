@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:core_util/util.dart';
 import 'package:feature_community/clind.dart';
@@ -19,13 +21,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  StreamSubscription<HomeTabEvent>? _homeTabEventSubscription;
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => SplashScreen.show(context),
+      (_) {
+        SplashScreen.show(context);
+        _subscribeHomeTabEvent();
+      },
     );
+  }
+
+  @override
+  void dispose() {
+    _unsubscribeHomeTabEvent();
+    super.dispose();
+  }
+
+  void _subscribeHomeTabEvent() {
+    _homeTabEventSubscription =
+        Modular.get<EventBus>().on<HomeTabEvent>().listen((event) {
+      if (mounted) context.readFlowBloc<HomeTabCubit>().change(event.index);
+    });
+  }
+
+  void _unsubscribeHomeTabEvent() {
+    _homeTabEventSubscription?.cancel();
+    _homeTabEventSubscription = null;
   }
 
   @override

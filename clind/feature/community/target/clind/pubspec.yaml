@@ -29,9 +29,3 @@ dependencies:
     path: ../../../../tool/clind/component
   tool_clind_theme:
     path: ../../../../tool/clind/theme
-
-  presentation:
-    path: ../../../../app/clind/presentation
-
-  feature_search:
-    path: ../../../../feature/search/target/clind

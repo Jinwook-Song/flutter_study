@@ -1,10 +1,8 @@
 import 'package:core_util/util.dart';
 import 'package:feature_notification/clind.dart';
 import 'package:notification_domain/domain.dart';
-import 'package:feature_community/clind.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_presentation/presentation.dart';
-import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
@@ -29,36 +27,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
     await context.readFlowBloc<NotificationListCubit>().load();
   }
 
-  Future<void> _landing(String route) async {
-    final Uri uri = Uri.tryParse(route) ?? Uri();
-
-    int? tabIndex;
-
-    if (uri.path == CommunityRoute.community.path) {
-      tabIndex = 0;
-    } else if (uri.path == NotificationRoute.notification.path) {
-      tabIndex = 1;
-    }
-
-    if (tabIndex != null) {
-      context.readFlowBloc<HomeTabCubit>().change(tabIndex);
-
-      if (tabIndex == 0) {
-        final int nestedTabIndex = switch (uri.queryParameters['type'] ?? '') {
-          'popular' => 1,
-          _ => 0,
-        };
-        context.readFlowBloc<HomeNestedTabCubit>().change(nestedTabIndex);
-      }
-      return;
-    }
-
-    Modular.to.pushNamed(
-      uri.path,
-      arguments: {
-        ...uri.queryParameters,
-      },
-    );
+  void _landing(String route) {
+    Modular.get<EventBus>().fire(RouteEvent(route));
   }
 
   @override

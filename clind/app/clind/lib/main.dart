@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_util/util.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ui/ui.dart';
@@ -40,7 +42,10 @@ class AppModule extends Module {
       ];
 
   @override
-  void binds(Injector i) => imports.map((import) => import.binds(i)).toList();
+  void binds(Injector i) {
+    i.addSingleton(() => EventBus());
+    imports.map((import) => import.binds(i)).toList();
+  }
 
   @override
   void exportedBinds(Injector i) =>
@@ -80,7 +85,84 @@ class _ClindAppState extends State<ClindApp> {
           Locale('ko'),
         ],
         routerConfig: Modular.routerConfig,
+        builder: (context, child) => ClindUriHandlerWidget(child: child!),
       ),
     );
+  }
+}
+
+class ClindUriHandlerWidget extends StatefulWidget {
+  final Widget child;
+  const ClindUriHandlerWidget({super.key, required this.child});
+
+  @override
+  State<ClindUriHandlerWidget> createState() => _ClindUriHandlerWidgetState();
+}
+
+class _ClindUriHandlerWidgetState extends State<ClindUriHandlerWidget> {
+  StreamSubscription<RouteEvent>? _routeSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _subscribeRouteEvent(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _unsubscribeRouteEvent();
+    super.dispose();
+  }
+
+  void _subscribeRouteEvent() {
+    _routeSubscription =
+        Modular.get<EventBus>().on<RouteEvent>().listen((event) {
+      _open(event.route);
+    });
+  }
+
+  void _unsubscribeRouteEvent() {
+    _routeSubscription?.cancel();
+    _routeSubscription = null;
+  }
+
+  Future<void> _open(String route) async {
+    final Uri uri = Uri.tryParse(route) ?? Uri();
+
+    int? tabIndex;
+
+    if (uri.path == CommunityRoute.community.path) {
+      tabIndex = 0;
+    } else if (uri.path == NotificationRoute.notification.path) {
+      tabIndex = 1;
+    }
+
+    if (tabIndex != null) {
+      Modular.get<EventBus>().fire(HomeTabEvent(tabIndex));
+
+      if (tabIndex == 0) {
+        final int nestedTabIndex = switch (uri.queryParameters['type'] ?? '') {
+          'popular' => 1,
+          _ => 0,
+        };
+
+        Modular.get<EventBus>().fire(CommunityNestedTabEvent(nestedTabIndex));
+      }
+      return;
+    }
+
+    Modular.to.pushNamed(
+      uri.path,
+      arguments: {
+        ...uri.queryParameters,
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }

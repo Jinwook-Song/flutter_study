@@ -2,7 +2,6 @@ import 'package:core_util/util.dart';
 import 'package:community_domain/domain.dart';
 import 'package:feature_community/clind.dart';
 import 'package:flutter/material.dart';
-import 'package:community_presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/gen/gen.dart';
 import 'package:tool_clind_theme/theme.dart';
