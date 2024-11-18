@@ -1,4 +1,5 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
+import 'package:core_util/util.dart';
 import 'package:notification_data/data.dart';
 import 'package:notification_domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,8 @@ class NotificationBlocProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlowRepositoryProvider<INotificationRemoteDataSource>(
-      create: (context) =>
-          NotificationRemoteDataSource(NotificationApi(ClindRestClient())),
+      create: (context) => NotificationRemoteDataSource(
+          NotificationApi(Modular.get<ClindRestClient>())),
       child: FlowRepositoryProvider<NotificationDataSource>(
         create: (context) => NotificationDataSource(
           context.readFlowRepository<INotificationRemoteDataSource>(),

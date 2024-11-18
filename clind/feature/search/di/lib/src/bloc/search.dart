@@ -1,4 +1,5 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
+import 'package:core_util/util.dart';
 import 'package:search_data/data.dart';
 import 'package:search_domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class SearchBlocProvider extends StatelessWidget {
           create: (context) => const PreferenceLocalDataSource(),
         ),
         FlowRepositoryProvider<IPostRemoteDataSource>(
-          create: (context) => PostRemoteDataSource(PostApi(ClindRestClient())),
+          create: (context) =>
+              PostRemoteDataSource(PostApi(Modular.get<ClindRestClient>())),
         )
       ],
       child: FlowRepositoryProvider<SearchDataSource>(

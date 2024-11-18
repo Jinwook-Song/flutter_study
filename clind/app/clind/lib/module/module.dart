@@ -4,9 +4,12 @@ import 'package:feature_community/clind.dart';
 import 'package:feature_my/clind.dart';
 import 'package:feature_notification/clind.dart';
 import 'package:feature_search/clind.dart';
+import 'package:tool_clind_network/network.dart';
 
 class AppModule extends Module {
-  AppModule();
+  final String baseUrl;
+
+  AppModule({required this.baseUrl});
 
   @override
   List<Module> get imports => [
@@ -20,6 +23,8 @@ class AppModule extends Module {
   @override
   void binds(Injector i) {
     i.addSingleton(() => EventBus());
+    i.addSingleton(() => ClindRestClient()..update(baseUrl: baseUrl));
+
     imports.map((import) => import.binds(i)).toList();
   }
 

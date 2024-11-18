@@ -40,6 +40,8 @@ dependencies:
 
   tool_clind_component:
     path: ../../tool/clind/component
+  tool_clind_network:
+    path: ../../tool/clind/network
   tool_clind_theme:
     path: ../../tool/clind/theme
 

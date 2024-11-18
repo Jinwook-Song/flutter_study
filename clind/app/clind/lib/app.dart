@@ -17,7 +17,9 @@ Future<void> run() async {
 
   runApp(
     ModularApp(
-      module: AppModule(),
+      module: AppModule(
+        baseUrl: 'http://127.0.0.1:8181',
+      ),
       child: const ClindApp(),
     ),
   );

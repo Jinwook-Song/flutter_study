@@ -1,4 +1,5 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
+import 'package:core_util/util.dart';
 import 'package:my_data/data.dart';
 import 'package:my_domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class MyBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlowRepositoryProvider<IProfileRemoteDataSource>(
       create: (context) =>
-          ProfileRemoteDataSource(ProfileApi(ClindRestClient())),
+          ProfileRemoteDataSource(ProfileApi(Modular.get<ClindRestClient>())),
       child: FlowRepositoryProvider<MyDataSource>(
         create: (context) => MyDataSource(
           context.readFlowRepository<IProfileRemoteDataSource>(),

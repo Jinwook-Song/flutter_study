@@ -1,6 +1,7 @@
 import 'package:core_flutter_bloc/flutter_bloc.dart';
 import 'package:community_data/data.dart';
 import 'package:community_domain/domain.dart';
+import 'package:core_util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:community_presentation/presentation.dart';
 import 'package:tool_clind_network/network.dart';
@@ -12,7 +13,8 @@ class CommunityBlocProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlowRepositoryProvider<IPostRemoteDataSource>(
-      create: (context) => PostRemoteDataSource(PostApi(ClindRestClient())),
+      create: (context) =>
+          PostRemoteDataSource(PostApi(Modular.get<ClindRestClient>())),
       child: FlowRepositoryProvider<CommunityDataSource>(
         create: (context) => CommunityDataSource(
           context.readFlowRepository<IPostRemoteDataSource>(),

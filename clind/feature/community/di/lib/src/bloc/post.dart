@@ -4,6 +4,7 @@ import 'package:community_domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:community_presentation/presentation.dart';
 import 'package:tool_clind_network/network.dart';
+import 'package:core_util/util.dart';
 
 class PostBlocProvider extends StatelessWidget {
   final Widget child;
@@ -12,7 +13,8 @@ class PostBlocProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlowRepositoryProvider<IPostRemoteDataSource>(
-      create: (context) => PostRemoteDataSource(PostApi(ClindRestClient())),
+      create: (context) =>
+          PostRemoteDataSource(PostApi(Modular.get<ClindRestClient>())),
       child: FlowRepositoryProvider<PostDataSource>(
         create: (context) => PostDataSource(
           context.readFlowRepository<IPostRemoteDataSource>(),
