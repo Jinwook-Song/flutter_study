@@ -155,8 +155,7 @@ class _CommunityScreenState extends State<CommunityScreen>
               ),
               leadingWidth: 55,
               title: ClindSearchBar(
-                  text: '관심있는 글 검색',
-                  onTap: () => ISearchRouteTo.search(context)),
+                  text: '관심있는 글 검색', onTap: () => ISearchRouteTo.search()),
               titleSpacing: 0,
               actions: [
                 Padding(
@@ -292,7 +291,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                                 onCommentTapped: (item) {},
                                 onViewTapped: (item) {},
                                 onTap: (item) {
-                                  ICommunityRouteTo.post(context, id: item.id);
+                                  ICommunityRouteTo.post(id: item.id);
                                 },
                                 isLoadMore: state is LoadMoreState,
                               );
@@ -313,7 +312,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                                 onCommentTapped: (item) {},
                                 onViewTapped: (item) {},
                                 onTap: (item) {
-                                  ICommunityRouteTo.post(context, id: item.id);
+                                  ICommunityRouteTo.post(id: item.id);
                                 },
                                 isLoadMore: state is LoadMoreState,
                               );

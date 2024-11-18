@@ -19,7 +19,36 @@ Future<void> main() async {
   await ICoreFirebaseRemoteConfig.fetchAndActivate();
   ICoreFirebaseRemoteConfig.getString('');
 
-  runApp(const ClindApp());
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: const ClindApp(),
+    ),
+  );
+}
+
+class AppModule extends Module {
+  AppModule();
+
+  @override
+  List<Module> get imports => [
+        ClindModule(),
+        CommunityModule(),
+        MyModule(),
+        NotificationModule(),
+        SearchModule(),
+      ];
+
+  @override
+  void binds(Injector i) => imports.map((import) => import.binds(i)).toList();
+
+  @override
+  void exportedBinds(Injector i) =>
+      imports.map((import) => import.exportedBinds(i)).toList();
+
+  @override
+  void routes(RouteManager r) =>
+      imports.map((import) => import.routes(r)).toList();
 }
 
 class ClindApp extends StatefulWidget {
@@ -42,7 +71,7 @@ class _ClindAppState extends State<ClindApp> {
   Widget build(BuildContext context) {
     return ClindTheme(
       themeData: ClindThemeData.dark(),
-      child: MaterialApp(
+      child: MaterialApp.router(
         themeMode: ThemeMode.dark,
         localizationsDelegates: const [
           ...GlobalMaterialLocalizations.delegates,
@@ -50,34 +79,7 @@ class _ClindAppState extends State<ClindApp> {
         supportedLocales: const [
           Locale('ko'),
         ],
-        initialRoute: ClindRoute.root.path,
-        onGenerateRoute: (settings) {
-          final Uri uri = Uri.tryParse(settings.name ?? '') ?? Uri();
-          final String path = uri.path;
-
-          final CommunityRoute communityRoute = CommunityRoute.decode(path);
-          if (communityRoute != CommunityRoute.unknown) {
-            return ICommunityRoutes.find(settings);
-          }
-
-          final MyRoute myRoute = MyRoute.decode(path);
-          if (myRoute != MyRoute.unknown) {
-            return IMyRoutes.find(settings);
-          }
-
-          final NotificationRoute notificationRoute =
-              NotificationRoute.decode(path);
-          if (notificationRoute != NotificationRoute.unknown) {
-            return INotificationRoutes.find(settings);
-          }
-
-          final SearchRoute searchRoute = SearchRoute.decode(path);
-          if (searchRoute != SearchRoute.unknown) {
-            return ISearchRoutes.find(settings);
-          }
-
-          return IClindRoutes.find(settings);
-        },
+        routerConfig: Modular.routerConfig,
       ),
     );
   }

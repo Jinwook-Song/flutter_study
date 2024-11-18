@@ -8,7 +8,6 @@ import 'package:presentation/presentation.dart';
 import 'package:tool_clind_component/component.dart';
 import 'package:tool_clind_theme/theme.dart';
 import 'package:core_flutter_bloc/flutter_bloc.dart';
-import 'package:ui/ui.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -54,9 +53,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
       return;
     }
 
-    final Route<dynamic> findRoute =
-        IClindRoutes.find(RouteSettings(name: route));
-    Navigator.of(context).push(findRoute);
+    Modular.to.pushNamed(
+      uri.path,
+      arguments: {
+        ...uri.queryParameters,
+      },
+    );
   }
 
   @override

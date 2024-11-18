@@ -77,7 +77,7 @@ class _WriteScreenState extends State<WriteScreen> {
                     title: "'${post.channel}'에 글을 등록하시겠습니까?",
                     onConfirm: () async {
                       goToPostRef(String id) async {
-                        await ICommunityRouteTo.post(context, id: id);
+                        await ICommunityRouteTo.post(id: id);
                       }
 
                       final WritePostCubit cubit =

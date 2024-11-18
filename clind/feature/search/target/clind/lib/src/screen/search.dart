@@ -150,7 +150,6 @@ class _SearchScreenState extends State<SearchScreen>
                                     onCommentTapped: (item) {},
                                     onViewTapped: (item) {},
                                     onTap: (item) => ICommunityRouteTo.post(
-                                      context,
                                       id: item.id,
                                     ),
                                     isLoadMore: state is LoadMoreState,

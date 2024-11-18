@@ -1,3 +1,4 @@
+import 'package:core_util/util.dart';
 import 'package:feature_notification/clind.dart';
 import 'package:notification_di/di.dart';
 import 'package:flutter/material.dart';
@@ -19,21 +20,27 @@ extension NotificationRouteX on NotificationRoute {
   String get path {
     if (this == NotificationRoute.notification) return '/$name';
 
-    return '${NotificationRoute.notification}/$name';
+    return '${NotificationRoute.notification.path}/$name';
   }
 }
 
 abstract class INotificationRoutes {
-  static Route<dynamic> find(RouteSettings settings) {
-    final Uri uri = Uri.tryParse(settings.name ?? '') ?? Uri();
-    final Map<String, String> queryParameters = {...uri.queryParameters};
-    final bool fullscreenDialog =
-        bool.tryParse(queryParameters['fullscreenDialog'] ?? '') ?? false;
-    return MaterialPageRoute(
-      builder: (context) => findScreen(uri),
-      settings: settings,
-      fullscreenDialog: fullscreenDialog,
+  static List<ModularRoute> routes =
+      NotificationRoute.values.map(_find).toList();
+
+  static ModularRoute _find(NotificationRoute route) {
+    return ChildRoute(
+      route.path,
+      child: (context) => findScreen(Uri.parse(route.path)),
+      transition: _findTransitionType(route),
     );
+  }
+
+  static TransitionType? _findTransitionType(NotificationRoute route) {
+    switch (route) {
+      default:
+        return null;
+    }
   }
 
   static Widget findScreen(Uri uri) {
@@ -48,44 +55,18 @@ abstract class INotificationRoutes {
 }
 
 abstract class INotificationRouteTo {
-  static Future<T?> pushNamed<T extends Object?>(
-    BuildContext context, {
-    required String path,
-    Map<String, String>? queryParameters,
-    bool fullscreenDialog = false,
-  }) async {
-    final Map<String, String> params = {
-      if (queryParameters != null) ...queryParameters,
-      'fullscreenDialog': fullscreenDialog.toString(),
-    };
-
-    final Uri uri = Uri(
-      path: path,
-      queryParameters: params,
-    );
-
-    final Object? result =
-        await Navigator.of(context).pushNamed<Object?>(uri.toString());
-    return result as T?;
-  }
-
-  static Future<T?> push<T extends Object?>(
-    BuildContext context, {
+  static Future<T?> push<T extends Object?>({
     required NotificationRoute route,
     Map<String, String>? queryParameters,
-    bool fullscreenDialog = false,
   }) {
-    return pushNamed<T>(
-      context,
-      path: route.path,
-      queryParameters: queryParameters,
-      fullscreenDialog: fullscreenDialog,
+    return Modular.to.pushNamed<T>(
+      route.path,
+      arguments: queryParameters,
     );
   }
 
-  static Future<void> notification(BuildContext context) {
+  static Future<void> notification() {
     return push<void>(
-      context,
       route: NotificationRoute.notification,
     );
   }

@@ -65,8 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
         switch (state.data) {
           case 0:
           case 1:
-            return ClindWriteButton(
-                onTap: () => ICommunityRouteTo.write(context));
+            return ClindWriteButton(onTap: () => ICommunityRouteTo.write());
           default:
             return const SizedBox.shrink();
         }
