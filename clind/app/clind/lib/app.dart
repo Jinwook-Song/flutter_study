@@ -6,7 +6,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:tool_clind_theme/theme.dart';
 
-Future<void> run() async {
+enum Phase {
+  qa('http://127.0.0.1:8080', true),
+  real('http://127.0.0.1:8181', false);
+
+  final String baseUrl;
+  final bool debugShowCheckedModeBanner;
+
+  const Phase(this.baseUrl, this.debugShowCheckedModeBanner);
+}
+
+Future<void> run(Phase phase) async {
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -18,15 +28,18 @@ Future<void> run() async {
   runApp(
     ModularApp(
       module: AppModule(
-        baseUrl: 'http://127.0.0.1:8181',
+        baseUrl: phase.baseUrl,
       ),
-      child: const ClindApp(),
+      child: ClindApp(
+        debugShowCheckedModeBanner: phase.debugShowCheckedModeBanner,
+      ),
     ),
   );
 }
 
 class ClindApp extends StatefulWidget {
-  const ClindApp({super.key});
+  final bool debugShowCheckedModeBanner;
+  const ClindApp({super.key, this.debugShowCheckedModeBanner = false});
 
   @override
   State<ClindApp> createState() => _ClindAppState();
@@ -46,6 +59,7 @@ class _ClindAppState extends State<ClindApp> {
     return ClindTheme(
       themeData: ClindThemeData.dark(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
         themeMode: ThemeMode.dark,
         localizationsDelegates: const [
           ...GlobalMaterialLocalizations.delegates,
