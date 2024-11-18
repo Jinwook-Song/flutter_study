@@ -1,0 +1,1 @@
+ /Users/jinwooksong/repository/mine/app/flutter_study/event_bus_starter/projects/app/.dart_tool/flutter_build/130a7afe2e05e120b640c4e78ccdf03f/native_assets.yaml: 

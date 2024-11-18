@@ -1,0 +1,15 @@
+name: setting
+description: 'A new Flutter package project.'
+version: 0.0.1
+publish_to: 'none'
+
+environment:
+  sdk: 3.5.3
+  flutter: 3.24.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_modular: ^6.3.4
+  event_bus: ^2.0.1
