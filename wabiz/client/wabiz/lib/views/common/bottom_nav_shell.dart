@@ -1,62 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wabiz/core/core.dart';
 
-class BottomNavShell extends StatefulWidget {
-  final Widget child;
+class BottomNavShell extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
 
-  const BottomNavShell({super.key, required this.child});
-
-  @override
-  State<BottomNavShell> createState() => _BottomNavShellState();
-}
-
-class _BottomNavShellState extends State<BottomNavShell> {
-  int _currentIndex = 0;
-
-  final List<String> _routes = [
-    '/',
-    '/search',
-    '/profile',
-    '/settings',
-  ];
-
-  void _onTap(int index) {
-    if (index != _currentIndex) {
-      setState(() {
-        _currentIndex = index;
-      });
-      // 해당 인덱스에 맞는 경로로 이동
-      context.go(_routes[index]);
-    }
-  }
+  const BottomNavShell({super.key, required this.navigationShell});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTap,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '홈',
+    const double bottomNavBarHeight = kBottomNavigationBarHeight;
+
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: bottomNavBarHeight),
+          child: navigationShell,
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: BottomNavigationBar(
+            currentIndex: navigationShell.currentIndex,
+            onTap: navigationShell.goBranch,
+            items: Routes.values.map((route) {
+              int index = route.index;
+              bool isActive = index == navigationShell.currentIndex;
+              return BottomNavigationBarItem(
+                icon: Icon(isActive ? route.activeIcon : route.icon),
+                label: route.label,
+              );
+            }).toList(),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: '프로젝트',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: '구독 ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '마이페이지',
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
