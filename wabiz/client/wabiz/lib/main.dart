@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wabiz/core/core.dart';
-import 'package:wabiz/views/views.dart';
 
 void main() {
   runApp(const WabizApp());
@@ -11,10 +10,10 @@ class WabizApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'wabiz',
+      routerConfig: goRouter,
       theme: wabizDefaultTheme,
-      home: const HomeScreen(),
     );
   }
 }
