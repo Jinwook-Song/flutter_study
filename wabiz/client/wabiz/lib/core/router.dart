@@ -15,22 +15,23 @@ final goRouter = GoRouter(
   initialLocation: Routes.home.path,
   routes: [
     StatefulShellRoute.indexedStack(
-        builder: (context, state, shell) {
-          return BottomNavShell(navigationShell: shell);
-        },
-        branches: List.generate(Routes.values.length, (index) {
-          final route = Routes.values[index];
-          return StatefulShellBranch(
-            navigatorKey: _branchNavigatorKeys[index],
-            preload: route.preload,
-            routes: [
-              GoRoute(
-                path: route.path,
-                builder: (context, state) => route.screen,
-              ),
-            ],
-          );
-        })),
+      builder: (context, state, shell) {
+        return BottomNavShell(navigationShell: shell);
+      },
+      branches: List.generate(Routes.values.length, (index) {
+        final route = Routes.values[index];
+        return StatefulShellBranch(
+          navigatorKey: _branchNavigatorKeys[index],
+          preload: route.preload,
+          routes: [
+            GoRoute(
+              path: route.path,
+              builder: (context, state) => route.screen,
+            ),
+          ],
+        );
+      }),
+    ),
   ],
 );
 
