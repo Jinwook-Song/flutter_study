@@ -3,7 +3,7 @@ import 'package:wabiz/core/core.dart';
 
 final ThemeData wabizDefaultTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
-  fontFamily: "Pretendard",
+  fontFamily: 'Pretendard',
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: AppColors.white,
     type: BottomNavigationBarType.fixed,

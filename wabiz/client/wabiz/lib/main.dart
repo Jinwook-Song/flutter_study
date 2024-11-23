@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:wabiz/core/core.dart';
 
 void main() {
-  runApp(const WabizApp());
+  runApp(
+    ProviderScope(
+      child: const WabizApp(),
+    ),
+  );
 }
 
 class WabizApp extends StatelessWidget {

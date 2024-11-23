@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wabiz/core/core.dart';
+import 'package:wabiz/models/models.dart';
+import 'package:wabiz/view_models/home/home.dart';
 
 class HomeCardList extends StatelessWidget {
   const HomeCardList({super.key});
@@ -7,15 +9,30 @@ class HomeCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.separated(
-        itemCount: 10,
-        separatorBuilder: (context, index) => const Divider(
-          height: 20,
-          color: Colors.transparent,
-        ),
-        itemBuilder: (context, index) {
-          if (index == 0) return const SizedBox.shrink();
-          return const HomeCard();
+      child: Consumer(
+        builder: (context, ref, child) {
+          return ref.watch(fetchHomeProjectProvider).when(
+                loading: () => Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (error, stackTrace) => Center(
+                  child: Text(error.toString()),
+                ),
+                data: (data) {
+                  return ListView.separated(
+                    itemCount: data.projects.length + 1,
+                    separatorBuilder: (context, index) => const Divider(
+                      height: 20,
+                      color: Colors.transparent,
+                    ),
+                    itemBuilder: (context, index) {
+                      if (index == 0) return const SizedBox.shrink();
+                      final homeItem = data.projects[index - 1];
+                      return HomeCard(homeItem);
+                    },
+                  );
+                },
+              );
         },
       ),
     );
@@ -23,9 +40,9 @@ class HomeCardList extends StatelessWidget {
 }
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({
-    super.key,
-  });
+  final HomeItemModel homeItem;
+
+  const HomeCard(this.homeItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +66,15 @@ class HomeCard extends StatelessWidget {
           children: [
             Container(
               height: 220,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: AppColors.wabizGray,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
+                ),
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(homeItem.thumbnail ?? ''),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -62,8 +83,10 @@ class HomeCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '123122명이 기다려요',
+                  Text(
+                    homeItem.isOpen == 'open'
+                        ? '${homeItem.totalFundedCount!.formatNumber()}명이 인증했어요'
+                        : '${homeItem.waitlistCount!.formatNumber()}명이 기다려요',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -71,10 +94,10 @@ class HomeCard extends StatelessWidget {
                     ),
                   ),
                   const Gap(8),
-                  const Text('아이돌 관리비법 '),
+                  Text(homeItem.title ?? ''),
                   const Gap(16),
                   Text(
-                    '세상에 없던 브랜드',
+                    homeItem.owner ?? '',
                     style: TextStyle(
                       color: AppColors.wabizGray.shade500,
                     ),
@@ -87,8 +110,8 @@ class HomeCard extends StatelessWidget {
                       color: AppColors.bg,
                       borderRadius: BorderRadius.circular(3),
                     ),
-                    child: const Text(
-                      '오픈예정',
+                    child: Text(
+                      homeItem.isOpen == 'open' ? '바로구매' : '오픈예정',
                       style: TextStyle(fontSize: 10),
                     ),
                   ),
