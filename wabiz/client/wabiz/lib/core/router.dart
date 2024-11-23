@@ -5,7 +5,9 @@ import 'package:wabiz/views/views.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final List<GlobalKey<NavigatorState>> _branchNavigatorKeys = List.generate(
   Routes.values.length,
-  (index) => GlobalKey<NavigatorState>(),
+  (index) => GlobalKey<NavigatorState>(
+    debugLabel: Routes.values[index].name,
+  ),
 );
 
 final goRouter = GoRouter(
@@ -44,8 +46,8 @@ enum Routes {
   project(
     path: '/project',
     label: '프로젝트',
-    icon: Icons.work_outline,
-    activeIcon: Icons.work,
+    icon: Icons.add,
+    activeIcon: Icons.add,
     screen: ProjectScreen(),
   ),
   favorite(

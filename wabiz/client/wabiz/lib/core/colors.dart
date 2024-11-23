@@ -7,7 +7,8 @@ class AppColors extends Color {
   static const Color primary = Color(0xFF03C3C4);
   static const Color secondary = Color(0xFFE2F9F9);
 
-  static const Color white = Colors.white;
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
 
   static const Color bg = Color(0xFFF2F2F7);
   static const Color newBg = Color(0xFFF2F4F6);

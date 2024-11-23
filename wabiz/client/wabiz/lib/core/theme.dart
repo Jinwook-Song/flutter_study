@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:wabiz/core/core.dart';
 
 final ThemeData wabizDefaultTheme = ThemeData(
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
   fontFamily: "Pretendard",
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: Colors.black,
-    unselectedItemColor: Colors.grey,
+    selectedItemColor: AppColors.black,
+    unselectedItemColor: AppColors.wabizGray,
   ),
   primaryColor: AppColors.primary,
   appBarTheme: const AppBarTheme(
-    backgroundColor: Colors.white,
-    foregroundColor: Colors.black,
-    surfaceTintColor: Colors.white,
+    backgroundColor: AppColors.white,
+    foregroundColor: AppColors.black,
+    surfaceTintColor: AppColors.white,
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
@@ -24,7 +24,7 @@ final ThemeData wabizDefaultTheme = ThemeData(
       side: BorderSide(
         color: AppColors.wabizGray.shade200,
       ),
-      foregroundColor: Colors.black,
+      foregroundColor: AppColors.black,
       textStyle: const TextStyle(
         fontSize: 16,
       ),
@@ -58,7 +58,7 @@ final ThemeData wabizDefaultTheme = ThemeData(
     ),
     hintStyle: TextStyle(
       fontSize: 16,
-      color: AppColors.wabizGray[400],
+      color: AppColors.wabizGray.shade400,
       fontWeight: FontWeight.w500,
     ),
   ),

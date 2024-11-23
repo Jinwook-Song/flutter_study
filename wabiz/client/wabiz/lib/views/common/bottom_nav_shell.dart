@@ -21,17 +21,24 @@ class BottomNavShell extends StatelessWidget {
           left: 0,
           right: 0,
           bottom: 0,
-          child: BottomNavigationBar(
-            currentIndex: navigationShell.currentIndex,
-            onTap: navigationShell.goBranch,
-            items: Routes.values.map((route) {
-              int index = route.index;
-              bool isActive = index == navigationShell.currentIndex;
-              return BottomNavigationBarItem(
-                icon: Icon(isActive ? route.activeIcon : route.icon),
-                label: route.label,
-              );
-            }).toList(),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
+            child: BottomNavigationBar(
+              currentIndex: navigationShell.currentIndex,
+              type: BottomNavigationBarType.fixed,
+              onTap: navigationShell.goBranch,
+              items: Routes.values.map((route) {
+                int index = route.index;
+                bool isActive = index == navigationShell.currentIndex;
+                return BottomNavigationBarItem(
+                  icon: Icon(isActive ? route.activeIcon : route.icon),
+                  label: route.label,
+                );
+              }).toList(),
+            ),
           ),
         ),
       ],
