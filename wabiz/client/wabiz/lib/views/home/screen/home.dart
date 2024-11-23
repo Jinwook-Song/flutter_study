@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:wabiz/core/colors.dart';
 import 'package:wabiz/views/home/widget/category_list.dart';
 import 'package:wabiz/views/home/widget/home_card_list.dart';
+import 'package:wabiz/views/home/widget/home_search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
               height: 324,
               child: Column(
                 children: [
-                  const SearchBar(),
+                  const HomeSearchBar(),
                   const CategoryList(),
                   Container(
                     width: 48,
