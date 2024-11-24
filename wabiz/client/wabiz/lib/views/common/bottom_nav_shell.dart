@@ -29,7 +29,7 @@ class BottomNavShell extends StatelessWidget {
               currentIndex: navigationShell.currentIndex,
               type: BottomNavigationBarType.fixed,
               onTap: navigationShell.goBranch,
-              items: Routes.values.map((route) {
+              items: RootRoutes.values.map((route) {
                 int index = route.index;
                 bool isActive = index == navigationShell.currentIndex;
                 return BottomNavigationBarItem(

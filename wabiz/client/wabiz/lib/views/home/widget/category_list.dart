@@ -32,6 +32,12 @@ class CategoryList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final ProjectCategory category = data[index];
                       return InkWell(
+                        onTap: () => context.pushNamed(
+                          AppRoutes.category.name,
+                          pathParameters: {
+                            'id': category.id!.toString(),
+                          },
+                        ),
                         child: Column(
                           children: [
                             CircleAvatar(
