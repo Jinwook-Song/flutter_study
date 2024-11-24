@@ -31,7 +31,7 @@ class CategoryList extends StatelessWidget {
                     ),
                     itemBuilder: (context, index) {
                       final ProjectCategory category = data[index];
-                      return InkWell(
+                      return GestureDetector(
                         onTap: () => context.pushNamed(
                           AppRoutes.category.name,
                           pathParameters: {
