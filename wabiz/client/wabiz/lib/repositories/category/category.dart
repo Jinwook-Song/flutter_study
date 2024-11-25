@@ -4,8 +4,6 @@ import 'package:wabiz/models/models.dart';
 import 'package:wabiz/services/category/category_api_service.dart';
 import 'package:wabiz/services/services.dart';
 
-part 'category.g.dart';
-
 @riverpod
 CategoryRepository categoryRepository(Ref ref) {
   final CategoryApi categoryApiService = ref.watch(categoryApiServiceProvider);
