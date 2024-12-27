@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary100),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
@@ -35,23 +35,31 @@ class HomeScreen extends StatelessWidget {
           style: TextStyles.largeTextBold,
         ),
       ),
-      body: ListView(
-        children: [
-          PrimaryButton.big(
-            text: 'Big Button',
-            onTap: () {},
-          ),
-          const Gap(8),
-          PrimaryButton.medium(
-            text: 'Medium Button',
-            onTap: () {},
-          ),
-          const Gap(8),
-          PrimaryButton(
-            text: 'Button',
-            onTap: () {},
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          children: [
+            PrimaryButton.big(
+              text: 'Big Button',
+              onTap: () {},
+            ),
+            const Gap(8),
+            PrimaryButton.medium(
+              text: 'Medium Button',
+              onTap: () {},
+            ),
+            const Gap(8),
+            PrimaryButton(
+              text: 'Button',
+              onTap: () {},
+            ),
+            const Gap(8),
+            const InputField(
+              label: 'label',
+              placeholder: 'placeholder',
+            )
+          ],
+        ),
       ),
     );
   }
