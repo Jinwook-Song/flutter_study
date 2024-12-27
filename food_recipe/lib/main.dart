@@ -23,9 +23,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +71,10 @@ class HomeScreen extends StatelessWidget {
               '5',
               icon: Icons.star,
               selected: true,
+            ),
+            const Gap(8),
+            const CustomTabBar(
+              labels: ['label1', 'label2'],
             )
           ],
         ),
