@@ -57,6 +57,14 @@ class HomeScreen extends StatelessWidget {
             const InputField(
               label: 'label',
               placeholder: 'placeholder',
+            ),
+            const Gap(8),
+            const FilterButton('Text'),
+            const Gap(8),
+            const FilterButton(
+              '5',
+              icon: Icons.star,
+              selected: true,
             )
           ],
         ),
