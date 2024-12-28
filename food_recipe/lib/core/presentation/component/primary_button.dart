@@ -9,16 +9,17 @@ class PrimaryButton extends StatefulWidget {
   final double buttonPadding;
   final bool hasIcon;
   final TextStyle textStyle;
+  final Color buttonColor;
 
-  const PrimaryButton({
-    super.key,
-    required this.text,
-    required this.onTap,
-    this.buttonHeight = 37,
-    this.buttonPadding = 30,
-    this.textStyle = TextStyles.smallTextBold,
-    this.hasIcon = false,
-  });
+  const PrimaryButton(
+      {super.key,
+      required this.text,
+      required this.onTap,
+      this.buttonHeight = 37,
+      this.buttonPadding = 30,
+      this.textStyle = TextStyles.smallTextBold,
+      this.hasIcon = false,
+      this.buttonColor = AppColors.primary100});
 
   factory PrimaryButton.big({
     required String text,
@@ -54,7 +55,7 @@ class PrimaryButton extends StatefulWidget {
 class _PrimaryButtonState extends State<PrimaryButton> {
   bool _isPressed = false;
 
-  Color get _buttonColor => _isPressed ? AppColors.gray4 : AppColors.primary100;
+  Color get _buttonColor => _isPressed ? AppColors.gray4 : widget.buttonColor;
 
   void _handleTap(bool tapped) {
     setState(() {
@@ -80,6 +81,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const MaxGap(20),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
+import 'package:food_recipe/core/presentation/dialog/rating_dialog.dart';
 import 'package:food_recipe/ui/ui.dart';
 import 'package:gap/gap.dart';
 
@@ -45,6 +46,24 @@ class _HomeScreenState extends State<HomeScreen>
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => RatingDialog(
+                    title: 'Rate recipe',
+                    rating: 3,
+                    submit: 'Send',
+                    disabled: false,
+                    onChange: (rating) {
+                      debugPrint('$rating');
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                );
+              },
+              child: const Text('Rating'),
+            ),
             PrimaryButton.big(
               text: 'Big Button',
               onTap: () {},
