@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/core/presentation/dialog/rating_dialog.dart';
+import 'package:food_recipe/presentation/sign_in/sign_in.dart';
 import 'package:food_recipe/ui/ui.dart';
 import 'package:gap/gap.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary100),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const SignInScreen(),
     );
   }
 }
