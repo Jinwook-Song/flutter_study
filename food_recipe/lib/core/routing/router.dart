@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
-import 'package:food_recipe/data/repository/repository.dart';
-import 'package:food_recipe/domain/use_case/get_saved_recipes.dart';
-import 'package:food_recipe/presentation/saved_recipes/saved_recipes.dart';
-import 'package:food_recipe/presentation/sign_in/sign_in.dart';
-import 'package:food_recipe/presentation/sign_up/sign_up.dart';
-import 'package:food_recipe/presentation/splash/splash.dart';
+import 'package:food_recipe/presentation/presentation.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Routes.splash.path,
@@ -43,24 +38,7 @@ final GoRouter router = GoRouter(
       path: Routes.savedRecipes.path,
       name: Routes.savedRecipes.name,
       builder: (BuildContext context, GoRouterState state) {
-        return FutureBuilder(
-          future: GetSavedRecipesUseCase(
-            recipeRepository: MockRecipeRepositoryImpl(),
-            bookmarkRepository: MockBookmarkRepositoryImpl(),
-          ).execute(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              );
-            }
-            return SavedRecipesScreen(
-              recipes: snapshot.requireData,
-            );
-          },
-        );
+        return const SavedRecipesScreen();
       },
     ),
   ],
