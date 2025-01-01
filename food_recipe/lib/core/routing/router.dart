@@ -4,6 +4,7 @@ import 'package:food_recipe/data/repository/repository.dart';
 import 'package:food_recipe/domain/use_case/get_saved_recipes.dart';
 import 'package:food_recipe/presentation/saved_recipes/saved_recipes.dart';
 import 'package:food_recipe/presentation/sign_in/sign_in.dart';
+import 'package:food_recipe/presentation/sign_up/sign_up.dart';
 import 'package:food_recipe/presentation/splash/splash.dart';
 
 final GoRouter router = GoRouter(
@@ -22,7 +23,20 @@ final GoRouter router = GoRouter(
       path: Routes.signIn.path,
       name: Routes.signIn.name,
       builder: (BuildContext context, GoRouterState state) {
-        return const SignInScreen();
+        return SignInScreen(
+          onSignInTap: () => context.goNamed(Routes.savedRecipes.name),
+          onSignUpTap: () => context.pushNamed(Routes.signUp.name),
+        );
+      },
+    ),
+    GoRoute(
+      path: Routes.signUp.path,
+      name: Routes.signUp.name,
+      builder: (BuildContext context, GoRouterState state) {
+        return SignUpScreen(
+          onSignInTap: context.pop,
+          onSignUpTap: () => context.goNamed(Routes.savedRecipes.name),
+        );
       },
     ),
     GoRoute(

@@ -1,3 +1,4 @@
 export 'saved_recipes/saved_recipes.dart';
 export 'sign_in/sign_in.dart';
+export 'sign_up/sign_up.dart';
 export 'splash/splash.dart';

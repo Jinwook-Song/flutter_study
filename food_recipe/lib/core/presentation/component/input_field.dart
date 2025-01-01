@@ -6,11 +6,13 @@ class InputField extends StatelessWidget {
   final TextEditingController? controller;
   final String label;
   final String placeholder;
+  final bool autofocus;
   const InputField({
     super.key,
     this.controller,
     required this.label,
     required this.placeholder,
+    this.autofocus = false,
   });
 
   @override
@@ -22,6 +24,7 @@ class InputField extends StatelessWidget {
         const Gap(5),
         TextField(
           controller: controller,
+          autofocus: autofocus,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(20),
             hintText: placeholder,

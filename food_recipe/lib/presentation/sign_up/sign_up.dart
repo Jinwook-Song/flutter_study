@@ -2,14 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/ui/ui.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   final VoidCallback onSignInTap;
   final VoidCallback onSignUpTap;
-  const SignInScreen({
+
+  const SignUpScreen({
     super.key,
     required this.onSignInTap,
     required this.onSignUpTap,
   });
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,36 +28,60 @@ class SignInScreen extends StatelessWidget {
         child: ListView(
           reverse: true,
           children: [
-            const Gap(50),
+            const Gap(10),
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hello,',
-                  style: TextStyles.headerTextBold,
+                  'Create an account',
+                  style: TextStyles.largeTextBold,
                 ),
+                Gap(5),
                 Text(
-                  'Welcome Back!',
-                  style: TextStyles.largeTextRegular,
+                  'Let’s help you set up your account,\nit won’t take long.',
+                  style: TextStyles.smallTextRegular,
                 )
               ],
             ),
-            const Gap(57),
-            const InputField(label: 'Email', placeholder: 'Enter Email'),
-            const Gap(30),
-            const InputField(
-                label: 'Enter Password', placeholder: 'Enter Password'),
             const Gap(20),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Forgot Password?',
-                style: TextStyles.smallerTextRegular
-                    .copyWith(color: AppColors.secondary100),
-              ),
+            const InputField(label: 'Name', placeholder: 'Enter Name'),
+            const Gap(20),
+            const InputField(label: 'Email', placeholder: 'Enter Email'),
+            const Gap(20),
+            const InputField(label: 'Password', placeholder: 'Enter Password'),
+            const Gap(20),
+            const InputField(
+                label: 'Confirm Password', placeholder: 'Retype Password'),
+            const Gap(20),
+            Row(
+              children: [
+                Checkbox.adaptive(
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  visualDensity: VisualDensity.compact,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  side: const BorderSide(
+                    color: AppColors.secondary100,
+                    width: 1,
+                  ),
+                  activeColor: AppColors.secondary100,
+                  value: _isChecked,
+                  onChanged: (value) {
+                    setState(() {
+                      _isChecked = value!;
+                    });
+                  },
+                ),
+                Text(
+                  'Accept terms & Condition',
+                  style: TextStyles.smallerTextRegular
+                      .copyWith(color: AppColors.secondary100),
+                ),
+              ],
             ),
             const Gap(25),
-            PrimaryButton.big(text: 'Sign In', onTap: onSignInTap),
+            PrimaryButton.big(text: 'Sign Up', onTap: widget.onSignUpTap),
             const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -120,25 +152,24 @@ class SignInScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const Gap(55),
+            const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Don't have an account? ",
+                  "Already a member? ",
                   style: TextStyles.smallerTextRegular,
                 ),
                 GestureDetector(
-                  onTap: onSignUpTap,
+                  onTap: widget.onSignInTap,
                   child: Text(
-                    'Sign up',
+                    'Sign In',
                     style: TextStyles.smallerTextBold
                         .copyWith(color: AppColors.secondary100),
                   ),
                 ),
               ],
             ),
-            const Gap(65),
           ].reversed.toList(),
         ),
       )),

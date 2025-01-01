@@ -8,7 +8,7 @@ interface class Route {
   });
 }
 
-class Routes {
+abstract class Routes {
   static const Route splash = Route(
     path: '/splash',
     name: 'Splash',
@@ -17,6 +17,11 @@ class Routes {
   static const Route signIn = Route(
     path: '/signin',
     name: 'Sign In',
+  );
+
+  static const Route signUp = Route(
+    path: '/signup',
+    name: 'Sign Up',
   );
 
   static const Route savedRecipes = Route(
