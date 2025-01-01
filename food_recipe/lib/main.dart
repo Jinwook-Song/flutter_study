@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/core/presentation/dialog/rating_dialog.dart';
-import 'package:food_recipe/presentation/sign_in/sign_in.dart';
+import 'package:food_recipe/data/repository/repository.dart';
+import 'package:food_recipe/domain/domain.dart';
+import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
 import 'package:gap/gap.dart';
 
@@ -17,10 +19,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary100),
+        colorScheme: const ColorScheme.light(),
         useMaterial3: true,
+        scaffoldBackgroundColor: AppColors.white,
       ),
-      home: const SignInScreen(),
+      home: FutureBuilder(
+        future: GetSavedRecipesUseCase(
+          recipeRepository: MockRecipeRepositoryImpl(),
+          bookmarkRepository: MockBookmarkRepositoryImpl(),
+        ).execute(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            );
+          }
+          return SavedRecipesScreen(recipes: snapshot.requireData);
+        },
+      ),
     );
   }
 }
