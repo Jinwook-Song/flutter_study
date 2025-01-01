@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/domain/domain.dart';
+import 'package:food_recipe/presentation/presentation.dart';
 
 class SavedRecipesProvider with ChangeNotifier {
   final GetSavedRecipesUseCase _getSavedRecipesUseCase;
 
-  List<Recipe> _recipes = [];
+  SavedRecipiesState _state = SavedRecipiesState.initial();
 
-  List<Recipe> get recipes => List.unmodifiable(_recipes);
-
-  bool _isLoading = false;
-
-  bool get isLoading => _isLoading;
+  SavedRecipiesState get state => _state;
 
   SavedRecipesProvider({
     required GetSavedRecipesUseCase getSavedRecipesUseCase,
@@ -19,11 +16,13 @@ class SavedRecipesProvider with ChangeNotifier {
   }
 
   Future<void> _load() async {
-    _isLoading = true;
+    _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    _recipes = await _getSavedRecipesUseCase.execute();
-    _isLoading = false;
+    _state = _state.copyWith(
+      isLoading: false,
+      recipes: await _getSavedRecipesUseCase.execute(),
+    );
     notifyListeners();
   }
 }

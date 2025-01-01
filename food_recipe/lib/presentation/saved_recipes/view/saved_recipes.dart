@@ -23,14 +23,15 @@ class SavedRecipesScreen extends StatelessWidget {
     return ListenableBuilder(
       listenable: provider,
       builder: (context, child) {
-        if (provider.isLoading) {
+        final SavedRecipiesState state = provider.state;
+        if (state.isLoading) {
           return const Scaffold(
               body: Center(
             child: CircularProgressIndicator.adaptive(),
           ));
         }
 
-        return SavedRecipesView(recipes: provider.recipes);
+        return SavedRecipesView(recipes: state.recipes);
       },
     );
   }
