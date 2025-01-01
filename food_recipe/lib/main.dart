@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
-import 'package:food_recipe/core/presentation/dialog/rating_dialog.dart';
-import 'package:food_recipe/data/repository/repository.dart';
-import 'package:food_recipe/domain/domain.dart';
-import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
-import 'package:gap/gap.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,28 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
+      routerConfig: router,
       theme: ThemeData(
         colorScheme: const ColorScheme.light(),
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.white,
-      ),
-      home: FutureBuilder(
-        future: GetSavedRecipesUseCase(
-          recipeRepository: MockRecipeRepositoryImpl(),
-          bookmarkRepository: MockBookmarkRepositoryImpl(),
-        ).execute(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator.adaptive(),
-              ),
-            );
-          }
-          return SavedRecipesScreen(recipes: snapshot.requireData);
-        },
       ),
     );
   }

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 abstract class TextStyles {
+  static const TextStyle titleTextBold = TextStyle(
+    fontSize: 50,
+    height: 1.5,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Poppins',
+  );
   static const TextStyle headerTextBold = TextStyle(
     fontSize: 30,
     height: 1.5,

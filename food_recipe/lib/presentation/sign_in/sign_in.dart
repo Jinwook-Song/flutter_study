@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/ui/ui.dart';
-import 'package:gap/gap.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
