@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
 final GoRouter router = GoRouter(
+  navigatorKey: _rootNavigatorKey,
   initialLocation: Routes.splash.path,
   routes: <RouteBase>[
     GoRoute(
@@ -19,7 +22,7 @@ final GoRouter router = GoRouter(
       name: Routes.signIn.name,
       builder: (BuildContext context, GoRouterState state) {
         return SignInScreen(
-          onSignInTap: () => context.goNamed(Routes.savedRecipes.name),
+          onSignInTap: () => context.goNamed(Routes.home.name),
           onSignUpTap: () => context.pushNamed(Routes.signUp.name),
         );
       },
@@ -30,16 +33,69 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return SignUpScreen(
           onSignInTap: context.pop,
-          onSignUpTap: () => context.goNamed(Routes.savedRecipes.name),
+          onSignUpTap: () => context.goNamed(Routes.home.name),
         );
       },
     ),
-    GoRoute(
-      path: Routes.savedRecipes.path,
-      name: Routes.savedRecipes.name,
-      builder: (BuildContext context, GoRouterState state) {
-        return const SavedRecipesScreen();
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return BottomNavShell(
+          navigationShell: navigationShell,
+          currentIndex: navigationShell.currentIndex,
+          onChangeIndex: (index) {
+            navigationShell.goBranch(
+              index,
+              initialLocation: index == navigationShell.currentIndex,
+            );
+          },
+        );
       },
-    ),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.home.path,
+              name: Routes.home.name,
+              builder: (BuildContext context, GoRouterState state) {
+                return const HomeScreen();
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.savedRecipes.path,
+              name: Routes.savedRecipes.name,
+              builder: (BuildContext context, GoRouterState state) {
+                return const SavedRecipesScreen();
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.notifications.path,
+              name: Routes.notifications.name,
+              builder: (BuildContext context, GoRouterState state) {
+                return const NotificationsScreen();
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.profile.path,
+              name: Routes.profile.name,
+              builder: (BuildContext context, GoRouterState state) {
+                return const ProfileScreen();
+              },
+            ),
+          ],
+        ),
+      ],
+    )
   ],
 );

@@ -1,7 +1,7 @@
 import 'package:food_recipe/domain/repository/repository.dart';
 
 class MockBookmarkRepositoryImpl implements BookmarkRepository {
-  final _ids = <int>{2, 4, 6};
+  final _ids = <int>{1, 2, 3, 5, 4, 6};
 
   @override
   Future<void> clear() async {

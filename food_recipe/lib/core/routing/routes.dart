@@ -24,8 +24,23 @@ abstract class Routes {
     name: 'Sign Up',
   );
 
+  static const Route home = Route(
+    path: '/home',
+    name: 'Home',
+  );
+
   static const Route savedRecipes = Route(
     path: '/saved-recipes',
     name: 'Saved Recipes',
+  );
+
+  static const Route notifications = Route(
+    path: '/notifications',
+    name: 'Notifications',
+  );
+
+  static const Route profile = Route(
+    path: '/profile',
+    name: 'Profile',
   );
 }
