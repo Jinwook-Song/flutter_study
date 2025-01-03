@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
+import 'package:food_recipe/main.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: Routes.splash.path,
+  initialLocation: Routes.uiTest.path,
   routes: <RouteBase>[
+    GoRoute(
+      path: Routes.uiTest.path,
+      name: Routes.uiTest.name,
+      builder: (BuildContext context, GoRouterState state) {
+        return const UiTestScreen();
+      },
+    ),
     GoRoute(
       path: Routes.splash.path,
       name: Routes.splash.name,

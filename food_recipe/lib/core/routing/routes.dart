@@ -9,6 +9,11 @@ interface class Route {
 }
 
 abstract class Routes {
+  static const Route uiTest = Route(
+    path: '/ui-test',
+    name: 'Ui Test',
+  );
+
   static const Route splash = Route(
     path: '/splash',
     name: 'Splash',

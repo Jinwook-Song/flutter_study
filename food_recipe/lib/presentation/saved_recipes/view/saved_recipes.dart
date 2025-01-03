@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe/core/presentation/component/recipe_card.dart';
+import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/data/repository/repository.dart';
 import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
-import 'package:gap/gap.dart';
 
 final _getSavedRecipesUseCase = GetSavedRecipesUseCase(
   recipeRepository: MockRecipeRepositoryImpl(),

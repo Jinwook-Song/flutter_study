@@ -23,14 +23,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class UiTestScreen extends StatefulWidget {
+  const UiTestScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<UiTestScreen> createState() => _UiTestScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _UiTestScreenState extends State<UiTestScreen>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen>
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
+            const SearchInputField(placeholder: 'placeholder'),
             ElevatedButton(
               onPressed: () {
                 showDialog(
