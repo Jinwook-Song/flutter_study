@@ -33,6 +33,10 @@ abstract class Routes {
     path: '/home',
     name: 'Home',
   );
+  static const Route search = Route(
+    path: '/search',
+    name: 'Search',
+  );
 
   static const Route savedRecipes = Route(
     path: '/saved-recipes',

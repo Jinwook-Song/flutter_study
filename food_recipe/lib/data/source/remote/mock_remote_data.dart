@@ -1,4 +1,4 @@
-abstract class MockData {
+abstract class MockRemoteData {
   static const recipe = {
     "recipes": [
       {

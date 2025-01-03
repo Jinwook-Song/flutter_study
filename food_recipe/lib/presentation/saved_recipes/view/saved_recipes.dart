@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
-import 'package:food_recipe/data/repository/repository.dart';
+import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
 
 final _getSavedRecipesUseCase = GetSavedRecipesUseCase(
-  recipeRepository: MockRecipeRepositoryImpl(),
+  recipeRepository: MockRecipeRepositoryImpl(MockRemoteRecipeDataSourceImpl()),
   bookmarkRepository: MockBookmarkRepositoryImpl(),
 );
 
@@ -58,7 +58,10 @@ class SavedRecipesView extends StatelessWidget {
           separatorBuilder: (context, index) => const Gap(20),
           itemBuilder: (context, index) {
             final recipe = recipes[index];
-            return RecipeCard(recipe);
+            return RecipeCard(
+              recipe,
+              aspectRatio: 315 / 150,
+            );
           },
         ),
       ),

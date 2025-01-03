@@ -7,7 +7,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: Routes.uiTest.path,
+  initialLocation: Routes.splash.path,
   routes: <RouteBase>[
     GoRoute(
       path: Routes.uiTest.path,
@@ -65,7 +65,9 @@ final GoRouter router = GoRouter(
               path: Routes.home.path,
               name: Routes.home.name,
               builder: (BuildContext context, GoRouterState state) {
-                return const HomeScreen();
+                return HomeScreen(
+                  onSearchTap: () => context.pushNamed(Routes.search.name),
+                );
               },
             ),
           ],
@@ -104,6 +106,13 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
-    )
+    ),
+    GoRoute(
+      path: Routes.search.path,
+      name: Routes.search.name,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SearchScreen();
+      },
+    ),
   ],
 );

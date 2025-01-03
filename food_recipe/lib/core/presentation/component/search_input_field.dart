@@ -5,11 +5,13 @@ class SearchInputField extends StatelessWidget {
   final TextEditingController? controller;
   final String placeholder;
   final bool autofocus;
+  final bool readOnly;
   const SearchInputField({
     super.key,
     this.controller,
     required this.placeholder,
     this.autofocus = false,
+    this.readOnly = false,
   });
 
   @override
@@ -19,6 +21,8 @@ class SearchInputField extends StatelessWidget {
       child: TextField(
         controller: controller,
         autofocus: autofocus,
+        readOnly: readOnly,
+        enabled: !readOnly,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(5),
           prefixIcon: const Icon(Icons.search, color: AppColors.gray4),
@@ -31,6 +35,13 @@ class SearchInputField extends StatelessWidget {
             borderSide: const BorderSide(
               color: AppColors.error,
               width: 2,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: AppColors.gray4,
+              width: 1.5,
             ),
           ),
           enabledBorder: OutlineInputBorder(

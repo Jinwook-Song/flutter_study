@@ -13,7 +13,6 @@ class GetSavedRecipesUseCase implements UseCase<List<Recipe>, void> {
 
   @override
   Future<List<Recipe>> execute([void params]) async {
-    await Future.delayed(const Duration(seconds: 2));
     final ids = await _bookmarkRepository.getBookmarkIds();
     final recipes = await _recipeRepository.getRecipes();
     return recipes.where((recipe) => ids.contains(recipe.id)).toList();

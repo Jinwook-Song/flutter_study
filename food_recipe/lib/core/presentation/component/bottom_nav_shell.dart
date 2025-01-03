@@ -17,11 +17,14 @@ class BottomNavShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double bottomNavBarHeight = 80;
+    const double bottomPadding = 20;
 
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: bottomNavBarHeight),
+          padding: const EdgeInsets.only(
+            bottom: bottomNavBarHeight + bottomPadding,
+          ),
           child: navigationShell,
         ),
         Positioned(

@@ -5,7 +5,14 @@ import 'package:gap/gap.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  const RecipeCard(this.recipe, {super.key});
+  final double aspectRatio;
+  final bool showBottomRight;
+  const RecipeCard(
+    this.recipe, {
+    super.key,
+    required this.aspectRatio,
+    this.showBottomRight = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +21,10 @@ class RecipeCard extends StatelessWidget {
       child: Stack(
         children: [
           AspectRatio(
-            aspectRatio: 315 / 150,
+            aspectRatio: aspectRatio,
             child: Image.network(
               recipe.image,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.cover,
             ),
           ),
           Positioned(
@@ -44,41 +51,42 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 10,
-            bottom: 10,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.timer_outlined,
-                  color: AppColors.white,
-                  size: 17,
-                ),
-                const Gap(5),
-                Text(
-                  recipe.time,
-                  style: TextStyles.smallTextRegular.copyWith(
+          if (showBottomRight)
+            Positioned(
+              right: 10,
+              bottom: 10,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.timer_outlined,
                     color: AppColors.white,
+                    size: 17,
                   ),
-                ),
-                const Gap(10),
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.white,
+                  const Gap(5),
+                  Text(
+                    recipe.time,
+                    style: TextStyles.smallTextRegular.copyWith(
+                      color: AppColors.white,
+                    ),
                   ),
-                  child: const Icon(
-                    Icons.bookmark_border_outlined,
-                    size: 16,
-                    color: AppColors.primary80,
+                  const Gap(10),
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.white,
+                    ),
+                    child: const Icon(
+                      Icons.bookmark_border_outlined,
+                      size: 16,
+                      color: AppColors.primary80,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
           Positioned(
             top: 10,
             right: 10,
