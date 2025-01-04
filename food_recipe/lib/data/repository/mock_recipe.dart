@@ -2,9 +2,11 @@ import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/domain/domain.dart';
 
 class MockRecipeRepositoryImpl implements RecipeRepository {
-  final RemoteRecipeDataSourece _remoteRecipeDataSourece;
+  final RemoteRecipeDataSource _remoteRecipeDataSourece;
 
-  MockRecipeRepositoryImpl(this._remoteRecipeDataSourece);
+  MockRecipeRepositoryImpl(
+      {required RemoteRecipeDataSource remoteRecipeDataSource})
+      : _remoteRecipeDataSourece = remoteRecipeDataSource;
 
   @override
   Future<Recipe?> getRecipeById({required int id}) async {
@@ -21,6 +23,7 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
   @override
   Future<List<Recipe>> getRecipesWithQuery(String query) async {
     final recipes = await getRecipes();
+
     return recipes
         .where(
             (recipe) => recipe.name.toLowerCase().contains(query.toLowerCase()))

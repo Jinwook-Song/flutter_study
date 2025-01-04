@@ -1,10 +1,10 @@
 import 'package:food_recipe/data/data.dart';
 
-abstract interface class RemoteRecipeDataSourece {
+abstract interface class RemoteRecipeDataSource {
   Future<dynamic> getRecipes();
 }
 
-class MockRemoteRecipeDataSourceImpl implements RemoteRecipeDataSourece {
+class MockRemoteRecipeDataSourceImpl implements RemoteRecipeDataSource {
   @override
   Future getRecipes() async {
     await Future.delayed(const Duration(seconds: 2));

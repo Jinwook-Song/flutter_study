@@ -15,7 +15,8 @@ class MockRecentSearchRecipeImpl implements RecentSearchRecipeRepository {
 
   @override
   Future<void> updateRecentSearchRecipes(List<Recipe> recipes) {
-    // TODO: implement updateRecentSearchRecipes
-    throw UnimplementedError();
+    return _localRecipeDataSourece.updateRecentSearchRecipes(
+      recipes.map((e) => e.toJson()).toList(),
+    );
   }
 }

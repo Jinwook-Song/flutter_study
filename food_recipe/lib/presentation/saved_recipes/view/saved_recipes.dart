@@ -6,7 +6,9 @@ import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
 
 final _getSavedRecipesUseCase = GetSavedRecipesUseCase(
-  recipeRepository: MockRecipeRepositoryImpl(MockRemoteRecipeDataSourceImpl()),
+  recipeRepository: MockRecipeRepositoryImpl(
+    remoteRecipeDataSource: MockRemoteRecipeDataSourceImpl(),
+  ),
   bookmarkRepository: MockBookmarkRepositoryImpl(),
 );
 
