@@ -1,23 +1,31 @@
 import 'package:food_recipe/data/data.dart';
 
-abstract interface class LocalRecipeDataSourece {
+abstract interface class LocalRecipeDataSource {
   // 최근 검색된 레시피 리스트
   Future<dynamic> getRecentSearchRecipes();
   // 검색된 레시피 리스트 최신화
   Future<void> updateRecentSearchRecipes(List<dynamic> recipes);
 }
 
-class MockLocalRecipeDataSourceImpl implements LocalRecipeDataSourece {
+class MockLocalRecipeDataSourceImpl implements LocalRecipeDataSource {
+  static final MockLocalRecipeDataSourceImpl _instance =
+      MockLocalRecipeDataSourceImpl._internal();
+
+  factory MockLocalRecipeDataSourceImpl() {
+    return _instance;
+  }
+
+  MockLocalRecipeDataSourceImpl._internal();
+
   List<dynamic> _data = MockLocalData.recipe['recipes']!.sublist(2, 5);
 
   @override
-  Future getRecentSearchRecipes() async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future<dynamic> getRecentSearchRecipes() async {
     return _data;
   }
 
   @override
-  Future<void> updateRecentSearchRecipes(List recipes) async {
+  Future<void> updateRecentSearchRecipes(List<dynamic> recipes) async {
     _data = recipes;
   }
 }
