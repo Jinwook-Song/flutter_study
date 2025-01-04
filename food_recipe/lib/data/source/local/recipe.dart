@@ -8,24 +8,15 @@ abstract interface class LocalRecipeDataSource {
 }
 
 class MockLocalRecipeDataSourceImpl implements LocalRecipeDataSource {
-  static final MockLocalRecipeDataSourceImpl _instance =
-      MockLocalRecipeDataSourceImpl._internal();
-
-  factory MockLocalRecipeDataSourceImpl() {
-    return _instance;
-  }
-
-  MockLocalRecipeDataSourceImpl._internal();
-
   List<dynamic> _data = MockLocalData.recipe['recipes']!.sublist(2, 5);
 
   @override
-  Future<dynamic> getRecentSearchRecipes() async {
+  Future getRecentSearchRecipes() async {
     return _data;
   }
 
   @override
-  Future<void> updateRecentSearchRecipes(List<dynamic> recipes) async {
+  Future<void> updateRecentSearchRecipes(List recipes) async {
     _data = recipes;
   }
 }

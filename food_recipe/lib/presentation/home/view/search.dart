@@ -1,34 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
-import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/presentation/home/home.dart';
 import 'package:food_recipe/ui/ui.dart';
-
-final _getRecentSearchRecipesUseCase = GetRecentSearchRecipesUseCase(
-  MockRecentSearchRecipeImpl(
-    MockLocalRecipeDataSourceImpl(),
-  ),
-);
-
-final _getRecipesWithQueryUseCase = GetRecipesWithQueryUseCase(
-  recipeRepository: MockRecipeRepositoryImpl(
-    remoteRecipeDataSource: MockRemoteRecipeDataSourceImpl(),
-    localRecipeDataSource: MockLocalRecipeDataSourceImpl(),
-  ),
-  recentSearchRecipeRepository: MockRecentSearchRecipeImpl(
-    MockLocalRecipeDataSourceImpl(),
-  ),
-);
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = SearchProvider(
-        getRecentSearchRecipesUseCase: _getRecentSearchRecipesUseCase,
-        getRecipesWithQueryUseCase: _getRecipesWithQueryUseCase);
+    final provider = getIt.get<SearchProvider>();
 
     return ListenableBuilder(
       listenable: provider,

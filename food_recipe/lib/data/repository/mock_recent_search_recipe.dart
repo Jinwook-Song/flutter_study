@@ -1,10 +1,13 @@
 import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/domain/domain.dart';
 
-class MockRecentSearchRecipeImpl implements RecentSearchRecipeRepository {
+class MockRecentSearchRecipeRepositoryImpl
+    implements RecentSearchRecipeRepository {
   final LocalRecipeDataSource _localRecipeDataSourece;
 
-  MockRecentSearchRecipeImpl(this._localRecipeDataSourece);
+  MockRecentSearchRecipeRepositoryImpl(
+      {required LocalRecipeDataSource localRecipeDataSourece})
+      : _localRecipeDataSourece = localRecipeDataSourece;
 
   @override
   Future<List<Recipe>> getRecentSearchRecipes() async {

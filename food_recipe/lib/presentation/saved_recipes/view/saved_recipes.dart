@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
-import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
-
-final _getSavedRecipesUseCase = GetSavedRecipesUseCase(
-  recipeRepository: MockRecipeRepositoryImpl(
-      remoteRecipeDataSource: MockRemoteRecipeDataSourceImpl(),
-      localRecipeDataSource: MockLocalRecipeDataSourceImpl()),
-  bookmarkRepository: MockBookmarkRepositoryImpl(),
-);
 
 class SavedRecipesScreen extends StatelessWidget {
   const SavedRecipesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = SavedRecipesProvider(
-      getSavedRecipesUseCase: _getSavedRecipesUseCase,
-    );
+    final provider = getIt.get<SavedRecipesProvider>();
 
     return ListenableBuilder(
       listenable: provider,

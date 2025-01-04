@@ -3,6 +3,7 @@ import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/ui/ui.dart';
 
 void main() {
+  diSetup();
   runApp(const MyApp());
 }
 
