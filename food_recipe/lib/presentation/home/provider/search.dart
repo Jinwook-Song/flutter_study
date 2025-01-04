@@ -39,6 +39,7 @@ class SearchProvider with ChangeNotifier {
     _state = _state.copyWith(
       isLoading: false,
       recipes: await _getRecipesWithQueryUseCase.execute(params),
+      searchQuery: query,
     );
     notifyListeners();
   }

@@ -93,12 +93,20 @@ class SearchScreenView extends StatelessWidget {
               ],
             ),
             const Gap(20),
-            const Row(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Recent Search',
+                  state.searchQuery.isEmpty ? 'Recent Search' : 'Search Result',
                   style: TextStyles.normalTextBold,
                 ),
+                if (state.searchQuery.isNotEmpty)
+                  Text(
+                    '${state.recipes.length} results',
+                    style: TextStyles.smallTextRegular.copyWith(
+                      color: AppColors.gray3,
+                    ),
+                  )
               ],
             ),
             const Gap(20),

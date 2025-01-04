@@ -10,10 +10,15 @@ class SearchState with _$SearchState {
   const factory SearchState({
     required bool isLoading,
     required List<Recipe> recipes,
+    required String searchQuery,
   }) = _SearchState;
 
   factory SearchState.initial() {
-    return const SearchState(isLoading: false, recipes: []);
+    return const SearchState(
+      isLoading: false,
+      recipes: [],
+      searchQuery: '',
+    );
   }
 
   factory SearchState.fromJson(Map<String, dynamic> json) =>

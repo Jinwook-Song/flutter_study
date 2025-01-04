@@ -22,6 +22,7 @@ SearchState _$SearchStateFromJson(Map<String, dynamic> json) {
 mixin _$SearchState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<Recipe> get recipes => throw _privateConstructorUsedError;
+  String get searchQuery => throw _privateConstructorUsedError;
 
   /// Serializes this SearchState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +40,7 @@ abstract class $SearchStateCopyWith<$Res> {
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
-  $Res call({bool isLoading, List<Recipe> recipes});
+  $Res call({bool isLoading, List<Recipe> recipes, String searchQuery});
 }
 
 /// @nodoc
@@ -59,6 +60,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   $Res call({
     Object? isLoading = null,
     Object? recipes = null,
+    Object? searchQuery = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -69,6 +71,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.recipes
           : recipes // ignore: cast_nullable_to_non_nullable
               as List<Recipe>,
+      searchQuery: null == searchQuery
+          ? _value.searchQuery
+          : searchQuery // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$SearchStateImplCopyWith<$Res>
       __$$SearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, List<Recipe> recipes});
+  $Res call({bool isLoading, List<Recipe> recipes, String searchQuery});
 }
 
 /// @nodoc
@@ -99,6 +105,7 @@ class __$$SearchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? recipes = null,
+    Object? searchQuery = null,
   }) {
     return _then(_$SearchStateImpl(
       isLoading: null == isLoading
@@ -109,6 +116,10 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value._recipes
           : recipes // ignore: cast_nullable_to_non_nullable
               as List<Recipe>,
+      searchQuery: null == searchQuery
+          ? _value.searchQuery
+          : searchQuery // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -118,7 +129,9 @@ class __$$SearchStateImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$SearchStateImpl implements _SearchState {
   const _$SearchStateImpl(
-      {required this.isLoading, required final List<Recipe> recipes})
+      {required this.isLoading,
+      required final List<Recipe> recipes,
+      required this.searchQuery})
       : _recipes = recipes;
 
   factory _$SearchStateImpl.fromJson(Map<String, dynamic> json) =>
@@ -135,8 +148,11 @@ class _$SearchStateImpl implements _SearchState {
   }
 
   @override
+  final String searchQuery;
+
+  @override
   String toString() {
-    return 'SearchState(isLoading: $isLoading, recipes: $recipes)';
+    return 'SearchState(isLoading: $isLoading, recipes: $recipes, searchQuery: $searchQuery)';
   }
 
   @override
@@ -146,13 +162,15 @@ class _$SearchStateImpl implements _SearchState {
             other is _$SearchStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality().equals(other._recipes, _recipes));
+            const DeepCollectionEquality().equals(other._recipes, _recipes) &&
+            (identical(other.searchQuery, searchQuery) ||
+                other.searchQuery == searchQuery));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(_recipes));
+  int get hashCode => Object.hash(runtimeType, isLoading,
+      const DeepCollectionEquality().hash(_recipes), searchQuery);
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -173,7 +191,8 @@ class _$SearchStateImpl implements _SearchState {
 abstract class _SearchState implements SearchState {
   const factory _SearchState(
       {required final bool isLoading,
-      required final List<Recipe> recipes}) = _$SearchStateImpl;
+      required final List<Recipe> recipes,
+      required final String searchQuery}) = _$SearchStateImpl;
 
   factory _SearchState.fromJson(Map<String, dynamic> json) =
       _$SearchStateImpl.fromJson;
@@ -182,6 +201,8 @@ abstract class _SearchState implements SearchState {
   bool get isLoading;
   @override
   List<Recipe> get recipes;
+  @override
+  String get searchQuery;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.

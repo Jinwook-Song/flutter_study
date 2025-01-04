@@ -12,10 +12,12 @@ _$SearchStateImpl _$$SearchStateImplFromJson(Map<String, dynamic> json) =>
       recipes: (json['recipes'] as List<dynamic>)
           .map((e) => Recipe.fromJson(e as Map<String, dynamic>))
           .toList(),
+      searchQuery: json['searchQuery'] as String,
     );
 
 Map<String, dynamic> _$$SearchStateImplToJson(_$SearchStateImpl instance) =>
     <String, dynamic>{
       'isLoading': instance.isLoading,
       'recipes': instance.recipes.map((e) => e.toJson()).toList(),
+      'searchQuery': instance.searchQuery,
     };
