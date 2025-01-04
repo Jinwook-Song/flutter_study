@@ -17,4 +17,13 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
     final List<dynamic> recipes = await _remoteRecipeDataSourece.getRecipes();
     return recipes.map((recipe) => Recipe.fromJson(recipe)).toList();
   }
+
+  @override
+  Future<List<Recipe>> getRecipesWithQuery(String query) async {
+    final recipes = await getRecipes();
+    return recipes
+        .where(
+            (recipe) => recipe.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+  }
 }

@@ -5,9 +5,15 @@ import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/presentation/home/home.dart';
 import 'package:food_recipe/ui/ui.dart';
 
-final _getRecentSearchRecipes = GetRecentSearchRecipes(
+final _getRecentSearchRecipesUseCase = GetRecentSearchRecipesUseCase(
   MockRecentSearchRecipeImpl(
     MockLocalRecipeDataSourceImpl(),
+  ),
+);
+
+final _getRecipesWithQueryUseCase = GetRecipesWithQueryUseCase(
+  MockRecipeRepositoryImpl(
+    MockRemoteRecipeDataSourceImpl(),
   ),
 );
 
@@ -16,13 +22,18 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = SearchProvider(_getRecentSearchRecipes);
+    final provider = SearchProvider(
+        getRecentSearchRecipesUseCase: _getRecentSearchRecipesUseCase,
+        getRecipesWithQueryUseCase: _getRecipesWithQueryUseCase);
 
     return ListenableBuilder(
       listenable: provider,
       builder: (context, child) {
         final SearchState state = provider.state;
-        return SearchScreenView(state: state);
+        return SearchScreenView(
+          state: state,
+          onChanged: provider.searchRecipes,
+        );
       },
     );
   }
@@ -30,7 +41,13 @@ class SearchScreen extends StatelessWidget {
 
 class SearchScreenView extends StatelessWidget {
   final SearchState state;
-  const SearchScreenView({super.key, required this.state});
+  final void Function(String query)? onChanged;
+
+  const SearchScreenView({
+    super.key,
+    required this.state,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +69,10 @@ class SearchScreenView extends StatelessWidget {
             const Gap(17),
             Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: SearchInputField(
                     placeholder: 'Search recipe',
+                    onChanged: onChanged,
                   ),
                 ),
                 const Gap(20),

@@ -3,13 +3,18 @@ import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/presentation/home/home.dart';
 
 class SearchProvider with ChangeNotifier {
-  final GetRecentSearchRecipes _getRecentSearchRecipes;
+  final GetRecentSearchRecipesUseCase _getRecentSearchRecipesUseCase;
+  final GetRecipesWithQueryUseCase _getRecipesWithQueryUseCase;
 
   SearchState _state = SearchState.initial();
 
   SearchState get state => _state;
 
-  SearchProvider(this._getRecentSearchRecipes) {
+  SearchProvider(
+      {required GetRecentSearchRecipesUseCase getRecentSearchRecipesUseCase,
+      required GetRecipesWithQueryUseCase getRecipesWithQueryUseCase})
+      : _getRecentSearchRecipesUseCase = getRecentSearchRecipesUseCase,
+        _getRecipesWithQueryUseCase = getRecipesWithQueryUseCase {
     _load();
   }
 
@@ -19,7 +24,21 @@ class SearchProvider with ChangeNotifier {
 
     _state = _state.copyWith(
       isLoading: false,
-      recipes: await _getRecentSearchRecipes.execute(),
+      recipes: await _getRecentSearchRecipesUseCase.execute(),
+    );
+    notifyListeners();
+  }
+
+  Future<void> searchRecipes(String query) async {
+    final GetRecipesWithQueryParams params =
+        GetRecipesWithQueryParams(query: query);
+
+    _state = _state.copyWith(isLoading: true);
+    notifyListeners();
+
+    _state = _state.copyWith(
+      isLoading: false,
+      recipes: await _getRecipesWithQueryUseCase.execute(params),
     );
     notifyListeners();
   }

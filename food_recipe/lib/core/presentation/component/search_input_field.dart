@@ -3,6 +3,7 @@ import 'package:food_recipe/ui/ui.dart';
 
 class SearchInputField extends StatelessWidget {
   final TextEditingController? controller;
+  final void Function(String query)? onChanged;
   final String placeholder;
   final bool autofocus;
   final bool readOnly;
@@ -12,6 +13,7 @@ class SearchInputField extends StatelessWidget {
     required this.placeholder,
     this.autofocus = false,
     this.readOnly = false,
+    this.onChanged,
   });
 
   @override
@@ -20,6 +22,7 @@ class SearchInputField extends StatelessWidget {
       height: 40,
       child: TextField(
         controller: controller,
+        onChanged: onChanged,
         autofocus: autofocus,
         readOnly: readOnly,
         enabled: !readOnly,
