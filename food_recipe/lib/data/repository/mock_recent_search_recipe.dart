@@ -2,7 +2,7 @@ import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/domain/domain.dart';
 
 class MockRecentSearchRecipeImpl implements RecentSearchRecipeRepository {
-  final LocalRecipeDataSourece _localRecipeDataSourece;
+  final LocalRecipeDataSource _localRecipeDataSourece;
 
   MockRecentSearchRecipeImpl(this._localRecipeDataSourece);
 
@@ -11,12 +11,5 @@ class MockRecentSearchRecipeImpl implements RecentSearchRecipeRepository {
     final List<dynamic> jsonList =
         await _localRecipeDataSourece.getRecentSearchRecipes();
     return jsonList.map((recipe) => Recipe.fromJson(recipe)).toList();
-  }
-
-  @override
-  Future<void> updateRecentSearchRecipes(List<Recipe> recipes) {
-    return _localRecipeDataSourece.updateRecentSearchRecipes(
-      recipes.map((e) => e.toJson()).toList(),
-    );
   }
 }

@@ -14,6 +14,7 @@ final _getRecentSearchRecipesUseCase = GetRecentSearchRecipesUseCase(
 final _getRecipesWithQueryUseCase = GetRecipesWithQueryUseCase(
   recipeRepository: MockRecipeRepositoryImpl(
     remoteRecipeDataSource: MockRemoteRecipeDataSourceImpl(),
+    localRecipeDataSource: MockLocalRecipeDataSourceImpl(),
   ),
   recentSearchRecipeRepository: MockRecentSearchRecipeImpl(
     MockLocalRecipeDataSourceImpl(),
