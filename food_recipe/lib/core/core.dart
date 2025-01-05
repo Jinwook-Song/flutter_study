@@ -9,3 +9,4 @@ export 'domain/domain.dart';
 export 'presentation/presentation.dart';
 export 'routing/routing.dart';
 export 'util/util.dart';
+export 'extension/extension.dart';

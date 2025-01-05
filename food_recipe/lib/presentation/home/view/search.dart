@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/domain/domain.dart';
+import 'package:food_recipe/domain/model/filter.dart';
 import 'package:food_recipe/presentation/home/home.dart';
+import 'package:food_recipe/presentation/home/view/widget/widget.dart';
 import 'package:food_recipe/ui/ui.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -18,6 +20,19 @@ class SearchScreen extends StatelessWidget {
         return SearchScreenView(
           state: state,
           onChanged: provider.searchRecipes,
+          onFilterTap: () async {
+            final Filter? filter = await showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) => SearchFilterButtonSheet(
+                filter: state.filter,
+              ),
+            );
+
+            if (filter != null) {
+              provider.onFilterChange(filter);
+            }
+          },
         );
       },
     );
@@ -27,11 +42,13 @@ class SearchScreen extends StatelessWidget {
 class SearchScreenView extends StatelessWidget {
   final SearchState state;
   final void Function(String query)? onChanged;
+  final VoidCallback onFilterTap;
 
   const SearchScreenView({
     super.key,
     required this.state,
     this.onChanged,
+    required this.onFilterTap,
   });
 
   @override
@@ -61,16 +78,19 @@ class SearchScreenView extends StatelessWidget {
                   ),
                 ),
                 const Gap(20),
-                Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.primary100),
-                    child: const Icon(
-                      Icons.tune_outlined,
-                      color: AppColors.white,
-                    ))
+                GestureDetector(
+                  onTap: onFilterTap,
+                  child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.primary100),
+                      child: const Icon(
+                        Icons.tune_outlined,
+                        color: AppColors.white,
+                      )),
+                )
               ],
             ),
             const Gap(20),

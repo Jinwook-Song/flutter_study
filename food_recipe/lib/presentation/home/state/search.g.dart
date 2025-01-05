@@ -13,6 +13,7 @@ _$SearchStateImpl _$$SearchStateImplFromJson(Map<String, dynamic> json) =>
           .map((e) => Recipe.fromJson(e as Map<String, dynamic>))
           .toList(),
       searchQuery: json['searchQuery'] as String,
+      filter: Filter.fromJson(json['filter'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SearchStateImplToJson(_$SearchStateImpl instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$SearchStateImplToJson(_$SearchStateImpl instance) =>
       'isLoading': instance.isLoading,
       'recipes': instance.recipes.map((e) => e.toJson()).toList(),
       'searchQuery': instance.searchQuery,
+      'filter': instance.filter.toJson(),
     };

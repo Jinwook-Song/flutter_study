@@ -1,3 +1,4 @@
+import 'package:food_recipe/domain/model/filter.dart';
 import 'package:food_recipe/domain/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,13 +12,15 @@ class SearchState with _$SearchState {
     required bool isLoading,
     required List<Recipe> recipes,
     required String searchQuery,
+    required Filter filter,
   }) = _SearchState;
 
   factory SearchState.initial() {
-    return const SearchState(
+    return SearchState(
       isLoading: false,
       recipes: [],
       searchQuery: '',
+      filter: Filter.initial(),
     );
   }
 

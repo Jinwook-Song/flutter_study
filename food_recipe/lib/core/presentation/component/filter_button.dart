@@ -22,39 +22,37 @@ class FilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 5,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 5,
+      ),
+      decoration: BoxDecoration(
+        color: _bgColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          width: 1,
+          color: _borderColor,
         ),
-        decoration: BoxDecoration(
-          color: _bgColor,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            width: 1,
-            color: _borderColor,
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              text,
-              style: TextStyles.smallTextRegular.copyWith(
-                color: _contentColor,
-              ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            text,
+            style: TextStyles.smallTextRegular.copyWith(
+              color: _contentColor,
             ),
-            if (icon != null) ...[
-              const Gap(5),
-              Icon(
-                icon,
-                size: 18,
-                color: _contentColor,
-              ),
-            ]
-          ],
-        ),
+          ),
+          if (icon != null) ...[
+            const Gap(5),
+            Icon(
+              icon,
+              size: 18,
+              color: _contentColor,
+            ),
+          ]
+        ],
       ),
     );
   }
