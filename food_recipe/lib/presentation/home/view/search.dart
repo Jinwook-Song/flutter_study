@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/domain/domain.dart';
-import 'package:food_recipe/domain/model/filter.dart';
 import 'package:food_recipe/presentation/home/home.dart';
 import 'package:food_recipe/presentation/home/view/widget/widget.dart';
 import 'package:food_recipe/ui/ui.dart';
@@ -19,7 +18,7 @@ class SearchScreen extends StatelessWidget {
         final SearchState state = provider.state;
         return SearchScreenView(
           state: state,
-          onChanged: provider.searchRecipes,
+          onChanged: (query) => provider.searchRecipes(query, state.filter),
           onFilterTap: () async {
             final Filter? filter = await showModalBottomSheet(
               isScrollControlled: true,

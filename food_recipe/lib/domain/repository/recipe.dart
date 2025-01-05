@@ -5,5 +5,8 @@ abstract interface class RecipeRepository {
 
   Future<Recipe?> getRecipeById({required int id});
 
-  Future<List<Recipe>> getRecipesWithQuery(String query);
+  Future<List<Recipe>> getRecipesWithQuery(
+    String query,
+    Filter filer,
+  );
 }

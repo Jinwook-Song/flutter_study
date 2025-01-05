@@ -13,16 +13,25 @@ class GetRecipesWithQueryUseCase
   @override
   Future<List<Recipe>> execute([GetRecipesWithQueryParams? params]) async {
     final GetRecipesWithQueryParams input =
-        params ?? GetRecipesWithQueryParams();
-    final recipes = await _recipeRepository.getRecipesWithQuery(input.query);
+        params ?? GetRecipesWithQueryParams.initial();
+    final recipes = await _recipeRepository.getRecipesWithQuery(
+      input.query,
+      input.filter,
+    );
     return recipes;
   }
 }
 
 class GetRecipesWithQueryParams {
   final String query;
+  final Filter filter;
 
   GetRecipesWithQueryParams({
-    this.query = '',
+    required this.query,
+    required this.filter,
   });
+
+  factory GetRecipesWithQueryParams.initial() {
+    return GetRecipesWithQueryParams(query: '', filter: Filter.initial());
+  }
 }

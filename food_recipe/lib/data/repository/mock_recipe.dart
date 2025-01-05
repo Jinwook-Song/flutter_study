@@ -24,13 +24,21 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
   }
 
   @override
-  Future<List<Recipe>> getRecipesWithQuery(String query) async {
+  Future<List<Recipe>> getRecipesWithQuery(String query, Filter filter) async {
     final recipes = await getRecipes();
 
     final results = recipes
         .where(
             (recipe) => recipe.name.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+        .where((recipe) => recipe.rating >= filter.rate)
+        .where(
+      (recipe) {
+        if (filter.category == CategoryFilter.all) return true;
+        return recipe.category.toLowerCase().contains(
+              filter.category.name.toLowerCase(),
+            );
+      },
+    ).toList();
 
     await _localRecipeDataSource
         .updateRecentSearchRecipes(results.map((e) => e.toJson()).toList());

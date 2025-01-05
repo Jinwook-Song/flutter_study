@@ -1,4 +1,3 @@
-import 'package:food_recipe/domain/model/filter.dart';
 import 'package:food_recipe/domain/model/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
