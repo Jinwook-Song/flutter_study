@@ -136,13 +136,12 @@ class _SearchFilterButtonSheetState extends State<SearchFilterButtonSheet> {
             ),
             const Gap(30),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const MaxGap(100),
                 PrimaryButton(
                   text: 'Filter',
                   onTap: _onFilterUpdate,
                 ),
-                const MaxGap(100),
               ],
             )
           ],

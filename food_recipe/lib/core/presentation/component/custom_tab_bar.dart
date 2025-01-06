@@ -17,7 +17,7 @@ class CustomTabBar extends StatefulWidget {
 class _CustomTabBarState extends State<CustomTabBar>
     with SingleTickerProviderStateMixin {
   late final TabController _controller = TabController(
-    length: 2,
+    length: widget.labels.length,
     vsync: this,
   );
 
@@ -30,6 +30,9 @@ class _CustomTabBarState extends State<CustomTabBar>
   @override
   Widget build(BuildContext context) {
     return TabBar(
+      isScrollable: true,
+      tabAlignment: TabAlignment.start,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 20),
       splashFactory: NoSplash.splashFactory,
       controller: widget.controller ?? _controller,
       dividerColor: Colors.transparent,
@@ -38,7 +41,7 @@ class _CustomTabBarState extends State<CustomTabBar>
         borderRadius: BorderRadius.circular(10),
       ),
       indicatorSize: TabBarIndicatorSize.tab,
-      indicatorPadding: const EdgeInsets.symmetric(horizontal: 7.5),
+      indicatorPadding: const EdgeInsets.symmetric(horizontal: 0),
       labelColor: AppColors.white,
       labelStyle: TextStyles.smallTextBold,
       unselectedLabelColor: AppColors.primary100,

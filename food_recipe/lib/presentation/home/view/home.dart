@@ -1,78 +1,143 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
+import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = getIt.get<HomeProvider>();
+
+    return ListenableBuilder(
+      listenable: provider,
+      builder: (context, child) {
+        return HomeView(
+          state: provider.state,
+          onSearchTap: () => context.pushNamed(Routes.search.name),
+          onSelectCategory: provider.onSelectCategory,
+        );
+      },
+    );
+  }
+}
+
+class HomeView extends StatefulWidget {
+  final HomeState state;
   final VoidCallback onSearchTap;
-  const HomeScreen({super.key, required this.onSearchTap});
+  final void Function(HomeCategory category) onSelectCategory;
+  const HomeView({
+    super.key,
+    required this.onSearchTap,
+    required this.state,
+    required this.onSelectCategory,
+  });
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
+  late final TabController _controller = TabController(
+    length: widget.state.categories.length,
+    vsync: this,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(
+      () => widget.onSelectCategory(HomeCategory.values[_controller.index]),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          children: [
-            const Gap(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                const Gap(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Hello Jega',
-                      style: TextStyles.largeTextBold,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Hello Jega',
+                          style: TextStyles.largeTextBold,
+                        ),
+                        const Gap(5),
+                        Text(
+                          'What are you cooking today?',
+                          style: TextStyles.smallerTextRegular.copyWith(
+                            color: AppColors.gray3,
+                          ),
+                        ),
+                      ],
                     ),
-                    const Gap(5),
-                    Text(
-                      'What are you cooking today?',
-                      style: TextStyles.smallerTextRegular.copyWith(
-                        color: AppColors.gray3,
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.secondary40),
+                      child: Image.asset(
+                        'assets/images/profile.png',
                       ),
-                    ),
+                    )
                   ],
                 ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.secondary40),
-                  child: Image.asset(
-                    'assets/images/profile.png',
-                  ),
-                )
+                const Gap(30),
+                Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: widget.onSearchTap,
+                        child: const SearchInputField(
+                          placeholder: 'Search recipe',
+                          readOnly: true,
+                        ),
+                      ),
+                    ),
+                    const Gap(20),
+                    Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary100),
+                        child: const Icon(
+                          Icons.tune_outlined,
+                          color: AppColors.white,
+                        ))
+                  ],
+                ),
+                const Gap(25),
               ],
             ),
-            const Gap(30),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: onSearchTap,
-                    child: const SearchInputField(
-                      placeholder: 'Search recipe',
-                      readOnly: true,
-                    ),
-                  ),
-                ),
-                const Gap(20),
-                Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.primary100),
-                    child: const Icon(
-                      Icons.tune_outlined,
-                      color: AppColors.white,
-                    ))
-              ],
-            )
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: CustomTabBar(
+              controller: _controller,
+              labels: widget.state.categories.map((e) => e.name).toList(),
+            ),
+          )
+        ],
       ),
     ));
   }

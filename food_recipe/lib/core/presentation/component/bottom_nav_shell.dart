@@ -56,7 +56,18 @@ class CustomNavBar extends StatelessWidget {
     return SafeArea(
       child: Container(
         height: BottomNavShell.bottomNavBarHeight,
-        color: AppColors.white,
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          border: Border(
+            top: BorderSide(
+              color: AppColors.gray4,
+            ),
+          ),
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

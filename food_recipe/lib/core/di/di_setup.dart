@@ -53,6 +53,7 @@ void diSetup() {
       getSavedRecipesUseCase: getIt.get<GetSavedRecipesUseCase>(),
     ),
   );
+  getIt.registerFactory(HomeProvider.new);
   getIt.registerFactory(
     () => SearchProvider(
       getRecentSearchRecipesUseCase: getIt.get<GetRecentSearchRecipesUseCase>(),

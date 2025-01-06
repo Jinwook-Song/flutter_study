@@ -65,9 +65,7 @@ final GoRouter router = GoRouter(
               path: Routes.home.path,
               name: Routes.home.name,
               builder: (BuildContext context, GoRouterState state) {
-                return HomeScreen(
-                  onSearchTap: () => context.pushNamed(Routes.search.name),
-                );
+                return const HomeScreen();
               },
             ),
           ],
