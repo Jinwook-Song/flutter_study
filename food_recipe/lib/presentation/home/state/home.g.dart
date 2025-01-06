@@ -17,6 +17,9 @@ _$HomeStateImpl _$$HomeStateImplFromJson(Map<String, dynamic> json) =>
       dishes: (json['dishes'] as List<dynamic>)
           .map((e) => Recipe.fromJson(e as Map<String, dynamic>))
           .toList(),
+      newRecipes: (json['newRecipes'] as List<dynamic>)
+          .map((e) => Recipe.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$HomeStateImplToJson(_$HomeStateImpl instance) =>
@@ -26,6 +29,7 @@ Map<String, dynamic> _$$HomeStateImplToJson(_$HomeStateImpl instance) =>
           instance.categories.map((e) => _$RecipeCategoryEnumMap[e]!).toList(),
       'selectedCategory': _$RecipeCategoryEnumMap[instance.selectedCategory]!,
       'dishes': instance.dishes,
+      'newRecipes': instance.newRecipes,
     };
 
 const _$RecipeCategoryEnumMap = {

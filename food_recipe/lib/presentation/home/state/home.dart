@@ -11,6 +11,7 @@ class HomeState with _$HomeState {
     required List<RecipeCategory> categories,
     required RecipeCategory selectedCategory,
     required List<Recipe> dishes,
+    required List<Recipe> newRecipes,
   }) = _HomeState;
 
   factory HomeState.initial() {
@@ -19,6 +20,7 @@ class HomeState with _$HomeState {
       categories: RecipeCategory.values,
       selectedCategory: RecipeCategory.all,
       dishes: [],
+      newRecipes: [],
     );
   }
 

@@ -29,6 +29,11 @@ void diSetup() {
   );
 
   // use case
+  getIt.registerSingleton<GetNewRecipesUseCase>(
+    GetNewRecipesUseCase(
+      recipeRepository: getIt.get<RecipeRepository>(),
+    ),
+  );
   getIt.registerSingleton<GetRecentSearchRecipesUseCase>(
     GetRecentSearchRecipesUseCase(
       getIt.get<RecentSearchRecipeRepository>(),
@@ -60,7 +65,9 @@ void diSetup() {
   );
   getIt.registerFactory<HomeProvider>(
     () => HomeProvider(
-      getIt.get<GetRecipiesWithCategoryUseCase>(),
+      getNewRecipiesUseCase: getIt.get<GetNewRecipesUseCase>(),
+      getRecipiesWithCategoryUseCase:
+          getIt.get<GetRecipiesWithCategoryUseCase>(),
     ),
   );
   getIt.registerFactory<SearchProvider>(

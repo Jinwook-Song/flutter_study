@@ -24,6 +24,7 @@ mixin _$HomeState {
   List<RecipeCategory> get categories => throw _privateConstructorUsedError;
   RecipeCategory get selectedCategory => throw _privateConstructorUsedError;
   List<Recipe> get dishes => throw _privateConstructorUsedError;
+  List<Recipe> get newRecipes => throw _privateConstructorUsedError;
 
   /// Serializes this HomeState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,7 +45,8 @@ abstract class $HomeStateCopyWith<$Res> {
       {bool isLoading,
       List<RecipeCategory> categories,
       RecipeCategory selectedCategory,
-      List<Recipe> dishes});
+      List<Recipe> dishes,
+      List<Recipe> newRecipes});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? categories = null,
     Object? selectedCategory = null,
     Object? dishes = null,
+    Object? newRecipes = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -84,6 +87,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.dishes
           : dishes // ignore: cast_nullable_to_non_nullable
               as List<Recipe>,
+      newRecipes: null == newRecipes
+          ? _value.newRecipes
+          : newRecipes // ignore: cast_nullable_to_non_nullable
+              as List<Recipe>,
     ) as $Val);
   }
 }
@@ -100,7 +107,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       {bool isLoading,
       List<RecipeCategory> categories,
       RecipeCategory selectedCategory,
-      List<Recipe> dishes});
+      List<Recipe> dishes,
+      List<Recipe> newRecipes});
 }
 
 /// @nodoc
@@ -120,6 +128,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? categories = null,
     Object? selectedCategory = null,
     Object? dishes = null,
+    Object? newRecipes = null,
   }) {
     return _then(_$HomeStateImpl(
       isLoading: null == isLoading
@@ -138,6 +147,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value._dishes
           : dishes // ignore: cast_nullable_to_non_nullable
               as List<Recipe>,
+      newRecipes: null == newRecipes
+          ? _value._newRecipes
+          : newRecipes // ignore: cast_nullable_to_non_nullable
+              as List<Recipe>,
     ));
   }
 }
@@ -149,9 +162,11 @@ class _$HomeStateImpl implements _HomeState {
       {required this.isLoading,
       required final List<RecipeCategory> categories,
       required this.selectedCategory,
-      required final List<Recipe> dishes})
+      required final List<Recipe> dishes,
+      required final List<Recipe> newRecipes})
       : _categories = categories,
-        _dishes = dishes;
+        _dishes = dishes,
+        _newRecipes = newRecipes;
 
   factory _$HomeStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$HomeStateImplFromJson(json);
@@ -176,9 +191,17 @@ class _$HomeStateImpl implements _HomeState {
     return EqualUnmodifiableListView(_dishes);
   }
 
+  final List<Recipe> _newRecipes;
+  @override
+  List<Recipe> get newRecipes {
+    if (_newRecipes is EqualUnmodifiableListView) return _newRecipes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_newRecipes);
+  }
+
   @override
   String toString() {
-    return 'HomeState(isLoading: $isLoading, categories: $categories, selectedCategory: $selectedCategory, dishes: $dishes)';
+    return 'HomeState(isLoading: $isLoading, categories: $categories, selectedCategory: $selectedCategory, dishes: $dishes, newRecipes: $newRecipes)';
   }
 
   @override
@@ -192,7 +215,9 @@ class _$HomeStateImpl implements _HomeState {
                 .equals(other._categories, _categories) &&
             (identical(other.selectedCategory, selectedCategory) ||
                 other.selectedCategory == selectedCategory) &&
-            const DeepCollectionEquality().equals(other._dishes, _dishes));
+            const DeepCollectionEquality().equals(other._dishes, _dishes) &&
+            const DeepCollectionEquality()
+                .equals(other._newRecipes, _newRecipes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -202,7 +227,8 @@ class _$HomeStateImpl implements _HomeState {
       isLoading,
       const DeepCollectionEquality().hash(_categories),
       selectedCategory,
-      const DeepCollectionEquality().hash(_dishes));
+      const DeepCollectionEquality().hash(_dishes),
+      const DeepCollectionEquality().hash(_newRecipes));
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -225,7 +251,8 @@ abstract class _HomeState implements HomeState {
       {required final bool isLoading,
       required final List<RecipeCategory> categories,
       required final RecipeCategory selectedCategory,
-      required final List<Recipe> dishes}) = _$HomeStateImpl;
+      required final List<Recipe> dishes,
+      required final List<Recipe> newRecipes}) = _$HomeStateImpl;
 
   factory _HomeState.fromJson(Map<String, dynamic> json) =
       _$HomeStateImpl.fromJson;
@@ -238,6 +265,8 @@ abstract class _HomeState implements HomeState {
   RecipeCategory get selectedCategory;
   @override
   List<Recipe> get dishes;
+  @override
+  List<Recipe> get newRecipes;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
