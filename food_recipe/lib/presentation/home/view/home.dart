@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
+import 'package:food_recipe/domain/domain.dart';
+import 'package:food_recipe/presentation/home/view/widget/dish_card.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 import 'package:food_recipe/ui/ui.dart';
 
@@ -26,7 +28,7 @@ class HomeScreen extends StatelessWidget {
 class HomeView extends StatefulWidget {
   final HomeState state;
   final VoidCallback onSearchTap;
-  final void Function(HomeCategory category) onSelectCategory;
+  final void Function(RecipeCategory category) onSelectCategory;
   const HomeView({
     super.key,
     required this.onSearchTap,
@@ -49,7 +51,11 @@ class _HomeViewState extends State<HomeView>
   void initState() {
     super.initState();
     _controller.addListener(
-      () => widget.onSelectCategory(HomeCategory.values[_controller.index]),
+      () {
+        if (!_controller.indexIsChanging) {
+          widget.onSelectCategory(RecipeCategory.values[_controller.index]);
+        }
+      },
     );
   }
 
@@ -64,6 +70,7 @@ class _HomeViewState extends State<HomeView>
     return Scaffold(
         body: SafeArea(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -126,17 +133,44 @@ class _HomeViewState extends State<HomeView>
                         ))
                   ],
                 ),
-                const Gap(25),
+                const Gap(15),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child: CustomTabBar(
-              controller: _controller,
-              labels: widget.state.categories.map((e) => e.name).toList(),
-            ),
-          )
+          const Gap(10),
+          Row(
+            children: [
+              Expanded(
+                child: CustomTabBar(
+                  controller: _controller,
+                  labels: widget.state.categories.map((e) => e.name).toList(),
+                ),
+              ),
+            ],
+          ),
+          const Gap(25),
+          if (widget.state.isLoading)
+            const SizedBox(
+              width: double.infinity,
+              height: 176 + 55,
+              child: CircularProgressIndicator.adaptive(),
+            )
+          else
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Gap(30),
+                  for (final dish in widget.state.dishes) ...[
+                    DishCard(dish: dish, isBookmarked: true),
+                    const Gap(15)
+                  ],
+                  const Gap(15)
+                ],
+              ),
+            )
         ],
       ),
     ));

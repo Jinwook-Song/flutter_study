@@ -32,3 +32,11 @@ class RecipeIngredient with _$RecipeIngredient {
   factory RecipeIngredient.fromJson(Map<String, dynamic> json) =>
       _$RecipeIngredientFromJson(json);
 }
+
+enum RecipeCategory {
+  all,
+  indian,
+  asian,
+  chinese,
+  italian,
+}

@@ -30,6 +30,7 @@ class _CustomTabBarState extends State<CustomTabBar>
   @override
   Widget build(BuildContext context) {
     return TabBar(
+      padding: const EdgeInsets.only(left: 30, right: 15),
       isScrollable: true,
       tabAlignment: TabAlignment.start,
       labelPadding: const EdgeInsets.symmetric(horizontal: 20),

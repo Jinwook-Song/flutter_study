@@ -7,7 +7,7 @@ abstract interface class RemoteRecipeDataSource {
 class MockRemoteRecipeDataSourceImpl implements RemoteRecipeDataSource {
   @override
   Future getRecipes() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 300));
     return MockRemoteData.recipe['recipes'];
   }
 }

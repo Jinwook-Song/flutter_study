@@ -45,4 +45,13 @@ class MockRecipeRepositoryImpl implements RecipeRepository {
 
     return results;
   }
+
+  @override
+  Future<List<Recipe>> getRecipesWithCategory(RecipeCategory category) async {
+    final recipes = await getRecipes();
+    if (category == RecipeCategory.all) return recipes;
+    return recipes
+        .where((recipe) => recipe.category.toLowerCase() == category.name)
+        .toList();
+  }
 }

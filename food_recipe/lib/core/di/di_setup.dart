@@ -40,6 +40,11 @@ void diSetup() {
       recentSearchRecipeRepository: getIt.get<RecentSearchRecipeRepository>(),
     ),
   );
+  getIt.registerSingleton<GetRecipiesWithCategoryUseCase>(
+    GetRecipiesWithCategoryUseCase(
+      getIt.get<RecipeRepository>(),
+    ),
+  );
   getIt.registerSingleton<GetSavedRecipesUseCase>(
     GetSavedRecipesUseCase(
       recipeRepository: getIt.get<RecipeRepository>(),
@@ -48,13 +53,17 @@ void diSetup() {
   );
 
   // provider
-  getIt.registerFactory(
+  getIt.registerFactory<SavedRecipesProvider>(
     () => SavedRecipesProvider(
       getSavedRecipesUseCase: getIt.get<GetSavedRecipesUseCase>(),
     ),
   );
-  getIt.registerFactory(HomeProvider.new);
-  getIt.registerFactory(
+  getIt.registerFactory<HomeProvider>(
+    () => HomeProvider(
+      getIt.get<GetRecipiesWithCategoryUseCase>(),
+    ),
+  );
+  getIt.registerFactory<SearchProvider>(
     () => SearchProvider(
       getRecentSearchRecipesUseCase: getIt.get<GetRecentSearchRecipesUseCase>(),
       getRecipesWithQueryUseCase: getIt.get<GetRecipesWithQueryUseCase>(),
