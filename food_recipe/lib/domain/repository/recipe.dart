@@ -1,5 +1,4 @@
 import 'package:food_recipe/domain/model/model.dart';
-import 'package:food_recipe/presentation/presentation.dart';
 
 abstract interface class RecipeRepository {
   Future<List<Recipe>> getRecipes();

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe/core/domain/error/error.dart';
+import 'package:food_recipe/core/domain/result/result.dart';
 import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
@@ -17,12 +19,20 @@ class HomeProvider extends ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    _state = _state.copyWith(
-      isLoading: false,
-      dishes: await _getRecipiesWithCategoryUseCase.execute(
-        state.selectedCategory,
-      ),
+    final results = await _getRecipiesWithCategoryUseCase.execute(
+      state.selectedCategory,
     );
+
+    switch (results) {
+      case Data<List<Recipe>, CustomError>():
+        _state = _state.copyWith(
+          isLoading: false,
+          dishes: results.data,
+        );
+      case Error<List<Recipe>, CustomError>():
+      // Error handling
+    }
+
     notifyListeners();
 
     _getRecipiesWithCategoryUseCase.execute(state.selectedCategory);
