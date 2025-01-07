@@ -18,8 +18,13 @@ class HomeScreen extends StatelessWidget {
       builder: (context, child) {
         return HomeView(
           state: provider.state,
-          onSearchTap: () => context.pushNamed(Routes.search.name),
-          onSelectCategory: provider.onSelectCategory,
+          onAction: (HomeAction action) {
+            if (action is OnSearchTap) {
+              context.pushNamed(Routes.search.name);
+            } else {
+              provider.onAction(action);
+            }
+          },
         );
       },
     );
@@ -28,13 +33,12 @@ class HomeScreen extends StatelessWidget {
 
 class HomeView extends StatefulWidget {
   final HomeState state;
-  final VoidCallback onSearchTap;
-  final void Function(RecipeCategory category) onSelectCategory;
+  final void Function(HomeAction action) onAction;
+
   const HomeView({
     super.key,
-    required this.onSearchTap,
     required this.state,
-    required this.onSelectCategory,
+    required this.onAction,
   });
 
   @override
@@ -54,7 +58,11 @@ class _HomeViewState extends State<HomeView>
     _controller.addListener(
       () {
         if (!_controller.indexIsChanging) {
-          widget.onSelectCategory(RecipeCategory.values[_controller.index]);
+          widget.onAction(
+            HomeAction.onSelectCategory(
+              RecipeCategory.values[_controller.index],
+            ),
+          );
         }
       },
     );
@@ -115,7 +123,9 @@ class _HomeViewState extends State<HomeView>
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: widget.onSearchTap,
+                          onTap: () => widget.onAction(
+                            const HomeAction.onSearchTap(),
+                          ),
                           child: const SearchInputField(
                             placeholder: 'Search recipe',
                             readOnly: true,
