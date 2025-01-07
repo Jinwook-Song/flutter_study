@@ -5,8 +5,13 @@ import 'package:food_recipe/ui/ui.dart';
 
 class DishCard extends StatelessWidget {
   final Recipe dish;
-  final bool isBookmarked;
-  const DishCard({super.key, required this.dish, required this.isBookmarked});
+  final void Function(Recipe recipe) onBookmarkTap;
+
+  const DishCard({
+    super.key,
+    required this.dish,
+    required this.onBookmarkTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,17 +95,22 @@ class DishCard extends StatelessWidget {
           Positioned(
             right: 10,
             bottom: 10,
-            child: Container(
-              width: 24,
-              height: 24,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.white,
-              ),
-              child: Icon(
-                Icons.bookmark_outline,
-                color: isBookmarked ? AppColors.primary100 : AppColors.gray3,
-                size: 16,
+            child: GestureDetector(
+              onTap: () => onBookmarkTap(dish),
+              child: Container(
+                width: 24,
+                height: 24,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.white,
+                ),
+                child: Icon(
+                  Icons.bookmark_outline,
+                  color: dish.isBookmarked
+                      ? AppColors.primary100
+                      : AppColors.gray3,
+                  size: 16,
+                ),
               ),
             ),
           )

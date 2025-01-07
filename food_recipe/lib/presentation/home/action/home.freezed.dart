@@ -20,18 +20,21 @@ mixin _$HomeAction {
   TResult when<TResult extends Object?>({
     required TResult Function() onSearchTap,
     required TResult Function(RecipeCategory category) onSelectCategory,
+    required TResult Function(Recipe recipe) onBookmarkTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onSearchTap,
     TResult? Function(RecipeCategory category)? onSelectCategory,
+    TResult? Function(Recipe recipe)? onBookmarkTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onSearchTap,
     TResult Function(RecipeCategory category)? onSelectCategory,
+    TResult Function(Recipe recipe)? onBookmarkTap,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$HomeAction {
   TResult map<TResult extends Object?>({
     required TResult Function(OnSearchTap value) onSearchTap,
     required TResult Function(OnSelectCategory value) onSelectCategory,
+    required TResult Function(OnBookmarkTap value) onBookmarkTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnSearchTap value)? onSearchTap,
     TResult? Function(OnSelectCategory value)? onSelectCategory,
+    TResult? Function(OnBookmarkTap value)? onBookmarkTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnSearchTap value)? onSearchTap,
     TResult Function(OnSelectCategory value)? onSelectCategory,
+    TResult Function(OnBookmarkTap value)? onBookmarkTap,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$OnSearchTapImpl implements OnSearchTap {
   TResult when<TResult extends Object?>({
     required TResult Function() onSearchTap,
     required TResult Function(RecipeCategory category) onSelectCategory,
+    required TResult Function(Recipe recipe) onBookmarkTap,
   }) {
     return onSearchTap();
   }
@@ -129,6 +136,7 @@ class _$OnSearchTapImpl implements OnSearchTap {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onSearchTap,
     TResult? Function(RecipeCategory category)? onSelectCategory,
+    TResult? Function(Recipe recipe)? onBookmarkTap,
   }) {
     return onSearchTap?.call();
   }
@@ -138,6 +146,7 @@ class _$OnSearchTapImpl implements OnSearchTap {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onSearchTap,
     TResult Function(RecipeCategory category)? onSelectCategory,
+    TResult Function(Recipe recipe)? onBookmarkTap,
     required TResult orElse(),
   }) {
     if (onSearchTap != null) {
@@ -151,6 +160,7 @@ class _$OnSearchTapImpl implements OnSearchTap {
   TResult map<TResult extends Object?>({
     required TResult Function(OnSearchTap value) onSearchTap,
     required TResult Function(OnSelectCategory value) onSelectCategory,
+    required TResult Function(OnBookmarkTap value) onBookmarkTap,
   }) {
     return onSearchTap(this);
   }
@@ -160,6 +170,7 @@ class _$OnSearchTapImpl implements OnSearchTap {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnSearchTap value)? onSearchTap,
     TResult? Function(OnSelectCategory value)? onSelectCategory,
+    TResult? Function(OnBookmarkTap value)? onBookmarkTap,
   }) {
     return onSearchTap?.call(this);
   }
@@ -169,6 +180,7 @@ class _$OnSearchTapImpl implements OnSearchTap {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnSearchTap value)? onSearchTap,
     TResult Function(OnSelectCategory value)? onSelectCategory,
+    TResult Function(OnBookmarkTap value)? onBookmarkTap,
     required TResult orElse(),
   }) {
     if (onSearchTap != null) {
@@ -254,6 +266,7 @@ class _$OnSelectCategoryImpl implements OnSelectCategory {
   TResult when<TResult extends Object?>({
     required TResult Function() onSearchTap,
     required TResult Function(RecipeCategory category) onSelectCategory,
+    required TResult Function(Recipe recipe) onBookmarkTap,
   }) {
     return onSelectCategory(category);
   }
@@ -263,6 +276,7 @@ class _$OnSelectCategoryImpl implements OnSelectCategory {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onSearchTap,
     TResult? Function(RecipeCategory category)? onSelectCategory,
+    TResult? Function(Recipe recipe)? onBookmarkTap,
   }) {
     return onSelectCategory?.call(category);
   }
@@ -272,6 +286,7 @@ class _$OnSelectCategoryImpl implements OnSelectCategory {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onSearchTap,
     TResult Function(RecipeCategory category)? onSelectCategory,
+    TResult Function(Recipe recipe)? onBookmarkTap,
     required TResult orElse(),
   }) {
     if (onSelectCategory != null) {
@@ -285,6 +300,7 @@ class _$OnSelectCategoryImpl implements OnSelectCategory {
   TResult map<TResult extends Object?>({
     required TResult Function(OnSearchTap value) onSearchTap,
     required TResult Function(OnSelectCategory value) onSelectCategory,
+    required TResult Function(OnBookmarkTap value) onBookmarkTap,
   }) {
     return onSelectCategory(this);
   }
@@ -294,6 +310,7 @@ class _$OnSelectCategoryImpl implements OnSelectCategory {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnSearchTap value)? onSearchTap,
     TResult? Function(OnSelectCategory value)? onSelectCategory,
+    TResult? Function(OnBookmarkTap value)? onBookmarkTap,
   }) {
     return onSelectCategory?.call(this);
   }
@@ -303,6 +320,7 @@ class _$OnSelectCategoryImpl implements OnSelectCategory {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnSearchTap value)? onSearchTap,
     TResult Function(OnSelectCategory value)? onSelectCategory,
+    TResult Function(OnBookmarkTap value)? onBookmarkTap,
     required TResult orElse(),
   }) {
     if (onSelectCategory != null) {
@@ -322,5 +340,163 @@ abstract class OnSelectCategory implements HomeAction {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OnSelectCategoryImplCopyWith<_$OnSelectCategoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnBookmarkTapImplCopyWith<$Res> {
+  factory _$$OnBookmarkTapImplCopyWith(
+          _$OnBookmarkTapImpl value, $Res Function(_$OnBookmarkTapImpl) then) =
+      __$$OnBookmarkTapImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Recipe recipe});
+
+  $RecipeCopyWith<$Res> get recipe;
+}
+
+/// @nodoc
+class __$$OnBookmarkTapImplCopyWithImpl<$Res>
+    extends _$HomeActionCopyWithImpl<$Res, _$OnBookmarkTapImpl>
+    implements _$$OnBookmarkTapImplCopyWith<$Res> {
+  __$$OnBookmarkTapImplCopyWithImpl(
+      _$OnBookmarkTapImpl _value, $Res Function(_$OnBookmarkTapImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? recipe = null,
+  }) {
+    return _then(_$OnBookmarkTapImpl(
+      null == recipe
+          ? _value.recipe
+          : recipe // ignore: cast_nullable_to_non_nullable
+              as Recipe,
+    ));
+  }
+
+  /// Create a copy of HomeAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RecipeCopyWith<$Res> get recipe {
+    return $RecipeCopyWith<$Res>(_value.recipe, (value) {
+      return _then(_value.copyWith(recipe: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OnBookmarkTapImpl implements OnBookmarkTap {
+  const _$OnBookmarkTapImpl(this.recipe);
+
+  @override
+  final Recipe recipe;
+
+  @override
+  String toString() {
+    return 'HomeAction.onBookmarkTap(recipe: $recipe)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnBookmarkTapImpl &&
+            (identical(other.recipe, recipe) || other.recipe == recipe));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, recipe);
+
+  /// Create a copy of HomeAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnBookmarkTapImplCopyWith<_$OnBookmarkTapImpl> get copyWith =>
+      __$$OnBookmarkTapImplCopyWithImpl<_$OnBookmarkTapImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onSearchTap,
+    required TResult Function(RecipeCategory category) onSelectCategory,
+    required TResult Function(Recipe recipe) onBookmarkTap,
+  }) {
+    return onBookmarkTap(recipe);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onSearchTap,
+    TResult? Function(RecipeCategory category)? onSelectCategory,
+    TResult? Function(Recipe recipe)? onBookmarkTap,
+  }) {
+    return onBookmarkTap?.call(recipe);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onSearchTap,
+    TResult Function(RecipeCategory category)? onSelectCategory,
+    TResult Function(Recipe recipe)? onBookmarkTap,
+    required TResult orElse(),
+  }) {
+    if (onBookmarkTap != null) {
+      return onBookmarkTap(recipe);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OnSearchTap value) onSearchTap,
+    required TResult Function(OnSelectCategory value) onSelectCategory,
+    required TResult Function(OnBookmarkTap value) onBookmarkTap,
+  }) {
+    return onBookmarkTap(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OnSearchTap value)? onSearchTap,
+    TResult? Function(OnSelectCategory value)? onSelectCategory,
+    TResult? Function(OnBookmarkTap value)? onBookmarkTap,
+  }) {
+    return onBookmarkTap?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OnSearchTap value)? onSearchTap,
+    TResult Function(OnSelectCategory value)? onSelectCategory,
+    TResult Function(OnBookmarkTap value)? onBookmarkTap,
+    required TResult orElse(),
+  }) {
+    if (onBookmarkTap != null) {
+      return onBookmarkTap(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnBookmarkTap implements HomeAction {
+  const factory OnBookmarkTap(final Recipe recipe) = _$OnBookmarkTapImpl;
+
+  Recipe get recipe;
+
+  /// Create a copy of HomeAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OnBookmarkTapImplCopyWith<_$OnBookmarkTapImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

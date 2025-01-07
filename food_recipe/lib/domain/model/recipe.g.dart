@@ -17,6 +17,7 @@ _$RecipeImpl _$$RecipeImplFromJson(Map<String, dynamic> json) => _$RecipeImpl(
       ingredients: (json['ingredients'] as List<dynamic>)
           .map((e) => RecipeIngredient.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isBookmarked: json['isBookmarked'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
@@ -29,6 +30,7 @@ Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
       'time': instance.time,
       'rating': instance.rating,
       'ingredients': instance.ingredients.map((e) => e.toJson()).toList(),
+      'isBookmarked': instance.isBookmarked,
     };
 
 _$RecipeIngredientImpl _$$RecipeIngredientImplFromJson(

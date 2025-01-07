@@ -28,6 +28,7 @@ mixin _$Recipe {
   String get time => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
   List<RecipeIngredient> get ingredients => throw _privateConstructorUsedError;
+  bool get isBookmarked => throw _privateConstructorUsedError;
 
   /// Serializes this Recipe to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $RecipeCopyWith<$Res> {
       String chef,
       String time,
       double rating,
-      List<RecipeIngredient> ingredients});
+      List<RecipeIngredient> ingredients,
+      bool isBookmarked});
 }
 
 /// @nodoc
@@ -77,6 +79,7 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
     Object? time = null,
     Object? rating = null,
     Object? ingredients = null,
+    Object? isBookmarked = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -111,6 +114,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
           ? _value.ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
               as List<RecipeIngredient>,
+      isBookmarked: null == isBookmarked
+          ? _value.isBookmarked
+          : isBookmarked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -130,7 +137,8 @@ abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       String chef,
       String time,
       double rating,
-      List<RecipeIngredient> ingredients});
+      List<RecipeIngredient> ingredients,
+      bool isBookmarked});
 }
 
 /// @nodoc
@@ -154,6 +162,7 @@ class __$$RecipeImplCopyWithImpl<$Res>
     Object? time = null,
     Object? rating = null,
     Object? ingredients = null,
+    Object? isBookmarked = null,
   }) {
     return _then(_$RecipeImpl(
       id: null == id
@@ -188,6 +197,10 @@ class __$$RecipeImplCopyWithImpl<$Res>
           ? _value._ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
               as List<RecipeIngredient>,
+      isBookmarked: null == isBookmarked
+          ? _value.isBookmarked
+          : isBookmarked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -204,7 +217,8 @@ class _$RecipeImpl implements _Recipe {
       required this.chef,
       required this.time,
       required this.rating,
-      required final List<RecipeIngredient> ingredients})
+      required final List<RecipeIngredient> ingredients,
+      this.isBookmarked = false})
       : _ingredients = ingredients;
 
   factory _$RecipeImpl.fromJson(Map<String, dynamic> json) =>
@@ -233,8 +247,12 @@ class _$RecipeImpl implements _Recipe {
   }
 
   @override
+  @JsonKey()
+  final bool isBookmarked;
+
+  @override
   String toString() {
-    return 'Recipe(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, ingredients: $ingredients)';
+    return 'Recipe(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, ingredients: $ingredients, isBookmarked: $isBookmarked)';
   }
 
   @override
@@ -251,13 +269,24 @@ class _$RecipeImpl implements _Recipe {
             (identical(other.time, time) || other.time == time) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             const DeepCollectionEquality()
-                .equals(other._ingredients, _ingredients));
+                .equals(other._ingredients, _ingredients) &&
+            (identical(other.isBookmarked, isBookmarked) ||
+                other.isBookmarked == isBookmarked));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, category, name, image, chef,
-      time, rating, const DeepCollectionEquality().hash(_ingredients));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      category,
+      name,
+      image,
+      chef,
+      time,
+      rating,
+      const DeepCollectionEquality().hash(_ingredients),
+      isBookmarked);
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.
@@ -284,7 +313,8 @@ abstract class _Recipe implements Recipe {
       required final String chef,
       required final String time,
       required final double rating,
-      required final List<RecipeIngredient> ingredients}) = _$RecipeImpl;
+      required final List<RecipeIngredient> ingredients,
+      final bool isBookmarked}) = _$RecipeImpl;
 
   factory _Recipe.fromJson(Map<String, dynamic> json) = _$RecipeImpl.fromJson;
 
@@ -304,6 +334,8 @@ abstract class _Recipe implements Recipe {
   double get rating;
   @override
   List<RecipeIngredient> get ingredients;
+  @override
+  bool get isBookmarked;
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.

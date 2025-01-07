@@ -16,6 +16,7 @@ class Recipe with _$Recipe {
     required String time,
     required double rating,
     required List<RecipeIngredient> ingredients,
+    @Default(false) bool isBookmarked,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);

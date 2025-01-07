@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe/core/domain/error/error.dart';
 import 'package:food_recipe/core/domain/result/result.dart';
 import 'package:food_recipe/domain/domain.dart';
-import 'package:food_recipe/presentation/home/action/home.dart';
+import 'package:food_recipe/domain/use_case/toggle_bookmark_recipe.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
 class HomeProvider extends ChangeNotifier {
   final GetRecipiesWithCategoryUseCase _getRecipiesWithCategoryUseCase;
   final GetNewRecipesUseCase _getNewRecipesUseCase;
+  final ToggleBookmarkRecipeUseCase _toggleBookmarkRecipeUseCase;
 
-  HomeProvider(
-      {required GetRecipiesWithCategoryUseCase getRecipiesWithCategoryUseCase,
-      required GetNewRecipesUseCase getNewRecipiesUseCase})
-      : _getRecipiesWithCategoryUseCase = getRecipiesWithCategoryUseCase,
-        _getNewRecipesUseCase = getNewRecipiesUseCase {
+  HomeProvider({
+    required GetRecipiesWithCategoryUseCase getRecipiesWithCategoryUseCase,
+    required GetNewRecipesUseCase getNewRecipiesUseCase,
+    required ToggleBookmarkRecipeUseCase toggleBookmarkRecipeUseCase,
+  })  : _getRecipiesWithCategoryUseCase = getRecipiesWithCategoryUseCase,
+        _getNewRecipesUseCase = getNewRecipiesUseCase,
+        _toggleBookmarkRecipeUseCase = toggleBookmarkRecipeUseCase {
     _getRecipesWithCategory();
     _fetchNewRecipes();
   }
@@ -62,12 +65,24 @@ class HomeProvider extends ChangeNotifier {
     _getRecipesWithCategory();
   }
 
+  Future<void> _onBookmarkTap(Recipe recipe) async {
+    final recipes = await _toggleBookmarkRecipeUseCase.execute(recipe.id);
+    _state = _state.copyWith(
+      dishes: recipes,
+    );
+    notifyListeners();
+  }
+
   void onAction(HomeAction action) {
     switch (action) {
       case OnSearchTap():
         break;
       case OnSelectCategory():
         _onSelectCategory(action.category);
+        break;
+      case OnBookmarkTap():
+        _onBookmarkTap(action.recipe);
+        break;
     }
   }
 }

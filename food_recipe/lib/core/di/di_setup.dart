@@ -1,6 +1,7 @@
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/domain/domain.dart';
+import 'package:food_recipe/domain/use_case/toggle_bookmark_recipe.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
 final getIt = GetIt.instance;
@@ -47,11 +48,17 @@ void diSetup() {
   );
   getIt.registerSingleton<GetRecipiesWithCategoryUseCase>(
     GetRecipiesWithCategoryUseCase(
-      getIt.get<RecipeRepository>(),
-    ),
+        bookmarkRepository: getIt.get<BookmarkRepository>(),
+        recipeRepository: getIt.get<RecipeRepository>()),
   );
   getIt.registerSingleton<GetSavedRecipesUseCase>(
     GetSavedRecipesUseCase(
+      recipeRepository: getIt.get<RecipeRepository>(),
+      bookmarkRepository: getIt.get<BookmarkRepository>(),
+    ),
+  );
+  getIt.registerSingleton<ToggleBookmarkRecipeUseCase>(
+    ToggleBookmarkRecipeUseCase(
       recipeRepository: getIt.get<RecipeRepository>(),
       bookmarkRepository: getIt.get<BookmarkRepository>(),
     ),
@@ -68,6 +75,7 @@ void diSetup() {
       getNewRecipiesUseCase: getIt.get<GetNewRecipesUseCase>(),
       getRecipiesWithCategoryUseCase:
           getIt.get<GetRecipiesWithCategoryUseCase>(),
+      toggleBookmarkRecipeUseCase: getIt.get<ToggleBookmarkRecipeUseCase>(),
     ),
   );
   getIt.registerFactory<SearchProvider>(

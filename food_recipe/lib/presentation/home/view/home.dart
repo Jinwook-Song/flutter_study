@@ -165,7 +165,7 @@ class _HomeViewState extends State<HomeView>
               const SizedBox(
                 width: double.infinity,
                 height: 176 + 55,
-                child: CircularProgressIndicator.adaptive(),
+                child: Center(child: CircularProgressIndicator.adaptive()),
               )
             else
               SingleChildScrollView(
@@ -174,7 +174,12 @@ class _HomeViewState extends State<HomeView>
                   children: [
                     const Gap(30),
                     for (final dish in widget.state.dishes) ...[
-                      DishCard(dish: dish, isBookmarked: true),
+                      DishCard(
+                        dish: dish,
+                        onBookmarkTap: (recipe) {
+                          widget.onAction(HomeAction.onBookmarkTap(recipe));
+                        },
+                      ),
                       const Gap(15)
                     ],
                     const Gap(15)
