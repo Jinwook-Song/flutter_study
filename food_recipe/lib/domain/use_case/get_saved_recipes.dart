@@ -17,4 +17,11 @@ class GetSavedRecipesUseCase implements UseCase<List<Recipe>, void> {
     final recipes = await _recipeRepository.getRecipes();
     return recipes.where((recipe) => ids.contains(recipe.id)).toList();
   }
+
+  Stream<List<Recipe>> emitStream([void params]) async* {
+    final recipes = await _recipeRepository.getRecipes();
+    await for (final ids in _bookmarkRepository.bookmarkIdsStream()) {
+      yield recipes.where((e) => ids.contains(e.id)).toList();
+    }
+  }
 }

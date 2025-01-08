@@ -12,17 +12,13 @@ class SavedRecipesProvider with ChangeNotifier {
   SavedRecipesProvider({
     required GetSavedRecipesUseCase getSavedRecipesUseCase,
   }) : _getSavedRecipesUseCase = getSavedRecipesUseCase {
-    _load();
-  }
-
-  Future<void> _load() async {
-    _state = _state.copyWith(isLoading: true);
-    notifyListeners();
-
-    _state = _state.copyWith(
-      isLoading: false,
-      recipes: await _getSavedRecipesUseCase.execute(),
+    _getSavedRecipesUseCase.emitStream().listen(
+      (recipes) {
+        _state = _state.copyWith(
+          recipes: recipes,
+        );
+        notifyListeners();
+      },
     );
-    notifyListeners();
   }
 }
