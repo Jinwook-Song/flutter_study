@@ -38,4 +38,19 @@ class GetRecipiesWithCategoryUseCase
       return const Result.error(NetworkError.unknwon);
     }
   }
+
+  Stream<List<Recipe>> emitStream(RecipeCategory? params) async* {
+    final input = params ?? RecipeCategory.all;
+    final recipes = await _recipeRepository.getRecipesWithCategory(input);
+
+    await for (final ids in _bookmarkRepository.bookmarkIdsStream()) {
+      yield recipes.map((e) {
+        if (ids.contains(e.id)) {
+          return e.copyWith(isBookmarked: true);
+        } else {
+          return e;
+        }
+      }).toList();
+    }
+  }
 }

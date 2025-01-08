@@ -67,8 +67,8 @@ void diSetup() {
   // provider
   getIt.registerFactory<SavedRecipesProvider>(
     () => SavedRecipesProvider(
-      getSavedRecipesUseCase: getIt.get<GetSavedRecipesUseCase>(),
-    ),
+        getSavedRecipesUseCase: getIt.get<GetSavedRecipesUseCase>(),
+        toggleBookmarkRecipeUseCase: getIt.get<ToggleBookmarkRecipeUseCase>()),
   );
   getIt.registerFactory<HomeProvider>(
     () => HomeProvider(

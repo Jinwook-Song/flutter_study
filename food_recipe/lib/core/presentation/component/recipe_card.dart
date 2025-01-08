@@ -7,11 +7,13 @@ class RecipeCard extends StatelessWidget {
   final Recipe recipe;
   final double aspectRatio;
   final bool showBottomRight;
+  final void Function(Recipe recipe) onBookmarkTap;
   const RecipeCard(
     this.recipe, {
     super.key,
     required this.aspectRatio,
     this.showBottomRight = true,
+    required this.onBookmarkTap,
   });
 
   @override
@@ -71,17 +73,20 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   const Gap(10),
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.white,
-                    ),
-                    child: const Icon(
-                      Icons.bookmark_border_outlined,
-                      size: 16,
-                      color: AppColors.primary80,
+                  GestureDetector(
+                    onTap: () => onBookmarkTap(recipe),
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.white,
+                      ),
+                      child: const Icon(
+                        Icons.bookmark_border_outlined,
+                        size: 16,
+                        color: AppColors.primary80,
+                      ),
                     ),
                   ),
                 ],

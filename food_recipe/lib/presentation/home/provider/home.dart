@@ -17,8 +17,14 @@ class HomeProvider extends ChangeNotifier {
   })  : _getRecipiesWithCategoryUseCase = getRecipiesWithCategoryUseCase,
         _getNewRecipesUseCase = getNewRecipiesUseCase,
         _toggleBookmarkRecipeUseCase = toggleBookmarkRecipeUseCase {
-    _getRecipesWithCategory();
+    // _getRecipesWithCategory();
     _fetchNewRecipes();
+    _getRecipiesWithCategoryUseCase
+        .emitStream(state.selectedCategory)
+        .listen((recipes) {
+      _state = _state.copyWith(dishes: recipes);
+      notifyListeners();
+    });
   }
 
   HomeState _state = HomeState.initial();

@@ -22,7 +22,10 @@ class SavedRecipesScreen extends StatelessWidget {
           ));
         }
 
-        return SavedRecipesView(recipes: state.recipes);
+        return SavedRecipesView(
+          recipes: state.recipes,
+          onAction: provider.onAction,
+        );
       },
     );
   }
@@ -30,8 +33,13 @@ class SavedRecipesScreen extends StatelessWidget {
 
 class SavedRecipesView extends StatelessWidget {
   final List<Recipe> recipes;
+  final void Function(SavedRecipesAction action) onAction;
 
-  const SavedRecipesView({super.key, required this.recipes});
+  const SavedRecipesView({
+    super.key,
+    required this.recipes,
+    required this.onAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +61,9 @@ class SavedRecipesView extends StatelessWidget {
             return RecipeCard(
               recipe,
               aspectRatio: 315 / 150,
+              onBookmarkTap: (recipe) {
+                onAction(SavedRecipesAction.dismissBookmark(recipe));
+              },
             );
           },
         ),

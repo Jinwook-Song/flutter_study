@@ -132,6 +132,7 @@ class SearchScreenView extends StatelessWidget {
                       recipe,
                       aspectRatio: 1,
                       showBottomRight: false,
+                      onBookmarkTap: (recipe) {},
                     );
                   },
                 ),
