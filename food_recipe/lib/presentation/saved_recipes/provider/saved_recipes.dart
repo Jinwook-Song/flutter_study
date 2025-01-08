@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe/domain/domain.dart';
 import 'package:food_recipe/domain/use_case/toggle_bookmark_recipe.dart';
@@ -6,6 +8,7 @@ import 'package:food_recipe/presentation/presentation.dart';
 class SavedRecipesProvider with ChangeNotifier {
   final GetSavedRecipesUseCase _getSavedRecipesUseCase;
   final ToggleBookmarkRecipeUseCase _toggleBookmarkRecipeUseCase;
+  StreamSubscription<List<Recipe>>? _streamSubscription;
 
   SavedRecipiesState _state = SavedRecipiesState.initial();
 
@@ -16,7 +19,7 @@ class SavedRecipesProvider with ChangeNotifier {
     required ToggleBookmarkRecipeUseCase toggleBookmarkRecipeUseCase,
   })  : _getSavedRecipesUseCase = getSavedRecipesUseCase,
         _toggleBookmarkRecipeUseCase = toggleBookmarkRecipeUseCase {
-    _getSavedRecipesUseCase.emitStream().listen(
+    _streamSubscription = _getSavedRecipesUseCase.emitStream().listen(
       (recipes) {
         _state = _state.copyWith(
           recipes: recipes,
@@ -24,6 +27,12 @@ class SavedRecipesProvider with ChangeNotifier {
         notifyListeners();
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _streamSubscription?.cancel();
+    super.dispose();
   }
 
   onAction(SavedRecipesAction action) {

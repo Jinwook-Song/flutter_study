@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/domain/error/error.dart';
 import 'package:food_recipe/core/domain/result/result.dart';
@@ -9,6 +11,7 @@ class HomeProvider extends ChangeNotifier {
   final GetRecipiesWithCategoryUseCase _getRecipiesWithCategoryUseCase;
   final GetNewRecipesUseCase _getNewRecipesUseCase;
   final ToggleBookmarkRecipeUseCase _toggleBookmarkRecipeUseCase;
+  StreamSubscription<List<Recipe>>? _streamSubscription;
 
   HomeProvider({
     required GetRecipiesWithCategoryUseCase getRecipiesWithCategoryUseCase,
@@ -19,12 +22,18 @@ class HomeProvider extends ChangeNotifier {
         _toggleBookmarkRecipeUseCase = toggleBookmarkRecipeUseCase {
     // _getRecipesWithCategory();
     _fetchNewRecipes();
-    _getRecipiesWithCategoryUseCase
+    _streamSubscription = _getRecipiesWithCategoryUseCase
         .emitStream(state.selectedCategory)
         .listen((recipes) {
       _state = _state.copyWith(dishes: recipes);
       notifyListeners();
     });
+  }
+
+  @override
+  void dispose() {
+    _streamSubscription?.cancel();
+    super.dispose();
   }
 
   HomeState _state = HomeState.initial();
