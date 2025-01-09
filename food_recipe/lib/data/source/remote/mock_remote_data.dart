@@ -302,4 +302,232 @@ abstract class MockRemoteData {
       }
     ]
   };
+  static const procedures = {
+    "procedures": [
+      {
+        "recipeId": 1,
+        "step": 1,
+        "content": "Preheat the oven to 350°F (175°C)."
+      },
+      {
+        "recipeId": 1,
+        "step": 2,
+        "content":
+            "Remove the membrane from the back of the ribs if it is still attached."
+      },
+      {
+        "recipeId": 1,
+        "step": 3,
+        "content":
+            "Season the ribs generously with salt, pepper, and your favorite rub."
+      },
+      {
+        "recipeId": 1,
+        "step": 4,
+        "content": "Wrap the ribs tightly in aluminum foil to retain moisture."
+      },
+      {
+        "recipeId": 1,
+        "step": 5,
+        "content":
+            "Place the wrapped ribs on a baking sheet and bake in the preheated oven for 2 hours."
+      },
+      {
+        "recipeId": 1,
+        "step": 6,
+        "content": "Remove the ribs from the oven and carefully unwrap them."
+      },
+      {
+        "recipeId": 1,
+        "step": 7,
+        "content": "Brush the ribs with your favorite barbecue sauce."
+      },
+      {
+        "recipeId": 1,
+        "step": 8,
+        "content":
+            "Return the ribs to the oven, uncovered, and bake for an additional 30 minutes, or until the sauce has caramelized."
+      },
+      {
+        "recipeId": 2,
+        "step": 1,
+        "content":
+            "Marinate the chicken with spices and let it sit for 30 minutes."
+      },
+      {
+        "recipeId": 2,
+        "step": 2,
+        "content":
+            "Preheat the oven to 375°F (190°C) and roast the chicken for 45 minutes."
+      },
+      {
+        "recipeId": 2,
+        "step": 3,
+        "content":
+            "Cook the rice with chicken broth and add vegetables for flavor."
+      },
+      {"recipeId": 3, "step": 1, "content": "Cook the rice and let it cool."},
+      {
+        "recipeId": 3,
+        "step": 2,
+        "content": "Stir-fry chicken with spices until cooked through."
+      },
+      {
+        "recipeId": 3,
+        "step": 3,
+        "content":
+            "Mix the chicken with the rice and vegetables, stir-fry for another 5 minutes."
+      },
+      {
+        "recipeId": 4,
+        "step": 1,
+        "content": "Soak rice cakes in water for 20 minutes."
+      },
+      {
+        "recipeId": 4,
+        "step": 2,
+        "content": "Boil water and add gochujang (Korean red chili paste)."
+      },
+      {
+        "recipeId": 4,
+        "step": 3,
+        "content":
+            "Add rice cakes and fish cakes, cook until the sauce thickens."
+      }
+    ]
+  };
+
+  static const ingredients = {
+    "ingredients": [
+      {
+        "id": 1,
+        "name": "Tomatos",
+        "image":
+            "https://cdn.pixabay.com/photo/2017/10/06/17/17/tomato-2823826_1280.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Beef",
+        "image":
+            "https://cdn.pixabay.com/photo/2016/01/21/18/08/meet-1154341_1280.png"
+      },
+      {
+        "id": 3,
+        "name": "Pork",
+        "image":
+            "https://cdn.pixabay.com/photo/2019/12/20/14/44/meat-4708596_1280.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Rice",
+        "image":
+            "https://cdn.pixabay.com/photo/2016/02/29/05/46/brown-rice-1228099_1280.jpg"
+      },
+      {
+        "id": 5,
+        "name": "Avocado",
+        "image":
+            "https://cdn.pixabay.com/photo/2020/01/02/01/43/avocado-4734786_1280.jpg"
+      },
+      {
+        "id": 6,
+        "name": "Chicken",
+        "image":
+            "https://cdn.pixabay.com/photo/2010/12/10/08/chicken-1140_1280.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Sugar",
+        "image":
+            "https://cdn.pixabay.com/photo/2014/11/28/19/10/lump-sugar-549096_1280.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Pepper",
+        "image":
+            "https://cdn.pixabay.com/photo/2016/03/05/22/31/pepper-1239308_1280.jpg"
+      },
+      {
+        "id": 9,
+        "name": "Onion",
+        "image":
+            "https://cdn.pixabay.com/photo/2013/02/21/19/14/onion-bulbs-84722_1280.jpg"
+      }
+    ]
+  };
+
+  static const profiles = {
+    "profiles": [
+      {
+        "id": 1,
+        "name": "Chef John",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "Lagos, Nigeria"
+      },
+      {
+        "id": 2,
+        "name": "Mark Kelvin",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "Abuja, Nigeria"
+      },
+      {
+        "id": 3,
+        "name": "Spicy Nelly",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "Ibadan, Nigeria"
+      },
+      {
+        "id": 4,
+        "name": "Kim Dahee",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "Seoul, South Korea"
+      },
+      {
+        "id": 5,
+        "name": "Alice Johnson",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "New York, USA"
+      },
+      {
+        "id": 6,
+        "name": "Gordon Ramsay",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "London, UK"
+      },
+      {
+        "id": 7,
+        "name": "Mario Batali",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "Rome, Italy"
+      },
+      {
+        "id": 8,
+        "name": "Jiro Ono",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "Tokyo, Japan"
+      },
+      {
+        "id": 9,
+        "name": "Julia Child",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "Paris, France"
+      },
+      {
+        "id": 10,
+        "name": "Paul Hollywood",
+        "image":
+            "https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png",
+        "address": "London, UK"
+      }
+    ]
+  };
 }
