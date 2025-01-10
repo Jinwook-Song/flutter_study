@@ -1,6 +1,10 @@
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/data/data.dart';
+import 'package:food_recipe/data/repository/mock_ingredient.dart';
+import 'package:food_recipe/data/repository/mock_procedure.dart';
 import 'package:food_recipe/domain/domain.dart';
+import 'package:food_recipe/domain/repository/ingredient.dart';
+import 'package:food_recipe/domain/repository/procedure.dart';
 import 'package:food_recipe/domain/use_case/toggle_bookmark_recipe.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
@@ -16,6 +20,16 @@ void diSetup() {
   // repository
   getIt.registerSingleton<BookmarkRepository>(
     MockBookmarkRepositoryImpl(),
+  );
+  getIt.registerSingleton<IngredientRepository>(
+    MockIngredientRepositoryImpl(
+      remoteRecipeDataSource: getIt.get<RemoteRecipeDataSource>(),
+    ),
+  );
+  getIt.registerSingleton<ProcedureRepository>(
+    MockProcedureRepositoryImpl(
+      remoteRecipeDataSource: getIt.get<RemoteRecipeDataSource>(),
+    ),
   );
   getIt.registerSingleton<RecentSearchRecipeRepository>(
     MockRecentSearchRecipeRepositoryImpl(
