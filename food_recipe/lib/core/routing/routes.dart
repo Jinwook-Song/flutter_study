@@ -52,4 +52,9 @@ abstract class Routes {
     path: '/profile',
     name: 'Profile',
   );
+
+  static const Route ingredient = Route(
+    path: '/ingredient/:recipeId',
+    name: 'Ingredient',
+  );
 }

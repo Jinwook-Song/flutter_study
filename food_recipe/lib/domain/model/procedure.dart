@@ -7,8 +7,8 @@ part 'procedure.g.dart';
 class Procedure with _$Procedure {
   const factory Procedure({
     required int recipeId,
-    required String name,
-    required String image,
+    required int step,
+    required String content,
   }) = _Procedure;
 
   factory Procedure.fromJson(Map<String, dynamic> json) =>

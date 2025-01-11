@@ -3,9 +3,8 @@ import 'package:food_recipe/data/data.dart';
 import 'package:food_recipe/data/repository/mock_ingredient.dart';
 import 'package:food_recipe/data/repository/mock_procedure.dart';
 import 'package:food_recipe/domain/domain.dart';
-import 'package:food_recipe/domain/repository/ingredient.dart';
-import 'package:food_recipe/domain/repository/procedure.dart';
 import 'package:food_recipe/domain/use_case/toggle_bookmark_recipe.dart';
+import 'package:food_recipe/presentation/ingredient/provider/provider.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
 final getIt = GetIt.instance;
@@ -98,4 +97,10 @@ void diSetup() {
       getRecipesWithQueryUseCase: getIt.get<GetRecipesWithQueryUseCase>(),
     ),
   );
+  getIt.registerFactory<IngredientProvider>(() => IngredientProvider(
+        procedureRepository: getIt.get<ProcedureRepository>(),
+        ingredientRepository: getIt.get<IngredientRepository>(),
+        getRecipiesWithCategoryUseCase:
+            getIt.get<GetRecipiesWithCategoryUseCase>(),
+      ));
 }

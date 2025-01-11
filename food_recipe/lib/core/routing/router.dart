@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe/core/core.dart';
 import 'package:food_recipe/main.dart';
+import 'package:food_recipe/presentation/ingredient/view/ingredient.dart';
 import 'package:food_recipe/presentation/presentation.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -110,6 +111,14 @@ final GoRouter router = GoRouter(
       name: Routes.search.name,
       builder: (BuildContext context, GoRouterState state) {
         return const SearchScreen();
+      },
+    ),
+    GoRoute(
+      path: Routes.ingredient.path,
+      name: Routes.ingredient.name,
+      builder: (BuildContext context, GoRouterState state) {
+        final recipeId = int.parse(state.pathParameters['recipeId']!);
+        return IngredientScreen(recipeId: recipeId);
       },
     ),
   ],

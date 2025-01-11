@@ -24,7 +24,20 @@ class SavedRecipesScreen extends StatelessWidget {
 
         return SavedRecipesView(
           recipes: state.recipes,
-          onAction: provider.onAction,
+          onAction: (action) {
+            switch (action) {
+              case OnRecipeTap():
+                context.pushNamed(
+                  Routes.ingredient.name,
+                  pathParameters: {'recipeId': '${action.recipe.id}'},
+                );
+                break;
+
+              case DismissBookmark():
+                provider.onAction(action);
+                break;
+            }
+          },
         );
       },
     );
@@ -58,12 +71,15 @@ class SavedRecipesView extends StatelessWidget {
           separatorBuilder: (context, index) => const Gap(20),
           itemBuilder: (context, index) {
             final recipe = recipes[index];
-            return RecipeCard(
-              recipe,
-              aspectRatio: 315 / 150,
-              onBookmarkTap: (recipe) {
-                onAction(SavedRecipesAction.dismissBookmark(recipe));
-              },
+            return GestureDetector(
+              onTap: () => onAction(SavedRecipesAction.onRecipeTap(recipe)),
+              child: RecipeCard(
+                recipe,
+                aspectRatio: 315 / 150,
+                onBookmarkTap: (recipe) {
+                  onAction(SavedRecipesAction.dismissBookmark(recipe));
+                },
+              ),
             );
           },
         ),
