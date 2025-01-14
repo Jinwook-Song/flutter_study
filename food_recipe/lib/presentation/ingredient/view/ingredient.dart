@@ -31,7 +31,7 @@ class IngredientScreen extends StatelessWidget {
   }
 }
 
-class IngredientView extends StatelessWidget {
+class IngredientView extends StatefulWidget {
   final IngredientState state;
   final void Function(IngredientAction) action;
   const IngredientView({
@@ -41,10 +41,38 @@ class IngredientView extends StatelessWidget {
   });
 
   @override
+  State<IngredientView> createState() => _IngredientViewState();
+}
+
+class _IngredientViewState extends State<IngredientView>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final recipe = state.recipe!;
+    final recipe = widget.state.recipe!;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: const [
+          IngredientPopupMenu(),
+          Gap(20),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
@@ -82,44 +110,94 @@ class IngredientView extends StatelessWidget {
             const Gap(10),
             const ChefProfile(),
             const Gap(20),
-            const CustomTabBar(
+            CustomTabBar(
+              controller: _tabController,
               padding: EdgeInsets.zero,
-              labels: [
+              labels: const [
                 'Ingrident',
                 'Procedure',
               ],
             ),
             const Gap(35),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.cookie,
-                  size: 17,
-                  color: AppColors.gray3,
-                ),
-                const Gap(5),
-                Text(
-                  '1 serve',
-                  style: TextStyles.smallTextRegular.copyWith(
-                    color: AppColors.gray3,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  '10 Items',
-                  style: TextStyles.smallTextRegular.copyWith(
-                    color: AppColors.gray3,
-                  ),
-                ),
-              ],
-            ),
-            const Gap(20),
             Expanded(
-              child: ListView.separated(
-                itemCount: 10,
-                separatorBuilder: (context, index) => const Gap(10),
-                itemBuilder: (context, index) => const IngredientTile(),
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.cookie,
+                            size: 17,
+                            color: AppColors.gray3,
+                          ),
+                          const Gap(5),
+                          Text(
+                            '1 serve',
+                            style: TextStyles.smallTextRegular.copyWith(
+                              color: AppColors.gray3,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            '10 Items',
+                            style: TextStyles.smallTextRegular.copyWith(
+                              color: AppColors.gray3,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Gap(20),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: 10,
+                          separatorBuilder: (context, index) => const Gap(10),
+                          itemBuilder: (context, index) =>
+                              const IngredientTile(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.cookie,
+                            size: 17,
+                            color: AppColors.gray3,
+                          ),
+                          const Gap(5),
+                          Text(
+                            '1 serve',
+                            style: TextStyles.smallTextRegular.copyWith(
+                              color: AppColors.gray3,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            '10 Items',
+                            style: TextStyles.smallTextRegular.copyWith(
+                              color: AppColors.gray3,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Gap(20),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: 10,
+                          separatorBuilder: (context, index) => const Gap(10),
+                          itemBuilder: (context, index) =>
+                              const IngredientTile(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],

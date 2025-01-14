@@ -18,14 +18,22 @@ class CustomTabBar extends StatefulWidget {
 
 class _CustomTabBarState extends State<CustomTabBar>
     with SingleTickerProviderStateMixin {
-  late final TabController _controller = TabController(
-    length: widget.labels.length,
-    vsync: this,
-  );
+  TabController? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.controller == null) {
+      _controller = TabController(
+        length: widget.labels.length,
+        vsync: this,
+      );
+    }
+  }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
